@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Temp.Core.Caching
 {
-    class MemoryCacheManager
+    public class MemoryCacheManager
     {
     }
 }
