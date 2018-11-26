@@ -1,0 +1,6 @@
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\bin\Debug\Temp.Core.dll
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\bin\Debug\Temp.Core.pdb
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.csprojResolveAssemblyReference.cache
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.csproj.CoreCompileInputs.cache
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.dll
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.pdb
