@@ -23,7 +23,7 @@ namespace Temp.Core.Dependency
         /// 获取单例对象
         /// </summary>
         /// <returns></returns>
-        public static IocObjectManager getInstance() {
+        public static IocObjectManager GetInstance() {
             return _manage;
         }
 

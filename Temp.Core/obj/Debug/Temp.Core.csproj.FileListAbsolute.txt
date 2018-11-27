@@ -4,3 +4,6 @@ C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.csprojRes
 C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.csproj.CoreCompileInputs.cache
 C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.dll
 C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.pdb
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\bin\Debug\Newtonsoft.Json.dll
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\bin\Debug\Newtonsoft.Json.xml
+C:\Users\zhangyuting\source\repos\testmy\Temp.Core\obj\Debug\Temp.Core.csproj.CopyComplete
