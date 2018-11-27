@@ -96,3 +96,8 @@ C:\Users\zhangyuting\source\repos\testmy\testmy\obj\Debug\testmy.csproj.CoreComp
 C:\Users\zhangyuting\source\repos\testmy\testmy\obj\Debug\testmy.csproj.CopyComplete
 C:\Users\zhangyuting\source\repos\testmy\testmy\obj\Debug\testmy.dll
 C:\Users\zhangyuting\source\repos\testmy\testmy\obj\Debug\testmy.pdb
+C:\Users\zhangyuting\source\repos\testmy\testmy\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\zhangyuting\source\repos\testmy\testmy\bin\NPOI.dll
+C:\Users\zhangyuting\source\repos\testmy\testmy\bin\NPOI.OOXML.dll
+C:\Users\zhangyuting\source\repos\testmy\testmy\bin\NPOI.OpenXml4Net.dll
+C:\Users\zhangyuting\source\repos\testmy\testmy\bin\NPOI.OpenXmlFormats.dll
