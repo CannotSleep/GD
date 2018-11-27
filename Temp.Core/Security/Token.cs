@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Temp.Core.Security
 {
-    class Token
+    public class Token
     {
+        public static string createToken()
+        {
+            Random ro = new Random(10);
+            long tick = DateTime.Now.Ticks;
+            Random ran = new Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+            return ran.Next().ToString();
+        }
     }
 }
