@@ -1,0 +1,2 @@
+C:\Users\zhangyuting\source\repos\testmy\Temp.Service\obj\Debug\Temp.Service.csprojResolveAssemblyReference.cache
+C:\Users\zhangyuting\source\repos\testmy\Temp.Service\obj\Debug\Temp.Service.csproj.CoreCompileInputs.cache
