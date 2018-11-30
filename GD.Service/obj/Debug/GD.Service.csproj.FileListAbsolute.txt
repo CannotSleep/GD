@@ -1,0 +1,6 @@
+C:\Users\zhangyuting\source\repos\testmy\GD.Service\bin\Debug\GD.Service.dll
+C:\Users\zhangyuting\source\repos\testmy\GD.Service\bin\Debug\GD.Service.pdb
+C:\Users\zhangyuting\source\repos\testmy\GD.Service\obj\Debug\GD.Service.csprojResolveAssemblyReference.cache
+C:\Users\zhangyuting\source\repos\testmy\GD.Service\obj\Debug\GD.Service.csproj.CoreCompileInputs.cache
+C:\Users\zhangyuting\source\repos\testmy\GD.Service\obj\Debug\GD.Service.dll
+C:\Users\zhangyuting\source\repos\testmy\GD.Service\obj\Debug\GD.Service.pdb

@@ -32,6 +32,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\LessJie.System.Web.Http.1.0.0\lib\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,10 +54,59 @@
     <Compile Include="Caching\HttpContextCacheManager.cs" />
     <Compile Include="Caching\HttpContextSessionManager.cs" />
     <Compile Include="Caching\PerRequestCacheManager.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HttpCombinerController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Core\CombinerResource.cs" />
+    <Compile Include="Core\CookieManager.cs" />
+    <Compile Include="Core\HttpModuleErrorHandler.cs" />
+    <Compile Include="Core\HttpRequestHelper.cs" />
+    <Compile Include="Core\MvcHtmlExtensions.cs" />
+    <Compile Include="Core\OverridelHttpHandler.cs" />
+    <Compile Include="Core\PageBase.cs" />
+    <Compile Include="Core\SessionManager.cs" />
+    <Compile Include="Core\TmpModelBinder.cs" />
+    <Compile Include="Core\TmpRazorViewEngine.cs" />
+    <Compile Include="Core\Utils.cs" />
+    <Compile Include="Core\WebViewPage.cs" />
+    <Compile Include="Filters\CompressAttribute.cs" />
+    <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
+    <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
+    <Compile Include="Filters\WebCacheAttribute.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\CommonComboModel.cs" />
+    <Compile Include="Models\CommonEnum.cs" />
+    <Compile Include="Models\DepartmentTree.cs" />
+    <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\IocContainerManager.cs" />
+    <Compile Include="Runtime\IocLifetimeScope.cs" />
+    <Compile Include="Runtime\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Temp.Core\Temp.Core.csproj">
+      <Project>{27b7b17f-2b66-4490-9846-ebd5185748d8}</Project>
+      <Name>Temp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Temp.Service\Temp.Service.csproj">
+      <Project>{1289b296-f39d-4c06-adec-a5cf9480ca5e}</Project>
+      <Name>Temp.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,6 @@
+C:\Users\zhangyuting\source\repos\testmy\GD.Data\bin\Debug\GD.Data.dll
+C:\Users\zhangyuting\source\repos\testmy\GD.Data\bin\Debug\GD.Data.pdb
+C:\Users\zhangyuting\source\repos\testmy\GD.Data\obj\Debug\GD.Data.csprojResolveAssemblyReference.cache
+C:\Users\zhangyuting\source\repos\testmy\GD.Data\obj\Debug\GD.Data.csproj.CoreCompileInputs.cache
+C:\Users\zhangyuting\source\repos\testmy\GD.Data\obj\Debug\GD.Data.dll
+C:\Users\zhangyuting\source\repos\testmy\GD.Data\obj\Debug\GD.Data.pdb

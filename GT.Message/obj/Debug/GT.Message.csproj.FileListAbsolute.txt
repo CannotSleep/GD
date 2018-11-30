@@ -1,0 +1,6 @@
+C:\Users\zhangyuting\source\repos\testmy\GT.Message\bin\Debug\GT.Message.dll
+C:\Users\zhangyuting\source\repos\testmy\GT.Message\bin\Debug\GT.Message.pdb
+C:\Users\zhangyuting\source\repos\testmy\GT.Message\obj\Debug\GT.Message.csprojResolveAssemblyReference.cache
+C:\Users\zhangyuting\source\repos\testmy\GT.Message\obj\Debug\GT.Message.csproj.CoreCompileInputs.cache
+C:\Users\zhangyuting\source\repos\testmy\GT.Message\obj\Debug\GT.Message.dll
+C:\Users\zhangyuting\source\repos\testmy\GT.Message\obj\Debug\GT.Message.pdb
