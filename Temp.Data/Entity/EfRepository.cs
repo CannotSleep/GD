@@ -285,7 +285,7 @@ namespace Temp.Data.Entity
         /// 分页查询
         /// </summary>
         /// <param name="">Entities</param>
-        public List<T> GetFileList(Expression<Func<T, bool>> where, Expression<Func<T, dynamic>> order, int pageIndex, int pageSize)
+        public List<T> GetListPage(Expression<Func<T, bool>> where, Expression<Func<T, dynamic>> order, int pageIndex, int pageSize)
         {
             var list = _context.Set<T>().Where(where).OrderByDescending(order).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
 
@@ -312,6 +312,18 @@ namespace Temp.Data.Entity
             var list = _context.Set<T>().Where(where).OrderByDescending(order).ToList();
             return list;
         }
+
+        /// <summary>
+        /// 通过条件查询
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public List<T> GetList(Expression<Func<T, bool>> where)
+        {
+            var list = _context.Set<T>().Where(where).ToList();
+            return list;
+        }
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -382,10 +394,7 @@ namespace Temp.Data.Entity
             throw new NotImplementedException();
         }
 
-        public List<T> GetList(Expression<Func<T, bool>> where)
-        {
-            throw new NotImplementedException();
-        }
+
 
         #endregion
 

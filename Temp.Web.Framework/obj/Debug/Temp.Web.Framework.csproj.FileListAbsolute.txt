@@ -3,3 +3,4 @@ C:\Users\zhangyuting\source\repos\testmy\Temp.Web.Framework\bin\Debug\Temp.Web.F
 C:\Users\zhangyuting\source\repos\testmy\Temp.Web.Framework\obj\Debug\Temp.Web.Framework.csproj.CoreCompileInputs.cache
 C:\Users\zhangyuting\source\repos\testmy\Temp.Web.Framework\obj\Debug\Temp.Web.Framework.dll
 C:\Users\zhangyuting\source\repos\testmy\Temp.Web.Framework\obj\Debug\Temp.Web.Framework.pdb
+C:\Users\zhangyuting\source\repos\testmy\Temp.Web.Framework\obj\Debug\Temp.Web.Framework.csprojResolveAssemblyReference.cache

@@ -40,7 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\ApiHandleErrorAttribute.cs" />
+    <Compile Include="API\ApiLoginAttribute.cs" />
+    <Compile Include="API\AppVersionApiController.cs" />
+    <Compile Include="API\BaseApiController.cs" />
+    <Compile Include="API\DefaultApiController.cs" />
+    <Compile Include="API\ErrorApiController.cs" />
+    <Compile Include="API\LoginApiController.cs" />
+    <Compile Include="Caching\HttpContextCacheManager.cs" />
+    <Compile Include="Caching\HttpContextSessionManager.cs" />
+    <Compile Include="Caching\PerRequestCacheManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

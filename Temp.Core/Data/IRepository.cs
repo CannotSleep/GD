@@ -97,7 +97,7 @@ namespace Temp.Core.Data
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        List<T> GetFilePage(Expression<Func<T, bool>> where, Expression<Func<T, dynamic>> order, int pageIndex, int pageSize);
+        List<T> GetListPage(Expression<Func<T, bool>> where, Expression<Func<T, dynamic>> order, int pageIndex, int pageSize);
 
         int GetDataTotal(Expression<Func<T, bool>> where);
 
