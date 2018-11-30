@@ -1,0 +1,1 @@
+<import src="/pages/index/quality/safetyList.vue.wxml" /><template is="79f7d370" data="{{ ...$root['0'], $root }}"/>

@@ -1,0 +1,4 @@
+<import src="/XC.qsp.app/components/uni-icon.vue.wxml" />
+
+<import src="/XC.qsp.app/components/number-box.vue.wxml" />
+<import src="/XC.qsp.app/components/uni-badge.vue.wxml" />

@@ -1,0 +1,62 @@
+<template name="ccdf3a2a">
+  <view class="_view data-v-97660fe0 content">
+    <view class="_view data-v-97660fe0 input-row">
+      <view class="_view data-v-97660fe0 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-97660fe0"></image>
+        <text class="_text data-v-97660fe0">工程名称:</text>
+      </view>
+      <view class="_view data-v-97660fe0 detail-box"> {{ProjectName}} </view>
+    </view>
+    <view class="_view data-v-97660fe0 input-row">
+      <view class="_view data-v-97660fe0 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-97660fe0"></image>
+        <text class="_text data-v-97660fe0">检查部位:</text>
+      </view>
+      <view class="_view data-v-97660fe0 detail-box"> {{ComponentType}} </view>
+    </view>
+    <view class="_view data-v-97660fe0 input-row">
+      <view class="_view data-v-97660fe0 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-97660fe0"></image>
+        <text class="_text data-v-97660fe0">混凝土强度设计等级:</text>
+      </view>
+      <view class="_view data-v-97660fe0 detail-box"> {{Grade}} </view>
+    </view>
+    <view class="_view data-v-97660fe0 input-row">
+      <view class="_view data-v-97660fe0 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-97660fe0"></image>
+        <text class="_text data-v-97660fe0">测试面状态:</text>
+      </view>
+      <view class="_view data-v-97660fe0 detail-box"> {{TestState}} </view>
+    </view>
+    <view class="_view data-v-97660fe0 input-row">
+      <view class="_view data-v-97660fe0 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-97660fe0"></image>
+        <text class="_text data-v-97660fe0">测量时间:</text>
+      </view>
+      <view class="_view data-v-97660fe0 detail-box"> {{CreateTime}} </view>
+    </view>
+    <block wx:key="index" key="{{index}}" wx:for="{{dataNumList}}" wx:for-index="index" wx:for-item="item">
+      <view class="_view data-v-97660fe0 input-row">
+        <view class="_view data-v-97660fe0 input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-13.png" mode class="_image data-v-97660fe0"></image>
+          <text class="_text data-v-97660fe0">测量数据:{{item.index}}</text>
+        </view>
+        <view class="_view data-v-97660fe0 detail-box"> {{item.value}} </view>
+      </view>
+    </block>
+    <view class="_view data-v-97660fe0 input-row">
+      <view class="_view data-v-97660fe0 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-97660fe0"></image>
+        <text class="_text data-v-97660fe0">计算结果:</text>
+      </view>
+      <view class="_view data-v-97660fe0 detail-box"> {{Calculation}} </view>
+    </view>
+    <view class="_view data-v-97660fe0 input-row">
+      <view class="_view data-v-97660fe0 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-97660fe0"></image>
+        <text class="_text data-v-97660fe0">备注:</text>
+      </view>
+      <view class="_view data-v-97660fe0 detail-box auto-height"> {{Remarks}} </view>
+    </view>
+  </view>
+</template>

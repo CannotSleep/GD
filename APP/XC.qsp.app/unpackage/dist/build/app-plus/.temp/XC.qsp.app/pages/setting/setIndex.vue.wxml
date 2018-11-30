@@ -1,0 +1,7 @@
+<template name="56c4ae54"><view class="_view data-v-3f15a5a8 page"><view class="_view data-v-3f15a5a8 uni-list-cell-navigate  uni-media-list user"><view class="_view data-v-3f15a5a8 uni-media-list-logo"><image src="{{img}}" class="_image data-v-3f15a5a8"></image></view><view class="_view data-v-3f15a5a8 uni-media-list-body" bindtap="handleProxy" data-eventid="{{'tQB-0'}}" data-comkey="{{$k}}"><view class="_view data-v-3f15a5a8 uni-media-list-text-top">超级管理员</view><view class="_view data-v-3f15a5a8 uni-media-list-text-bottom uni-ellipsis">账号:admin2</view></view></view><view class="_view data-v-3f15a5a8 about" hover-class="uni-list-cell-hover" bindtap="handleProxy" data-eventid="{{'hyR-1'}}" data-comkey="{{$k}}"><view class="_view data-v-3f15a5a8 uni-list-cell-navigate uni-navigate-right">
+				关于我们
+			</view></view><view class="_view data-v-3f15a5a8 instruction" hover-class="uni-list-cell-hover" bindtap="handleProxy" data-eventid="{{'wiB-2'}}" data-comkey="{{$k}}"><view class="_view data-v-3f15a5a8 uni-list-cell-navigate uni-navigate-right">
+				软件介绍
+			</view></view><view class="_view data-v-3f15a5a8 uni-list-cell logout" hover-class="uni-list-cell-hover" bindtap="handleProxy" data-eventid="{{'OV3-3'}}" data-comkey="{{$k}}"><view class="_view data-v-3f15a5a8 uni-list-cell-navigate uni-navigate-right">
+				退出登录
+			</view></view></view></template>

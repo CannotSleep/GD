@@ -1,0 +1,1 @@
+<import src="/components/selectPeopleMulti.vue.wxml" /><template is="5384ed49" data="{{ ...$root['0'], $root }}"/>

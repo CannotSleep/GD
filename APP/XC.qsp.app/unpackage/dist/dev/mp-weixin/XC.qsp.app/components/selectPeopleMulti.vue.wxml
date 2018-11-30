@@ -1,0 +1,96 @@
+<import src="/XC.qsp.app/components/uni-icon.vue.wxml" />
+<template name="794e2cb0">
+  <view class="_view data-v-5db38d32 content">
+    <view class="_view data-v-5db38d32 list-content">
+      <view class="_view data-v-5db38d32 uni-list">
+        <checkbox-group class="_checkbox-group data-v-5db38d32 checkbox-group" bindchange="handleProxy" data-eventid="{{'iak-0'}}" data-comkey="{{$k}}">
+          <block wx:key="index" key="{{index}}" wx:for="{{peopleDatalist}}" wx:for-index="index" wx:for-item="item">
+            <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+              <label class="_label data-v-5db38d32">
+                <template data="{{...$root['0'], ...$root[$kk+'gsO-0-'+index],$root}}" is="e02e9068"></template>
+                <text class="_text data-v-5db38d32 list-first">{{item.Name}}</text>
+              </label>
+            </view>
+            <block wx:if="{{item.children!=null}}" wx:key="sindex" key="{{sindex}}" wx:for="{{item.children}}" wx:for-index="sindex" wx:for-item="sitem">
+              <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+                <label wx:if="{{sitem.Account==null}}" class="_label data-v-5db38d32">
+                  <template data="{{...$root['0'], ...$root[$kk+'yan-1-'+index+'-'+sindex],$root}}" is="e02e9068"></template>
+                  <text class="_text data-v-5db38d32 list-second">{{sitem.Name}}</text>
+                </label>
+                <label class="_label data-v-5db38d32 checkbox list-second" wx:if="{{sitem.Account!=null}}">
+                  <checkbox value="{{sitem.Account.ID+sitem.Name}}" checked="{{false}}" class="_checkbox data-v-5db38d32"></checkbox>
+                  <template data="{{...$root['0'], ...$root[$kk+'j49-2-'+index+'-'+sindex],$root}}" is="e02e9068"></template> {{sitem.Name}} </label>
+              </view>
+              <block wx:if="{{sitem.children!=null}}" wx:key="tindex" key="{{tindex}}" wx:for="{{sitem.children}}" wx:for-index="tindex" wx:for-item="titem">
+                <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+                  <label wx:if="{{titem.Account==null}}" class="_label data-v-5db38d32">
+                    <template data="{{...$root['0'], ...$root[$kk+'4Fx-3-'+index+'-'+sindex+'-'+tindex],$root}}" is="e02e9068"></template>
+                    <text class="_text data-v-5db38d32 list-third">{{titem.Name}}</text>
+                  </label>
+                  <label class="_label data-v-5db38d32 checkbox list-third" wx:if="{{titem.Account!=null}}">
+                    <checkbox value="{{titem.Account.ID+titem.Name}}" checked="{{false}}" class="_checkbox data-v-5db38d32"></checkbox>
+                    <template data="{{...$root['0'], ...$root[$kk+'EdQ-4-'+index+'-'+sindex+'-'+tindex],$root}}" is="e02e9068"></template> {{titem.Name}} </label>
+                </view>
+                <block wx:if="{{titem.children!=null}}" wx:key="findex" key="{{findex}}" wx:for="{{titem.children}}" wx:for-index="findex" wx:for-item="fitem">
+                  <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+                    <label wx:if="{{fitem.Account==null}}" class="_label data-v-5db38d32">
+                      <template data="{{...$root['0'], ...$root[$kk+'RU1-5-'+index+'-'+sindex+'-'+tindex+'-'+findex],$root}}" is="e02e9068"></template>
+                      <text class="_text data-v-5db38d32 list-fourth">{{fitem.Name}}</text>
+                    </label>
+                    <label class="_label data-v-5db38d32 checkbox list-fourth" wx:if="{{fitem.Account!=null}}">
+                      <checkbox value="{{fitem.Account.ID+fitem.Name}}" checked="{{false}}" class="_checkbox data-v-5db38d32"></checkbox>
+                      <template data="{{...$root['0'], ...$root[$kk+'glO-6-'+index+'-'+sindex+'-'+tindex+'-'+findex],$root}}" is="e02e9068"></template> {{fitem.Name}} </label>
+                  </view>
+                  <block wx:if="{{fitem.children!=null}}" wx:key="sxindex" key="{{sxindex}}" wx:for="{{fitem.children}}" wx:for-index="sxindex" wx:for-item="sxitem">
+                    <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+                      <label wx:if="{{sxitem.Account==null}}" class="_label data-v-5db38d32">
+                        <template data="{{...$root['0'], ...$root[$kk+'kRm-7-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex],$root}}" is="e02e9068"></template>
+                        <text class="_text data-v-5db38d32 list-fifth">{{sxitem.Name}}</text>
+                      </label>
+                      <label class="_label data-v-5db38d32 checkbox list-fifth" wx:if="{{sxitem.Account!=null}}">
+                        <checkbox value="{{sxitem.Account.ID+sxitem.Name}}" checked="{{false}}" class="_checkbox data-v-5db38d32"></checkbox>
+                        <template data="{{...$root['0'], ...$root[$kk+'w5s-8-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex],$root}}" is="e02e9068"></template> {{sxitem.Name}} </label>
+                    </view>
+                    <block wx:if="{{sxitem.children!=null}}" wx:key="seindex" key="{{seindex}}" wx:for="{{sxitem.children}}" wx:for-index="seindex" wx:for-item="seitem">
+                      <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+                        <label wx:if="{{seitem.Account==null}}" class="_label data-v-5db38d32">
+                          <template data="{{...$root['0'], ...$root[$kk+'nVD-9-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex],$root}}" is="e02e9068"></template>
+                          <text class="_text data-v-5db38d32 list-sixth">{{seitem.Name}}</text>
+                        </label>
+                        <label class="_label data-v-5db38d32 checkbox list-sixth" wx:if="{{seitem.Account!=null}}">
+                          <checkbox value="{{seitem.Account.ID+seitem.Name}}" checked="{{false}}" class="_checkbox data-v-5db38d32"></checkbox>
+                          <template data="{{...$root['0'], ...$root[$kk+'JHU-10-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex],$root}}" is="e02e9068"></template> {{seitem.Name}} </label>
+                      </view>
+                      <block wx:if="{{seitem.children!=null}}" wx:key="eindex" key="{{eindex}}" wx:for="{{seitem.children}}" wx:for-index="eindex" wx:for-item="eitem">
+                        <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+                          <label wx:if="{{eitem.Account==null}}" class="_label data-v-5db38d32">
+                            <template data="{{...$root['0'], ...$root[$kk+'WPL-11-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex],$root}}" is="e02e9068"></template>
+                            <text class="_text data-v-5db38d32 .list-senth">{{eitem.Name}}</text>
+                          </label>
+                          <label class="_label data-v-5db38d32 checkbox .list-senth" wx:if="{{eitem.Account!=null}}">
+                            <checkbox value="{{eitem.Account.ID+eitem.Name}}" checked="{{false}}" class="_checkbox data-v-5db38d32"></checkbox>
+                            <template data="{{...$root['0'], ...$root[$kk+'HgX-12-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex],$root}}" is="e02e9068"></template> {{eitem.Name}} </label>
+                        </view>
+                        <block wx:if="{{eitem.children!=null}}" wx:key="nindex" key="{{nindex}}" wx:for="{{eitem.children}}" wx:for-index="nindex" wx:for-item="nitem">
+                          <view class="_view data-v-5db38d32 uni-list-cell" hover-class="uni-list-cell-hover">
+                            <label wx:if="{{nitem.Account==null}}" class="_label data-v-5db38d32">
+                              <template data="{{...$root['0'], ...$root[$kk+'TMg-13-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex+'-'+nindex],$root}}" is="e02e9068"></template>
+                              <text class="_text data-v-5db38d32 list-eight">{{nitem.Name}}</text>
+                            </label>
+                            <label class="_label data-v-5db38d32 checkbox list-eight" wx:if="{{nitem.Account!=null}}">
+                              <checkbox value="{{nitem.Account.ID+nitem.Name}}" checked="{{false}}" class="_checkbox data-v-5db38d32"></checkbox>
+                              <template data="{{...$root['0'], ...$root[$kk+'1FA-14-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex+'-'+nindex],$root}}" is="e02e9068"></template> {{nitem.Name}} </label>
+                          </view>
+                        </block>
+                      </block>
+                    </block>
+                  </block>
+                </block>
+              </block>
+            </block>
+          </block>
+        </checkbox-group>
+      </view>
+    </view>
+  </view>
+</template>

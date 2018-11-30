@@ -1,0 +1,957 @@
+<template>
+	<view class="index">
+		<scroll-view id="tab-bar" class="swiper-tab" scroll-x :scroll-left="scrollLeft">
+			<block v-for="(tab,index) in tabs" :key="tab.id">
+				<view :class="['swiper-tab-list',currentTab==index ? 'on' : '']" :id="tab.id" :data-current="index" @tap="swichNav">{{tab.name}}</view>
+			</block>
+		</scroll-view>
+		<swiper :current="currentTab" class="swiper-box" duration="300" @change="bindChange">
+			<swiper-item>
+				<scroll-view class="index-bd" scroll-y>
+					<view class="content">
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-02.png"
+								 mode=""></image>
+								<text>项目名称:</text>
+							</view>
+							<picker @change="changeProject" :value="ProjectIndex" :range="ProjectList" range-key="text">
+								<view class="uni-input">{{ProjectText}}</view>
+							</picker>
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-03.png" mode=""></image>
+								<text>陪同检查人:</text>
+							</view>
+							<input type="text" :value="Rectpeople" placeholder="请选择陪同检查人" @tap="selectRect" />
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+								<text>检查日期:</text>
+							</view>
+							<picker mode="date" :value="CheckDate" start="2000-01-01" end="2028-12-31" @change="changeDate">
+								<view class="uni-input">{{CheckDate}}</view>
+							</picker>
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-04.png" mode=""></image>
+								<text>区域/栋号:</text>
+							</view>
+							<picker @change="changeArea" :value="AreaIndex" :range="AreaList" range-key="text">
+								<view class="uni-input">{{AreaText}}</view>
+							</picker>
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+								<text>楼层:</text>
+							</view>
+							<input type="number" value="" placeholder="请输入楼层" v-model="Postition" />
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-05.png" mode=""></image>
+								<text>构件类别:</text>
+							</view>
+							<picker @change="changeConstruct" :value="ConstructIndex" :range="ConstructList" range-key="text">
+								<view class="uni-input">{{ConstructText}}</view>
+							</picker>
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-06.png" mode=""></image>
+								<text>主控项目:</text>
+							</view>
+							<picker @change="changeEngproject" :value="EngProjectIndex" :range="EngProjectList" range-key="text">
+								<view class="uni-input">{{EngProjectText}}</view>
+							</picker>
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-09.png" mode=""></image>
+								<text>允许偏差:</text>
+							</view>
+							<view class="detail-box">
+								{{Deviation}}
+							</view>
+						</view>
+						<view class="input-row">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-07.png" mode=""></image>
+								<text>测量数据:</text>
+							</view>
+							<view class="data-row">
+								<button size="mini" type="default" @tap="addDatas">添加数据</button>
+							</view>
+						</view>
+						<block v-for="(item,index) in dataList" :key="index" v-if="isAdd">
+							<view class="input-row" v-if="isAdd">
+								<view class="input-label">
+									数据:{{item.dataNum}}
+								</view>
+								<input type="number" v-model="item.dataInput" placeholder="请输入测量数据">
+
+							</view>
+						</block>
+						<view class="input-row auto-height">
+							<view class="input-label">
+								<image src="../../../static/img/list1_icon/list2_icon-08.png" mode=""></image>
+								<text>备注:</text>
+							</view>
+							<textarea @blur="bindTextAreaBlur" v-model="Remark" auto-height placeholder="请填写备注" />
+							</view>
+							<!-- <view class="input-row auto-height">
+								<view class="input-label width-100 block">
+									<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+									<text>上传照片:</text>
+								</view>		
+								<view class="uni-uploader-body">
+									<view class="uni-uploader__files">
+										<block v-for="(image,index) in imageList" :key="index">
+											<view class="uni-uploader__file">
+												<image class="uni-uploader__img" :src="image" :data-src="image" @tap="previewImage"></image>
+											</view>
+										</block>
+									</view>
+									<view class="uni-uploader__input-box">
+										<view class="uni-uploader__input" @tap="chooseImage"></view>
+									</view>
+								</view>
+							</view> -->
+						</view>
+					</scroll-view>
+				</swiper-item>
+				<swiper-item>
+					<scroll-view class="index-bd" scroll-y @scrolltolower="">
+						<view class="content">						
+							<view class="input-row">
+								<view class="input-label">
+									<image src="../../../static/img/list1_icon/list2_icon-04.png" mode=""></image>
+									<text>区域/栋号:</text>
+								</view>
+								<picker @change="changeArea2" :value="AreaIndex2" :range="AreaList2" range-key="text">
+									<view class="uni-input">{{AreaText2}}</view>
+								</picker>
+							</view>
+							<view class="input-row">
+								<view class="input-label">
+									<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+									<text>楼层:</text>
+								</view>
+								<input type="number" value="" placeholder="请输入楼层" v-model="Postition2" />
+							</view>
+							<view class="input-row">
+								<view class="input-label">
+									<image src="../../../static/img/list1_icon/list2_icon-05.png" mode=""></image>
+									<text>构件类别:</text>
+								</view>
+								<picker @change="changeConstruct2" :value="ConstructIndex2" :range="ConstructList2" range-key="text">
+									<view class="uni-input">{{ConstructText2}}</view>
+								</picker>
+							</view>
+							<view class="input-row">
+								<view class="input-label">
+									<image src="../../../static/img/list1_icon/list2_icon-06.png" mode=""></image>
+									<text>主控项目:</text>
+								</view>
+								<picker @change="changeEngproject2" :value="EngProjectIndex2" :range="EngProjectList2" range-key="text">
+									<view class="uni-input">{{EngProjectText2}}</view>
+								</picker>
+							</view>
+							<view class="input-row">
+								<view class="input-label">
+									<image src="../../../static/img/list1_icon/list2_icon-09.png" mode=""></image>
+									<text>允许偏差:</text>
+								</view>
+								<view class="detail-box">
+									{{Deviation2}}
+								</view>
+							</view>
+							<view class="input-row">
+								<view class="input-label">
+									<image src="../../../static/img/list1_icon/list2_icon-07.png" mode=""></image>
+									<text>测量数据:</text>
+								</view>
+								<view class="data-row">
+									<button size="mini" type="default" @tap="addDatas2()">添加数据</button>
+								</view>
+							</view>
+							<block v-for="(item,index) in dataList2" :key="index" v-if="isAdd">
+								<view class="input-row" v-if="isAdd">
+									<view class="input-label">
+										数据:{{item.dataNum}}
+									</view>
+									<input type="number" v-model="item.dataInput" placeholder="请输入测量数据">
+								</view>
+							</block>
+							<view class="input-row auto-height">
+								<view class="input-label">
+									<image src="../../../static/img/list1_icon/list2_icon-08.png" mode=""></image>
+									<text>备注:</text>
+								</view>
+								<textarea @blur="bindTextAreaBlur" v-model="Remark2" auto-height placeholder="请填写备注" />
+							</view>
+							<!-- <view class="input-row auto-height">
+								<view class="input-label width-100 block">
+									<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+									<text>上传照片:</text>
+								</view>		
+								<view class="uni-uploader-body">
+									<view class="uni-uploader__files">
+										<block v-for="(image,index) in imageList" :key="index">
+											<view class="uni-uploader__file">
+												<image class="uni-uploader__img" :src="image" :data-src="image" @tap="previewImage"></image>
+											</view>
+										</block>
+									</view>
+									<view class="uni-uploader__input-box">
+										<view class="uni-uploader__input" @tap="chooseImage"></view>
+									</view>
+								</view>
+							</view> -->
+						</view>
+					</scroll-view>
+				</swiper-item>
+		</swiper>
+		<view class="button-row">
+			<button type="primary" size="mini" @tap="submit">提交</button>
+			<button type="default" size="mini" @tap="tempS" >暂存</button>
+		</view>
+	</view> 
+</template>
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data() {
+			return {
+				Token: '',
+				title: 'tabbar',
+				scrollLeft: 0, //横向滚动条起始位置
+				isClickChange: false,
+				currentTab: 0, //判断是否当前点击项
+				tabs: [{
+					name: '平等度',
+					id: 'guanzhu'
+				}, {
+					name: '垂直度',
+					id: 'tuijian'
+				}],
+				newsitems: [],
+				ProjectList: [],
+				ProjectIndex: 0,
+				ProjectVal: '',
+				ProjectText: '',
+				CheckDate: '请选择检查日期',
+				AreaVal: '',
+				AreaList: [],
+				AreaIndex: 0,
+				AreaText: '',
+				Postition:'',
+				Postition2:'',
+				ConstructVal: '',
+				ConstructList: [],
+				ConstructIndex: 0,
+				ConstructText: '',
+				AreaVal2: '',
+				AreaList2: [],
+				AreaIndex2: 0,
+				AreaText2: '',
+				ConstructVal2: '',
+				ConstructList2: [],
+				ConstructIndex2: 0,
+				ConstructText2: '',
+				EngProjectVal: '',
+				EngProjectList: [],
+				EngProjectIndex: 0,
+				EngProjectText: '',
+				EngProjectVal2: '',
+				EngProjectList2: [],
+				EngProjectIndex2: 0,
+				EngProjectText2: '',
+				Deviation:'',
+				Deviation2:'',
+				isAdd: true,
+				dataList: [{
+					dataNum: 1,
+					dataInput:''
+				}],
+				dataNumList:[{}],
+				dataList2: [{
+					dataNum: 1,
+					dataInput:''
+				}],
+				dataNumList2:[{}],
+				Rectpeople:'',
+				Rectpeopleid:'',
+				isfirstopen:1,
+				Remark:'',
+				Remark2:'',
+			}
+		},
+		onLoad: function() {
+			//this.newsitems = this.randomfn()
+			this.Token = server.net.GetSessionToken();
+			this.getProject();
+			//this.getArea();
+			//this.getConstruction();
+		},
+		onShow:function(){
+			console.log("页面显示")
+			if(this.isfirstopen!=1){
+				let id = uni.getStorageSync('selectID');
+				let name = uni.getStorageSync('selectName');
+				this.Rectpeople = name;
+				this.Rectpeopleid = id;
+			}
+		},
+		onUnload: function() {
+			this.scrollLeft = 0,
+			this.isClickChange = false,
+			this.currentTab = 0;
+		},
+		methods: {
+			bindChange: async function(e) { //异步函数
+					let index = e.target.current;
+					if (this.isClickChange) {
+						this.currentTab = index;
+						this.isClickChange = false;
+						return;
+					}
+					let tabBar = await this.getWidth("tab-bar"),
+						tabBarScrollLeft = tabBar.scrollLeft;
+
+					let width = 0;
+
+					for (let i = 0; i < index; i++) {
+						let result = await this.getWidth(this.tabs[i].id);
+						width += result.width;
+					}
+
+					let winWidth = uni.getSystemInfoSync().windowWidth,
+						nowElement = await this.getWidth(this.tabs[index].id),
+						nowWidth = nowElement.width;
+
+					if (width + nowWidth - tabBarScrollLeft > winWidth) {
+						this.scrollLeft = width + nowWidth - winWidth;
+					}
+					if (width < tabBarScrollLeft) {
+						this.scrollLeft = width;
+					}
+					this.isClickChange = false;
+					this.currentTab = index; //一旦访问data就会出问题
+				},
+				getWidth: function(id) { //得到元素的宽高
+					return new Promise((res, rej) => {
+						uni.createSelectorQuery().select("#" + id).fields({
+							size: true,
+							scrollOffset: true
+						}, (data) => {
+							if (id === 'tab-bar') {
+								console.log("id=", id, "数据:", data)
+							}
+							res(data);
+						}).exec();
+					})
+				},
+				swichNav: async function(e) { //点击tab-bar事件
+						if (this.currentTab === e.target.dataset.current) {
+							return false;
+						} else {
+							let tabBar = await this.getWidth("tab-bar"),
+								tabBarScrollLeft = tabBar.scrollLeft; //点击的时候记录并设置scrollLeft
+							this.scrollLeft = tabBarScrollLeft;
+							this.isClickChange = true;
+							this.currentTab = e.target.dataset.current
+						}
+				},
+// 					chooseImage: async function() { //选择图片
+// 							if (this.imageList.length === 9) {
+// 								let isContinue = await this.isFullImg();
+// 								console.log("是否继续?", isContinue);
+// 								if (!isContinue) {
+// 									return;
+// 								}
+// 							}
+// 							uni.chooseImage({ //调用图片选择API
+// 								sourceType: sourceType[this.sourceTypeIndex],
+// 								// #ifdef MP-WEIXIN
+// 								sizeType: sizeType[this.sizeTypeIndex],
+// 								// #endif
+// 								count: this.imageList.length + this.count[this.countIndex] > 9 ? 9 - this.imageList.length : this.count[this
+// 									.countIndex],
+// 								success: (res) => {
+// 									this.imageList = this.imageList.concat(res.tempFilePaths);
+// 								}
+// 							})
+// 						},
+// 						isFullImg: function() { //判断图片最大数量
+// 							return new Promise((res) => {
+// 								uni.showModal({
+// 									content: "已经有9张图片了,是否清空现有图片？",
+// 									success: (e) => {
+// 										if (e.confirm) {
+// 											this.imageList = [];
+// 											res(true);
+// 										} else {
+// 											res(false)
+// 										}
+// 									},
+// 									fail: () => {
+// 										res(false)
+// 									}
+// 								});
+// 							});
+// 						},
+// 						previewImage(e) { //预览图片
+// 							var current = e.target.dataset.src
+// 							uni.previewImage({
+// 								current: current,
+// 								urls: this.imageList
+// 							})
+// 						},
+				getProject() { //获取项目数据
+					let url = server.net.setUrl('api/DropDownListApi/GetProject');
+					uni.request({
+						url: url,
+						method: 'GET',
+						header: {
+							Token: this.Token
+						},
+						
+						success: (data) => {
+							let jsondata = data.data;
+							let dataArr = jsondata.data;
+							
+							let first={
+								value:"",
+								text:"请选择项目"
+							}
+							dataArr.unshift(first)
+							
+							if (jsondata.status = 1) {
+								this.ProjectList = this.setData(dataArr);
+								this.ProjectVal = this.ProjectList[this.ProjectIndex].value;
+								this.ProjectText = this.ProjectList[this.ProjectIndex].text;
+							} else {
+								console.log("项目获取失败" + jsondata.status);
+							}
+						},
+						fail: (data, code) => {
+							console.log("项目数据请求失败" + data + code)
+						},
+						complete: () => {}
+					});
+				},
+				getArea(projectid) {
+					//获取测量区域
+					let url = server.net.setUrl('api/DropDownListApi/GetActualQuaAreaList');
+					let data = {};
+					if (projectid) {
+						data.projectid = projectid;
+					}
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							Token: this.Token
+						},
+						data: JSON.stringify(data),
+						success: (data) => {
+							let jsondata = data.data;
+							if (jsondata.status = 1) {
+								console.log("检查区域获取成功");
+								this.AreaList = this.setData(jsondata.data);
+								this.AreaList2 = this.setData(jsondata.data);
+								this.AreaVal = this.AreaList[this.AreaIndex].value;
+								this.AreaText = this.AreaList[this.AreaIndex].text;
+								this.AreaVal2 = this.AreaList2[this.AreaIndex2].value;
+								this.AreaText2 = this.AreaList2[this.AreaIndex2].text;
+							} else {
+								console.log("检查区域获取失败" + jsondata.status);
+							}
+
+						},
+						fail: (data, code) => {
+							console.log("检查区域数据请求失败" + data + code)
+						}
+					});
+				},
+				getConstruction(projectid) {
+					//获取构件类型
+					let url = server.net.setUrl('api/DropDownListApi/GetActualQuaComList');
+					let data = {};
+					if (projectid) {
+						data.projectid = projectid;
+					}
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							Token: this.Token
+						},
+						data: JSON.stringify(data),
+						success: (data) => {
+							let jsondata = data.data;
+							if (jsondata.status = 1) {
+								console.log("构件类型获取成功");
+								this.ConstructList = this.setData(jsondata.data);
+								this.ConstructVal = this.ConstructList[this.ConstructIndex].value;
+								this.ConstructText = this.ConstructList[this.ConstructIndex].text;
+								this.ConstructList2 = this.setData(jsondata.data);
+								this.ConstructVal2 = this.ConstructList2[this.ConstructIndex2].value;
+								this.ConstructText2 = this.ConstructList2[this.ConstructIndex2].text;
+								//初始化主控项目
+								this.GetActualQuaTermList(this.ConstructVal);
+								this.GetActualQuaTermList2(this.ConstructVal2);
+							} else {
+								console.log("构件类型获取失败" + jsondata.status);
+							}
+						},
+						fail: (data, code) => {
+							console.log("构件类型数据请求失败" + data + code)
+						}
+					});
+				},
+				GetActualQuaTermList(value) {
+					//主控项目1
+					let url = server.net.setUrl('api/DropDownListApi/GetActualQuaTermList');
+					let ajaxdata = {
+						comid: value
+					};
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							Token: this.Token
+						},
+						data: JSON.stringify(ajaxdata),
+						success: res => {
+							let jsondata = res.data;
+							if (jsondata.status = 1) {
+								if(jsondata.data.length > 0)
+								{
+								    console.log("主控项目获取成功");
+								    this.EngProjectList = this.setData2(jsondata.data);
+								    this.EngProjectVal = this.EngProjectList[this.EngProjectIndex].value;
+								    this.EngProjectText = this.EngProjectList[this.EngProjectIndex].text;
+									this.Deviation = this.EngProjectList[this.EngProjectIndex].text2;
+								}
+								else
+								{
+									this.EngProjectList = [];
+									this.EngProjectVal = '';
+									this.EngProjectText = '';
+									this.Deviation = '';
+									uni.showModal({
+										title: '提示',
+										content: '此构件没有配置主控项目，请联系项目管理员进行配置',
+										showCancel:false
+									});
+								}
+							} else {
+						        console.log("主控项目获取失败" + jsondata.status);
+							}
+						},
+						fail: () => {},
+						complete: () => {}
+					});
+				},
+				GetActualQuaTermList2(value) {
+					//主控项目2
+					let url = server.net.setUrl('api/DropDownListApi/GetActualQuaTermList');
+					let ajaxdata = {
+						comid: value
+					};
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							Token: this.Token
+						},
+						data: JSON.stringify(ajaxdata),
+						success: res => {
+							let jsondata = res.data;
+							if (jsondata.status = 1) {
+								if(jsondata.data.length > 0)
+								{
+								    console.log("主控项目获取成功");
+								    this.EngProjectList2 = this.setData2(jsondata.data);
+								    this.EngProjectVal2 = this.EngProjectList2[this.EngProjectIndex2].value;
+								    this.EngProjectText2 = this.EngProjectList2[this.EngProjectIndex2].text;
+									this.Deviation2 = this.EngProjectList2[this.EngProjectIndex2].text2;
+				                }
+				                else
+				                {
+									this.EngProjectList2 = [];
+									this.EngProjectVal2 = '';
+									this.EngProjectText2 = '';
+									this.Deviation2 = '';
+				                	uni.showModal({
+				                		title: '提示',
+				                		content: '此构件没有配置主控项目，请联系项目管理员进行配置',
+				                		showCancel:false
+				                	});
+				                }
+							} else {
+								console.log("主控项目获取失败" + jsondata.status);
+							}
+						},
+						fail: () => {},
+						complete: () => {}
+					});
+				},
+				changeProject(e) {
+					this.ProjectIndex = e.detail.value;
+					this.ProjectVal = this.ProjectList[e.detail.value].value;
+					this.ProjectText = this.ProjectList[this.ProjectIndex].text;
+					this.getArea(this.ProjectVal);
+					this.getConstruction(this.ProjectVal);
+				},
+				changeDate(e){
+					this.CheckDate = e.detail.value;
+				},
+				selectRect(e){
+					this.isfirstopen+=1;
+					uni.navigateTo({
+						url:'../../../components/selectPeople'
+					})
+				},
+				setData(items) {
+					let newItems = [];
+					items.forEach((e) => {
+						newItems.push({
+							text: e.text,
+							value: e.value
+						});
+					});
+					return newItems;
+				},
+				setData2(items) {
+					let newItems = [];
+					items.forEach((e) => {
+						newItems.push({
+							text: e.text,
+							text2: e.text2,
+							value: e.value
+						});
+					});
+					return newItems;
+				},
+				changeArea(e) {
+					this.AreaIndex = e.detail.value;
+					this.AreaText = this.AreaList[this.AreaIndex].text;
+					this.AreaVal = this.AreaList[this.AreaIndex].value;
+				},
+				changeArea2(e) {
+					this.AreaIndex2 = e.detail.value;
+					this.AreaText2 = this.AreaList2[this.AreaIndex2].text;
+					this.AreaVal2 = this.AreaList2[this.AreaIndex2].value;
+				},
+				changeConstruct(e) {
+					this.ConstructIndex = e.detail.value;
+					this.ConstructVal = this.ConstructList[this.ConstructIndex].value;
+					this.ConstructText = this.ConstructList[this.ConstructIndex].text;
+					this.GetActualQuaTermList(this.ConstructVal); //重新获取主控项目
+				},
+				changeConstruct2(e) {
+					this.ConstructIndex2 = e.detail.value;
+					this.ConstructVal2 = this.ConstructList2[this.ConstructIndex2].value;
+					this.ConstructText2 = this.ConstructList2[this.ConstructIndex2].text;
+					this.GetActualQuaTermList2(this.ConstructVal2); //重新获取主控项目
+				},
+				changeEngproject(e) {
+					this.EngProjectIndex = e.detail.value;
+					this.EngProjectVal = this.EngProjectList[this.EngProjectIndex].value;
+					this.EngProjectText = this.EngProjectList[this.EngProjectIndex].text;
+					this.Deviation = this.EngProjectList[this.EngProjectIndex].text2;
+				},
+				changeEngproject2(e) {
+					this.EngProjectIndex2 = e.detail.value;
+					this.EngProjectVal2 = this.EngProjectList2[this.EngProjectIndex2].value;
+					this.EngProjectText2 = this.EngProjectList2[this.EngProjectIndex2].text;
+					this.Deviation2 = this.EngProjectList2[this.EngProjectIndex2].text2;
+				},
+				addDatas() {
+					//this.isAdd = true;
+					console.log(this.dataList.length);
+					let addTimes = this.dataList.length+1;
+					console.log("点击次数" + addTimes);
+					if (addTimes < 11) {
+						this.dataList.push({
+							dataNum: addTimes
+						});
+						addTimes += 1;
+					} else {
+						uni.showToast({
+							title:'最多添加10条'
+						})
+						return false;
+					}
+				},
+				addDatas2() {
+					//this.isAdd = true;
+					console.log(this.dataList2.length);
+					let addTimes = this.dataList2.length+1;
+					console.log("点击次数" + addTimes);
+					if (addTimes < 11) {
+						this.dataList2.push({
+							dataNum: addTimes
+						});
+						addTimes += 1;
+					} else {
+						uni.showToast({
+							title:'最多添加10条'
+						})
+						return false;
+					}
+				},
+				submit() {
+					uni.removeStorageSync('selectID');
+					uni.removeStorageSync('selectName');
+					let url = server.net.setUrl('api/ActualQuantityApi/Add');
+					let newItems = [];
+					for (let i in this.dataList) {
+						newItems.push(this.dataList[i].dataInput);
+					}
+					let newItems2 = [];
+					for (let i in this.dataList2) {
+						newItems2.push(this.dataList2[i].dataInput);
+					}
+					
+					if(!this.ProjectVal)
+					{
+						server.net.showWrongTips("请选择项目");
+						return false; 
+					}
+					if(!this.Rectpeopleid)
+					{
+						server.net.showWrongTips("请选择陪同检查人");
+						return false; 
+					}
+					if(this.CheckDate =='请选择检查日期')
+					{
+						server.net.showWrongTips("请选择检查日期");
+						return false; 
+					}
+					if(!this.Postition || !this.Postition2)
+					{
+						server.net.showWrongTips("请输入楼层");
+						return false; 
+					}
+					if(!this.EngProjectVal || !this.EngProjectVal2)
+					{
+						uni.showModal({
+							title: '提示',
+							content: '此构件没有配置主控项目，请联系项目管理员进行配置',
+							showCancel:false
+						});
+						return false; 
+					}
+					
+					console.log(newItems);
+					let ajaxdata = {
+						ProjectID: this.ProjectVal, //项目ID
+						AccCheckProple: this.Rectpeopleid, //陪同检查人
+						CheckDate: this.CheckDate, //检查日期
+						Children: [{
+							ActualQuantityAreaID: this.AreaVal, //检查区域
+							DataAttr: newItems, //检查数据
+							Remark: this.Remark, //备注
+							Postition: this.Postition, //楼层
+							ComId: this.ConstructVal, //构件部位
+							ActualQuantityTermID: this.EngProjectVal //主控项目				
+						},
+						{
+							ActualQuantityAreaID: this.AreaVal2, //检查区域
+							DataAttr: newItems2, //检查数据
+							Remark: this.Remark2, //备注
+							Postition: this.Postition2, //楼层
+							ComId: this.ConstructVal2, //构件部位
+							ActualQuantityTermID: this.EngProjectVal2 //主控项目				
+						}],
+				
+					}
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							Token: this.Token
+						},
+						data: JSON.stringify(ajaxdata),
+						success: res => {
+							console.log(res);
+							let result = res.data;
+							let jsondata = result.data;
+							if (result.status == 1) {
+								uni.showToast({
+									title: '提交成功',
+									mask: false,
+									duration: 1500
+								});
+								setTimeout(function() {
+									uni.navigateBack({
+										delta: 1
+									})
+								}, 2000)
+							} else {
+								console.log(result.message);
+							}
+						},
+						fail: () => {
+							console.log("实测实量提交失败");
+						},
+						complete: () => {}
+					});
+				},
+				tempS(){
+					uni.removeStorageSync('selectID');
+					uni.removeStorageSync('selectName');
+					let newItems = [];
+					for (let i in this.dataList) {
+						newItems.push(this.dataList[i].dataInput);
+					}
+					let newItems2 = [];
+					for (let i in this.dataList2) {
+						newItems2.push(this.dataList2[i].dataInput);
+					}
+					let tempObject = {
+						ProjectVal: this.ProjectVal, //项目ID
+						ProjectIndex:this.ProjectIndex,
+						ProjectText:this.ProjectText,
+						Rectpeopleid: this.Rectpeopleid, //陪同检查人
+						Rectpeople:this.Rectpeople,
+						CheckDate: this.CheckDate, //检查日期
+						Children: [{
+							AreaVal:this.AreaVal,
+							AreaText:this.AreaText,
+							DataAttr: newItems, //检查数据
+							Remark: this.Remark, //备注
+							Postition: this.Postition, //楼层
+							ConstructVal:this.ConstructVal,
+							ConstructIndex:this.ConstructIndex,
+							ConstructText:this.ConstructText,
+							EngProjectVal: this.EngProjectVal ,//主控项目		
+							EngProjectIndex:this.EngProjectIndex,
+							EngProjectText:this.EngProjectText,
+							Deviation:this.Deviation
+						},
+						{
+							AreaVal:this.AreaVal2,
+							AreaText:this.AreaText2,
+							DataAttr: newItems2, //检查数据
+							Remark: this.Remark2, //备注
+							Postition: this.Postition2, //楼层
+							ConstructVal:this.ConstructVal2,
+							ConstructIndex:this.ConstructIndex2,
+							ConstructText:this.ConstructText2,
+							EngProjectVal: this.EngProjectVal2 ,//主控项目		
+							EngProjectIndex:this.EngProjectIndex2,
+							EngProjectText:this.EngProjectText2,
+							Deviation:this.Deviation2
+						}]
+					}
+					let measuringOff = uni.getStorageSync('MeasuringListOffLine');
+					if (measuringOff) {
+						console.log(measuringOff);
+						measuringOff.push(tempObject)
+					}else{
+						measuringOff=[];
+						measuringOff.push(tempObject)
+					}
+					uni.setStorageSync("MeasuringListOffLine",measuringOff);
+					uni.showToast({
+						title: '暂存成功',
+						mask: false,
+						duration: 1500
+					});
+					setTimeout(function() {
+						uni.navigateBack({
+							delta: 1
+						})
+					}, 2000)
+				}
+		}
+	}
+</script>
+
+<style>
+	page {
+		display: flex;
+	}
+
+	.index {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		overflow: hidden;
+		height: 100%;
+	}
+
+	.index-bd {
+		width: 750upx;
+		height: 100%;
+	}
+
+	.swiper-tab {
+		width: 100%;
+		white-space: nowrap;
+		line-height: 60upx;
+		height: 65px;
+	}
+
+
+	.swiper-tab-list {
+		font-size: 30upx;
+		width: 50%;
+		display: inline-block;
+		text-align: center;
+		color: #777777;
+	}
+
+	.on {
+		color: #17A869;
+		border-bottom: 5upx solid #17A869;
+	}
+
+	.swiper-box {
+		flex: 1;
+		width: 100%;
+		height: 1030px;
+		min-height: 600px;
+	}
+
+	.tab-list {
+		width: 100%;
+		height: 90upx;
+		line-height: 90upx;
+		text-align: left;
+		border-bottom: 2upx solid #EFEFF4;
+	}
+
+	.data-row {
+		width: 70%;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		padding: 15px 0px;
+	}
+
+	.data-row button {
+		color: #fff;
+		background-color: #17A869;
+		border: none;
+		position: relative;
+	}
+	.detail-box {
+		min-height: 50px;
+		font-size: 28px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+</style>

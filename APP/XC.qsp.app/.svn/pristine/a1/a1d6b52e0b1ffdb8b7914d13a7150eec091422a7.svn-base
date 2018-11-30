@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/message/messageList.vue.wxml" /><template is="09c75b68" data="{{ ...$root['0'], $root }}"/>

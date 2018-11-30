@@ -1,0 +1,113 @@
+<template>
+	<view class="page">
+		
+
+			<view class="uni-list-cell-navigate  uni-media-list user">
+				<view class="uni-media-list-logo">
+					<image :src="img"></image>
+				</view>
+				<view class="uni-media-list-body" @tap="jumpUser">
+					<view class="uni-media-list-text-top">{{username}}</view>
+					<view class="uni-media-list-text-bottom uni-ellipsis">账号:{{userid}}</view>
+				</view>
+			</view>
+
+			<view class="about" hover-class="uni-list-cell-hover" @tap="jumpAbout">
+				<view class="uni-list-cell-navigate uni-navigate-right">
+					关于我们
+				</view>
+			</view>
+			
+			<view class="instruction" hover-class="uni-list-cell-hover" @tap="jumpInstru">
+				<view class="uni-list-cell-navigate uni-navigate-right">
+					软件介绍
+				</view>
+			</view>
+			<view class="uni-list-cell logout" hover-class="uni-list-cell-hover" @tap="exit">
+				<view class="uni-list-cell-navigate uni-navigate-right">
+					退出登录
+				</view>
+			</view>
+	</view>
+</template>
+<script>
+	import server from '../../store/server.js';
+	
+	export default {
+		data() {
+			return {
+				title: 'media-list',
+				showImg: false,
+				img: "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
+					userid:'',
+					username:''
+			}
+		},
+		methods:{
+			jumpUser(){
+				
+			},
+			jumpAbout(){
+				uni.navigateTo({
+					url: 'aboutus'
+				})
+			},
+			jumpInstru(){
+				uni.navigateTo({
+					url: 'instruction'
+				})
+			},
+			exit(){
+				server.net.ClearSessionToken();
+				server.net.ClearLocalToken();
+				uni.reLaunch({ 
+					 url: '../login/login'
+				})
+			}
+		},
+		onLoad() {
+			let user = server.net.GetUser();
+			this.userid = user.AccountID;
+			this.username = user.Name;
+			setTimeout(() => {
+				this.showImg = true;
+			}, 400)
+		}
+	}
+</script>
+
+<style>
+	@import "../../common/uni.css";
+	
+	
+	.page {
+		width:100%;
+		background: #F0EFF4;
+	}
+
+	.title {
+		padding: 20upx;
+	}
+	
+	.user{
+		margin-top: 40upx;
+		background: #FFF;
+	}
+	
+	.about{
+		margin-top:40upx;
+		background: #FFF;
+	}
+	
+	.instruction{
+		background: #FFF;
+	}
+	
+	.logout{
+		margin-top:80upx;
+		background: #FFF;
+	}
+	
+	
+	
+</style>

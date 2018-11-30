@@ -1,0 +1,83 @@
+<template name="34dc4629">
+  <view class="_view data-v-71b255a4 content">
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">工程名称:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{ProjectName}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">测量时间:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{CreateTime}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">总合格率:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{totalRate}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">合格个数:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{qualifiedNum}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">不合格个数:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{failedNum}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">陪同检查人:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{checkPerson}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">实测项目:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{engProject}} </view>
+    </view>
+    <block wx:key="index" key="{{index}}" wx:for="{{dataNumList}}" wx:for-index="index" wx:for-item="item">
+      <view class="_view data-v-71b255a4 input-row">
+        <view class="_view data-v-71b255a4 input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-13.png" mode class="_image data-v-71b255a4"></image>
+          <text class="_text data-v-71b255a4">测量数据:{{item.index}}</text>
+        </view>
+        <view class="_view data-v-71b255a4 detail-box"> {{item.value}} </view>
+      </view>
+    </block>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">合格率:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{PerRate}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">偏差:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box"> {{Deviation}} </view>
+    </view>
+    <view class="_view data-v-71b255a4 input-row">
+      <view class="_view data-v-71b255a4 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-71b255a4"></image>
+        <text class="_text data-v-71b255a4">备注:</text>
+      </view>
+      <view class="_view data-v-71b255a4 detail-box auto-height"> {{Remarks}} </view>
+    </view>
+  </view>
+</template>

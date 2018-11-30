@@ -1,0 +1,19 @@
+<template name="ddb10a96">
+  <view class="_view data-v-0691041a content">
+    <view class="_view data-v-0691041a list-content">
+      <view class="_view data-v-0691041a uni-list">
+        <block wx:key="index" key="{{index}}" wx:for="{{ConcreteList}}" wx:for-index="index" wx:for-item="item">
+          <view class="_view data-v-0691041a uni-list-cell" hover-class="uni-list-cell-hover" bindtap="handleProxy" data-eventid="{{'Aei-0-'+index}}" data-comkey="{{$k}}">
+            <view class="_view data-v-0691041a uni-triplex-row">
+              <view class="_view data-v-0691041a uni-triplex-left">
+                <text class="_text data-v-0691041a list-title uni-ellipsis">{{item.ProjectName}}</text>
+                <text class="_text data-v-0691041a list-deadline">{{item.ConcreteDate}}</text>
+                <text class="_text data-v-0691041a list-level">{{item.GradeVal}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>

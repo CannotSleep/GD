@@ -1,0 +1,2 @@
+@import "../../common/vendor.wxss";
+.page{background:#17a869}.content{margin-top:40rpx}.cont_text{color:#fff;line-height:60rpx}

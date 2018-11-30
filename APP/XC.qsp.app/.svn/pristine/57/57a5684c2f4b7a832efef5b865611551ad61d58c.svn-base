@@ -1,0 +1,258 @@
+<template>
+	<view class="content">
+		<view class="img-group mt-20">
+			<image :src="src"></image>
+		</view>
+		<view class="input-group mt-20">
+			<!-- <view class="login-input-row">
+				<picker @change="changeServer" :value="index" :range="array">
+					<view class="uni-input">{{array[index]}}</view>
+				</picker>
+			</view> -->
+			<view class="login-input-row mt-20">
+				<input type="text" value="" placeholder="请输入用户名" placeholder-style="color:#fff" v-model="account" />
+			</view>
+			<view class="login-input-row mt-20">
+				<input type="password" value="" placeholder="请输入密码" placeholder-style="color:#fff" v-model="password" />
+			</view>
+			<view class="login-input-row mt-20 ">
+				<view class="uni-list-cell uni-list-cell-pd">
+					<view class="uni-list-cell-db">自动登录</view>
+					<switch @change="autoLogin" color="#0ce998" />
+				</view>
+			</view>
+			<view class="btn-row">
+				<button type="primary" :loading="loading" @tap="login">登录</button>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../store/server.js';
+	export default {
+		data() {
+			return {
+				src: '../../static/img/logo.png',
+				account: '',
+				password: '',
+				loading: false,
+				isAuto: false,
+// 				array: ['中建五局三公司', '韶关印雪精舍项目', '东莞市民服务中心'],
+// 				objectArray: [{
+// 						id: 0,
+// 						name: '中建五局三公司'
+// 					},
+// 					{
+// 						id: 1,
+// 						name: '韶关印雪精舍项目'
+// 					},
+// 					{
+// 						id: 2,
+// 						name: '东莞市民服务中心'
+// 					}
+// 				],
+				index: 0
+			}
+		},
+		methods: {
+// 			changeServer(e) {
+// 				console.log('picker发送选择改变，携带值为', e.target.value)
+// 				this.index = e.detail.value;
+// 			},
+			login() {
+				this.loading = true;
+				if (this.account.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '用户名不能为空',
+						success:(e)=>{
+							this.loading=false;
+						}
+					});
+					return;
+				}
+				if (this.password.length < 1) {
+					uni.showToast({
+						icon: 'none',
+						title: '密码不能为空',
+						success:(e)=>{
+							this.loading=false;
+						}
+					});
+					return;
+				}
+				const ajaxdata = JSON.stringify({
+					AccountID: this.account,
+					Password: this.password
+				})
+
+
+				const url = server.net.setUrl('api/loginapi/login');
+				console.log("请求地址：" + url);
+				uni.request({
+					url: url,
+					data: ajaxdata,
+					dataType: 'json',
+					method: 'POST',
+					header: {
+						"content-type": "application/json"
+					},
+					success: (result, header) => {
+						var jsondata = result.data;
+						if (jsondata.status == 1) {
+							uni.showToast({
+								icon: 'none',
+								title: '登录成功'
+							});
+							server.net.SetSessionToken(jsondata.token);
+							this.getAuthorityMenus();//获取菜单权限
+							console.log(this.isAuto);
+							//判断是否自动登录
+							if (this.isAuto == true) {							
+								server.net.SetLocalToken(jsondata.token);
+							}
+							uni.switchTab({
+								url: '../index/index',
+								fail: function(e) {
+									console.log("跳转失败")
+								}
+							});
+							server.net.SetUser(jsondata.data);
+							console.log("本次登录token：" + server.net.GetSessionToken());
+
+						} else {
+							console.log(jsondata.message)
+							uni.showToast({
+								icon: 'none',
+								title: jsondata.message,
+								success:(e)=>{
+									this.loading=false;
+								}
+							});
+						}
+					},
+					fail: () => {
+						console.log("登录失败")
+					},
+					complete: () => {
+						this.loading = false;
+					}
+				})
+			},
+			autoLogin(e) {
+				console.log(e.detail.value);
+				this.isAuto = e.detail.value;
+			},
+			getAuthorityMenus(){
+				const url = server.net.setUrl('api/loginapi/GetAuthority');
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: server.net.GetSessionToken()
+					},
+					success: (data) => {
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						if (jsondata.status = 1) {
+							var menus = "";
+							console.log("菜单权限获取成功");
+                            for(var i = 0; i < dataArr.length; i++) {
+                                menus += dataArr[i].Name + ",";
+								if(dataArr[i].AppTitle != "")
+								    menus += dataArr[i].AppTitle + ",";
+                            }
+                            server.net.SetMenus(menus);
+						} else {
+							console.log("菜单权限获取失败");
+							server.net.SetMenus("");
+						}
+					},
+					fail: (data, code) => {
+						console.log("菜单权限获取失败:" + data + code)
+						server.net.SetMenus("");
+					},
+					complete: () => {}
+				});
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.content {
+		flex-direction: column;
+		align-items: flex-start ! !important;
+		justify-content: center;
+		background-color: #17a869;
+	}
+
+	.img-group {
+		width: 100%;
+	}
+
+	.input-group {
+		width: 100%;
+		padding: 0px;
+	}
+
+	.login-input-row {
+		margin-top: 30px;
+		text-align: center;
+	}
+
+	.login-input-row input {
+		background-color: #17A869;
+		border-radius: 40px;
+		border: 1px solid #fff;
+		color: #fff !important;
+		height: 40px;
+		font-size: 28px;
+		padding: 10px 0;
+	}
+
+	.input-group input::-webkit-input-placeholder {
+		color: #fff;
+	}
+
+	.btn-row button {
+		border-radius: 40px;
+		background-color: #45b881;
+		height: 80px;
+		border: none;
+		padding: 0px;
+		line-height: 80px;
+	}
+
+	picker {
+		width: 100%;
+		height: 50px;
+		background-color: #17A869;
+		border-radius: 40px;
+		padding: 15px 0;
+		border: 1px solid #fff;
+		color: #fff ! !important;
+		text-align: center;
+	}
+
+	.uni-input {
+		text-align: center;
+		color: #fff;
+		justify-content: center;
+	}
+
+	.uni-list-cell {
+		display: flex;
+		position: relative;
+		flex-flow: row;
+		align-items: center;
+		justify-content: space-between;
+		color: #fff;
+		border: 1px solid #fff;
+		border-radius: 40px;
+		font-size: 28px;
+		padding: 15px 35px;
+		padding-left: 80px;
+	}
+</style>

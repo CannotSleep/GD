@@ -1,0 +1,1 @@
+<import src="/pages/index/site/Concrete.vue.wxml" /><template is="4e22f087" data="{{ ...$root['0'], $root }}"/>

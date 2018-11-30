@@ -1,0 +1,775 @@
+<template>
+	<view class="content">
+		<form action="" @submit="safetySubmit" @reset="formReset" class="input-form">
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+					<text>所属公司:</text>
+				</view>
+				<picker @change="changeCompany" :value="companyIndex" :range="companyList" range-key="text">
+					<view class="uni-input">{{companyText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+					<text>项目名称:</text>
+				</view>
+				<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+					<view class="uni-input">{{projectText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-03.png" mode=""></image>
+					<text>任务名称:</text>
+				</view>
+				<input type="text" @input="nameInput" value="" placeholder="请填写任务名称" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-04.png" mode=""></image>
+					<text>检查楼栋:</text>
+				</view>
+				<input type="text" @input="dongInput" value="" placeholder="请填写检查楼栋号" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-05.png" mode=""></image>
+					<text>检查楼层:</text>
+				</view>
+				<input type="text" @input="cengInput" value="" placeholder="请填写检查楼层号" />
+			</view>
+<!-- 			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-06.png" mode=""></image>
+					<text>检查区域:</text>
+				</view>
+				<picker @change="changeArea" :value="areaIndex" :range="areaList" range-key="text">
+					<view class="uni-input">{{areaText}}</view>
+				</picker>
+			</view> -->
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-07.png" mode=""></image>
+					<text>施工单位:</text>
+				</view>
+				<picker @change="changeUnit" :value="unitIndex" :range="unitList" range-key="text">
+					<view class="uni-input">{{unitText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+					<text>隐患类型:</text>
+				</view>
+				<picker @change="changeDanger" :value="dangerIndex" :range="dangerList" range-key="text">
+					<view class="uni-input">{{dangerText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-09.png" mode=""></image>
+					<text>隐患描述:</text>
+				</view>
+				<picker @change="changeDangerDes" :value="dangerDesVal" :range="dangerDesList" range-key="text">
+					<view class="uni-input">{{dangerDesText}}</view>
+				</picker>
+			</view>
+			<!-- <view class="input-row auto-height">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-10.png" mode=""></image>
+					<text>整改要求:</text>
+				</view>
+				<textarea @blur="bindTextAreaBlur" auto-height placeholder="请填写整改要求" />
+				</view> -->
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-11.png" mode=""></image>
+					<text>整改人:</text>
+				</view>
+				<!-- <picker @change="changeServer" :value="index" :range="rectiList">
+					<view class="uni-input">{{rectiList[index]}}</view>
+				</picker> -->
+				<input type="text" :value="rectpeople" @tap="selectRect" placeholder="" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-12.png" mode=""></image>
+					<text>通知人:</text>
+				</view>
+				<!-- <picker @change="changeServer" :value="index" :range="noticeList">
+					<view class="uni-input">{{noticeList[index]}}</view>
+				</picker> -->
+				<input type="text" :value="noticepeople" @tap="selectNotice" placeholder="" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+					<text>整改期限:</text>
+				</view>
+				<picker mode="date" :value="deadline" start="2018-09-18" end="2028-12-31">
+					<view class="uni-input">{{deadline}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-05.png" mode=""></image>
+					<text>整改要求:</text>
+				</view>
+				<input type="text" @input="recInput" value="" placeholder="请填写整改要求" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-14.png" mode=""></image>
+					<text>检查日期:</text>
+				</view>
+				<picker mode="date" :value="checkDate" start="2018-09-18" end="2028-12-31">
+					<view class="uni-input">{{checkDate}}</view>
+				</picker>
+			</view>
+<!-- 			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+					<text>复查日期:</text>
+				</view>
+				<picker mode="date" :value="recheckDate" start="2018-09-18" end="2028-12-31">
+					<view class="uni-input">{{recheckDate}}</view>
+				</picker>
+			</view> -->
+			<view class="input-row mt-10">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+					<text>严重程度:</text>
+				</view>
+				<picker @change="changeDegree" :value="degreeVal" :range="degreeList">
+					<view class="uni-input">{{degreeList[degreeVal]}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<button  size="mini" @tap="chooseImage" class="search-btn">选择图片</button>
+				<block v-for="(item,index) in imageList" :key="index">
+					<view>
+						<!-- <image :src="item.path" ></image> -->
+						<text>11111</text>
+					</view>
+				</block> 
+			</view>
+			<view class="input-row">
+				<block v-for="(item,index) in imageList" :key="index">
+					<view>
+						<!-- <image :src="item.path" ></image> -->
+						<text>11111</text>
+					</view>
+				</block> 
+			</view>
+			<view class="input-row">
+				<button  size="mini" @tap="submit" class="search-btn">提交</button>
+			</view>
+			<!-- <view class="input-row auto-height">
+				<view class="input-label width-100 block">
+					<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+					<text>上传照片:</text>
+				</view>		
+				<view class="uni-uploader-body">
+					<view class="uni-uploader__files">
+						<block v-for="(image,index) in imageList" :key="index">
+							<view class="uni-uploader__file">
+								<image class="uni-uploader__img" :src="image" :data-src="image" @tap="previewImage"></image>
+							</view>
+						</block>
+					</view>
+					<view class="uni-uploader__input-box">
+						<view class="uni-uploader__input" @tap="chooseImage"></view>
+					</view>
+				</view>
+			</view> -->
+		</form>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data() {
+			return {
+				Token: '',
+				title: 'picker',
+				companyList: ['请选择分公司'],
+				companyIndex: 0,
+				companyText: '1',
+				companyVal: '1',
+				dong:'',
+				ceng:'',
+				projectList: ['请选择项目'],
+				projectIndex: 1,
+				projectText: '',
+				projectVal: '',
+				areaList: ['请选择区域'],
+				areaVal: '',
+				areaIndex: 0,
+				areaText: '',
+				unitList: ['请选择施工单位'],
+				unitVal: '',
+				unitIndex: 0,
+				unitText: '',
+				rectification:'',
+				dangerList: ['请选择隐患类型'],
+				dangerVal: '',
+				dangerIndex: 0,
+				dangerText: '',
+				dangerDesList: ['请选择隐患描述'],
+				dangerDesVal: '',
+				dangerDesText:'请选择隐患描述',
+				dangerDesIndex:0,
+				rectiList: ['请选择整改人'],
+				rectpeople:'整改人',
+				rectpeopleid:'',
+				noticeList: ['请选择通知人'],
+				noticepeople:'通知人',
+				noticepeopleid:'',
+				degreeList: ['一般', '紧急', '严重'],
+				degreeVal: 0,
+				checkDate: '2018-09-18',
+				recheckDate: '2018-10-18',
+				deadline: '2018-09-21',
+				time: '12:01',
+				sourceTypeIndex: 2,
+				sourceType: ['拍照', '相册', '拍照或相册'],
+				sizeTypeIndex: 2,
+				sizeType: ['压缩', '原图', '压缩或原图'],
+				countIndex: 8,
+				count: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+				isfirstopen:1,
+				imageList:[1,1,1,1,1,1,1]
+			}
+		},
+		onLoad(option) {
+			/*var sourceType = [
+				['camera'],
+				['album'],
+				['camera', 'album']
+			]
+			var sizeType = [
+				['compressed'],
+				['original'],
+				['compressed', 'original']
+			]*/
+			let pageType = option.type;
+			switch (pageType) {
+				case 'safety':
+					uni.setNavigationBarTitle({
+						title: '安全隐患检查'
+					});
+					break;
+				case 'quality':
+					uni.setNavigationBarTitle({
+						title: '质量隐患检查'
+					});
+					break;
+					defualt: break;
+			}
+			this.Token = server.net.GetSessionToken();
+			this.getCompany(); 
+			//this.getProject();
+			this.getArea();
+			this.getUnit();
+			this.getDanger();
+			
+			console.log(server.net.GetUser())
+		},
+		onShow:function(){
+			console.log("页面显示")
+			if(this.isfirstopen!=1){
+				let id = uni.getStorageSync('selectID');
+				let name = uni.getStorageSync('selectName');
+				this.rectpeople = name;
+				this.rectpeopleid = id;
+				
+				let ids = uni.getStorageSync('selectIDs');
+				let names = uni.getStorageSync('selectNames');
+				this.noticepeople = names;
+				this.noticepeopleid = ids; 
+			}
+		},
+		onHide:function(){
+			
+		},
+		onUnload() { 
+			/*this.imageList = [],
+			this.sourceTypeIndex= 2,
+			this.sourceType= ['拍照', '相册', '拍照或相册'],
+			this.sizeTypeIndex= 2,
+			this.sizeType= ['压缩', '原图', '压缩或原图'],
+			this.countIndex= 8;*/
+
+		},
+		methods: {
+			submit:function(e){
+				uni.removeStorageSync('selectID');
+				uni.removeStorageSync('selectName');
+				uni.removeStorageSync('selectIDs');
+				uni.removeStorageSync('selectNames');
+				let url = server.net.setUrl('api/SecurityInspectApi/AddOrUpdate?notifier='+this.noticepeopleid);
+				let ajaxdata = {
+					"Title":this.title,
+					"RectPeople":this.rectpeopleid,
+					"ProjectId":this.projectVal,
+					"SubcontractingUnit":this.unitVal,
+					"Building":this.dong,
+					"Floor":this.ceng,
+					"SaftyDangerID":this.dangerVal,
+					"SaftyDanger":this.dangerText,
+					"DangerDesID":this.dangerDesVal,
+					"DangerDes":this.dangerDesText,
+					"Rectification":this.rectification,
+					"ExpirDate":this.deadline,
+					"CrashLevel":this.degreeVal,
+					"AddPeopleID":server.net.GetUser().ID,
+					"CheckDate":this.checkDate	
+				}
+				let ispass = this.formcheck(ajaxdata);
+				if(ispass){
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							Token: this.Token
+						},
+						data: JSON.stringify(ajaxdata),
+						success: res => {
+							let result = res.data;
+							let jsondata = result.data;
+							if (result.status == 1) {
+								uni.showToast({
+									title: '提交成功',
+									mask: false,
+									duration: 1500
+								});
+								setTimeout(function() {
+									uni.navigateBack({
+										delta: 1
+									})
+								}, 2000)
+							} else {
+								console.log(result.message);
+							}
+						},
+						fail: () => {
+							console.log("提交失败");
+						},
+						complete: () => {}
+					});
+				}
+			},
+			/*chooseImage: async function() { //选择图片
+					if (this.imageList.length === 9) {
+						let isContinue = await this.isFullImg();
+						console.log("是否继续?", isContinue);
+						if (!isContinue) {
+							return;
+						}
+					}
+					uni.chooseImage({ //调用图片选择API
+						sourceType: sourceType[this.sourceTypeIndex],
+						// #ifdef MP-WEIXIN
+						sizeType: sizeType[this.sizeTypeIndex],
+						// #endif
+						count: this.imageList.length + this.count[this.countIndex] > 9 ? 9 - this.imageList.length : this.count[this.countIndex],
+						success: (res) => {
+							this.imageList = this.imageList.concat(res.tempFilePaths);
+						}
+					})
+				},
+				isFullImg: function() { //判断图片最大数量
+					return new Promise((res) => {
+						uni.showModal({
+							content: "已经有9张图片了,是否清空现有图片？",
+							success: (e) => {
+								if (e.confirm) {
+									this.imageList = [];
+									res(true);
+								} else {
+									res(false)
+								}
+							},
+							fail: () => {
+								res(false)
+							}
+						});
+					});
+				},e
+				previewImage(e) { //预览图片
+					var current = e.target.dataset.src
+					uni.previewImage({
+						current: current,
+						urls: this.imageList
+					})
+				},*/ 
+			chooseImage(){
+				uni.chooseImage({
+					count: 9, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album','camera'], //从相册选择
+					success: function (res) {
+						//console.log(JSON.stringify(res.tempFilePaths));  路径列表
+						console.log(JSON.stringify(res.tempFiles));
+						//File  path   size 
+// 						for(let im of res.tempFiles){
+// // 							this.imageList.push({
+// // 								path:im.path,
+// // 								size:im.size
+// // 							});
+// 							this.imageList.push(1);
+// 						} 
+						let sttrr = [1,1];
+						this.imageList=sttrr;
+						console.log(this.imageList.length)
+					},
+					fail:function(res){
+						console.log(res)
+					}
+				})
+			},
+			getCompany() { //获取公司数据				
+				let url = server.net.setUrl('api/DropDownListApi/GetCompany');
+				uni.request({
+					url: url,
+					dataType: 'json',
+					type: 'GET',
+					header: {
+						//token: server.net.GetSessionToken()
+						token: this.Token
+					},
+					success: (result) => {
+						let jsondata = result.data;
+						let dataArr = jsondata.data; 
+						
+						if (jsondata.status = 1) {
+							console.log("公司获取成功");
+							let first={
+								value:"08876894",
+								text:"请选择公司"
+							}
+							dataArr.unshift(first)
+							this.companyList = this.setData(dataArr);
+							this.companyVal = this.companyList[this.companyIndex].value;
+							this.companyText = this.companyList[this.companyIndex].text;
+							if(this.companyVal!='08876894'){
+								this.getProject();
+							}
+							
+						} else {
+							console.log(jsondata.status);
+							uni.showToast({
+								title: jsondata.status,
+								mask: false,
+								duration: 1500
+							});
+						}
+					},
+					fail: (data, code) => {
+						console.log("公司获取失败" + data + code);
+					}
+				});
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						//token: server.net.GetSessionToken(),
+						token: this.Token
+					},
+					data: {
+						company: this.companyVal
+					},
+					success: (data) => {
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						console.log(data);
+						if (jsondata.status = 1) {
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					}
+				});
+			},
+			getArea() { //获取检查区域
+				let url = server.net.setUrl('api/DropDownListApi/GetUtilitySettings');
+				let data = {
+					type: 0
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//token:server.net.GetSessionToken(),
+						token: this.Token
+					},
+					data: JSON.stringify(data),
+					success: (data) => {
+						var jsondata = data.data;
+						if (jsondata.status = 1) {
+							console.log("检查区域获取成功");
+							this.areaList = this.setData(jsondata.data);
+							this.areaVal = this.areaList[this.areaIndex].value;
+							this.areaText = this.areaList[this.areaIndex].text;
+						} else {
+							console.log("检查区域获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("检查区域数据请求失败" + data + code)
+					}
+
+				});
+			},
+			getUnit() {
+				let url = server.net.setUrl('api/DropDownListApi/GetUtilitySettings');
+				let data = {
+					type: 1
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//token:server.net.GetSessionToken(),
+						token: this.Token
+					},
+					data: JSON.stringify(data),
+					success: (data) => {
+						var jsondata = data.data;
+						if (jsondata.status = 1) {
+							console.log("施工单位获取成功");
+							this.unitList = this.setData(jsondata.data);
+							this.unitVal = this.unitList[this.unitIndex].value;
+							this.unitText = this.unitList[this.unitIndex].text;
+						} else {
+							console.log("施工单位获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("施工单位数据请求失败" + data + code)
+					}
+				})
+			},
+			getDanger() {
+				let url = server.net.setUrl('api/DropDownListApi/GetQualityDangerType');
+				
+				let data = {
+					"type":2,
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//token:server.net.GetSessionToken(),
+						token: this.Token
+					},
+					data:JSON.stringify(data),
+					success: (data) => {
+						var jsondata = data.data;
+						let dataAtrr = jsondata.data;
+						if (jsondata.status = 1) {
+							let first={
+								value:"088",
+								text:"请选择隐患类型"
+							}
+							dataAtrr.unshift(first);
+							this.dangerList = this.setData(dataAtrr);
+							this.dangerVal = this.dangerList[this.dangerIndex].value;
+							this.dangerText = this.dangerList[this.dangerIndex].text;
+							if(this.dangerVal!='088'){
+								this.getDangerDes();
+							}
+						} else {
+							console.log("隐患类型获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("施工单位数据请求失败" + data + code)
+					}
+				})
+			},
+			getDangerDes(){
+				console.log(this.dangerVal)
+				let url = server.net.setUrl('api/DropDownListApi/GetQualityDangerDes');
+				let data={
+					"size":"9999",
+					"page":"1",
+					"type":"2",
+					"comid":this.dangerVal
+				};
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//token:server.net.GetSessionToken(),
+						token: this.Token
+					},
+					data:JSON.stringify(data),
+					success: (data) => {
+						
+						let jsondata = data.data;
+						let dataAtrr = jsondata.data;
+						
+						if (jsondata.status = 1) {
+							let first={
+								value:"088",
+								text:"请选择隐患描述"
+							}
+							dataAtrr.unshift(first);
+							this.dangerDesList = this.setData(jsondata.data);
+							this.dangerDesVal = this.dangerDesList[this.dangerDesIndex].value;
+							this.dangerDesText = this.dangerDesList[this.dangerDesIndex].text;
+						} else {
+							console.log("隐患描述获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("隐患描述获取失败" + data + code)
+					}
+				})
+				
+			},
+			setData(items) {
+				let newItems = [];
+				//console.log(items)
+				if(items!=null&&items.length!=0){
+					items.forEach((e) => {
+						newItems.push({
+							text: e.text,
+							value: e.value
+						});
+					});
+				}
+				return newItems;
+			},
+			changeCompany(e) {
+				this.companyIndex = e.detail.value;
+				this.companyVal = this.companyList[e.detail.value].value;
+				this.companyText = this.companyList[this.companyIndex].text;
+				this.getProject();
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+			},
+			changeArea(e) {
+				this.areaIndex = e.detail.value;
+				this.areaText = this.areaList[this.areaIndex].text;
+				this.areaVal = this.areaList[this.areaIndex].value;
+			},
+			changeUnit(e) {
+				this.unitIndex = e.detail.value;
+				this.unitText = this.unitList[this.unitIndex].text;
+				this.unitVal = this.unitList[this.unitIndex].value;
+			},
+			changeDanger(e) {
+				this.dangerIndex = e.detail.value;
+				this.dangerVal = this.dangerList[this.dangerIndex].value;
+				this.dangerText = this.dangerList[this.dangerIndex].text;
+				this.getDangerDes();
+			}, 
+			changeDangerDes(e){
+				this.dangerDesIndex = e.detail.value;
+				this.dangerDesVal = this.dangerDesList[this.dangerDesIndex].value;
+				this.dangerDesText = this.dangerDesList[this.dangerDesIndex].text;
+			},
+			selectRect(e){
+				this.isfirstopen+=1;
+				uni.navigateTo({
+					url:'../../../components/selectPeople'
+				})
+			},selectNotice(){ 
+				this.isfirstopen+=1;
+				uni.navigateTo({
+					url:'../../../components/selectPeopleMulti'
+				})
+			},nameInput(e){
+				this.title = e.detail.value;
+			},dongInput(e){
+				this.dong = e.detail.value;
+			},cengInput(e){
+				this.ceng = e.detail.value;
+			},recInput(e){
+				this.rectification =e.detail.value;
+			},formcheck(data){
+				if(data.RectPeople==''){
+					uni.showToast({
+						title: '请选择整改人',
+						mask: true,
+						image:null,
+						duration: 1500
+					});
+					return false; 
+				}
+				if(data.ProjectId==''){
+					uni.showToast({
+						title: '请选择项目',
+						mask: false,
+						duration: 1500
+					});
+					return false;
+				}
+				if(data.SubcontractingUnit==''){
+					uni.showToast({
+						title: '请填写整改单位',
+						mask: false,
+						duration: 1500
+					});
+					return false;
+				}
+				if(data.BranchCompany=='08876894'){
+					uni.showToast({
+						title: '请选择公司',
+						mask: false,
+						duration: 1500
+					});
+					return false;
+				}
+
+				if(data.SaftyDangerID=='088'){
+					uni.showToast({
+						title: '请选择隐患类型',
+						mask: false,
+						duration: 1500
+					});
+					return false;
+				}
+				if(data.DangerDesID=='088'){
+					uni.showToast({
+						title: '请选择隐患描述',
+						mask: false,
+						duration: 1500
+					});
+					return false; 
+				}
+				if(this.noticepeopleid==''){
+					uni.showToast({
+						title: '请选择通知人',
+						mask: false,
+						duration: 1500
+					});
+					return false;
+				}
+			}
+			
+		}
+	}
+</script>
+
+<style scoped> 
+	.input-row{
+		border: none;
+	}
+</style>

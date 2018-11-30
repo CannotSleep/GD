@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/index/site/ConcreteOffList.vue.wxml" /><template is="ddb10a96" data="{{ ...$root['0'], $root }}"/>

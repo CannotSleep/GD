@@ -1,0 +1,26 @@
+<template name="72ab9ef0">
+  <view class="_view data-v-9606089a content">
+    <view class="_view data-v-9606089a list-content">
+      <view class="_view data-v-9606089a uni-list">
+        <block wx:key="index" key="{{index}}" wx:for="{{fileDatalist}}" wx:for-index="index" wx:for-item="item">
+          <block wx:key="cindex" key="{{cindex}}" wx:for="{{item.Detail}}" wx:for-index="cindex" wx:for-item="citem">
+            <view class="_view data-v-9606089a uni-list-cell" hover-class="uni-list-cell-hover">
+              <view class="_view data-v-9606089a uni-triplex-row">
+                <view class="_view data-v-9606089a uni-triplex-left">
+                  <text class="_text data-v-9606089a list-title uni-ellipsis">{{citem.FileName}}</text>
+                  <text class="_text data-v-9606089a list-deadline">{{item.AddUserName}}</text>
+                  <text class="_text data-v-9606089a list-level">{{item.AddTime}}</text>
+                  <text class="_text data-v-9606089a list-state">{{item.Type}}</text>
+                  <button class="_button data-v-9606089a list-button {{[citem.isDown == 1 ? 'classdown' : '']}}" type="primary" size="{{mini}}" bindtap="handleProxy" loading="{{false}}" data-eventid="{{'IDk-0-'+index+'-'+cindex}}"
+                    data-comkey="{{$k}}">下载</button>
+                  <button class="_button data-v-9606089a list-button {{[citem.isDown == 0 ? 'classdown' : '']}}" type="primary" size="{{mini}}" bindtap="handleProxy" loading="{{false}}" plain="{{true}}" data-eventid="{{'J5S-1-'+index+'-'+cindex}}"
+                    data-comkey="{{$k}}">打开</button>
+                </view>
+              </view>
+            </view>
+          </block>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>

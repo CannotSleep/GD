@@ -1,0 +1,21 @@
+<template name="1d289015">
+  <view class="_view data-v-54f03350 content">
+    <view class="_view data-v-54f03350 list-content">
+      <view class="_view data-v-54f03350 uni-list">
+        <block wx:key="index" key="{{index}}" wx:for="{{MeasuringList}}" wx:for-index="index" wx:for-item="item">
+          <view class="_view data-v-54f03350 uni-list-cell" hover-class="uni-list-cell-hover" bindtap="handleProxy" data-eventid="{{'4vp-0-'+index}}" data-comkey="{{$k}}">
+            <view class="_view data-v-54f03350 uni-triplex-row">
+              <view class="_view data-v-54f03350 uni-triplex-left">
+                <text class="_text data-v-54f03350 list-title uni-ellipsis">{{item.ProjectText}}</text>
+                <label class="_label data-v-54f03350">
+                  <text class="_text data-v-54f03350 list-deadline">{{item.CheckDate}}</text>
+                  <text class="_text data-v-54f03350 list-level">{{item.Rectpeople}}</text>
+                </label>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>

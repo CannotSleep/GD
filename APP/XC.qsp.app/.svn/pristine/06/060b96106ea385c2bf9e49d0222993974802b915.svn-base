@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <title>View</title>
+        <style>
+            * {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            input[type="search"i]::-webkit-search-cancel-button {
+                display: none;
+            }
+
+        </style>
+        <script>
+            var __wxConfig = {"debug":false,"appname":"XC-XCGL","entryPagePath":"pages/index/index.html","page":{"pages/index/index.html":{"window":{"navigationBarTitleText":"星层现场管理系统","navigationBarBackgroundColor":"#17a869","navigationBarTextStyle":"#f0f0f0"}},"pages/login/login.html":{"window":{"navigationBarTitleText":"登录-星层现场管理系统","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869"}},"pages/index/quality/safetyCheck.html":{"window":{"navigationBarTitleText":"安全隐患检查","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869","titleNView":{"buttons":[{"float":"left","type":"back"}]}}},"pages/index/quality/qualityManagement.html":{"window":{"navigationBarTitleText":"质量安全管理系统","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869","titleNView":{"buttons":[{"float":"left","type":"back"}]}}},"pages/index/quality/qualityCheck.html":{"window":{"navigationBarTitleText":"质量隐患检查","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869","titleNView":{"buttons":[{"float":"left","type":"back"}]}}},"pages/index/quality/safetyList.html":{"window":{"navigationBarTitleText":"安全记录列表","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869","titleNView":{"buttons":[{"float":"left","type":"back"}]}}},"pages/index/site/siteManagement.html":{"window":{"navigationBarTitleText":"现场管理系统","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869","titleNView":{"buttons":[{"float":"left","type":"back"}]}}},"pages/index/site/ConcreteList.html":{"window":{"navigationBarTitleText":"混凝土回弹记录","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869","titleNView":{"buttons":[{"float":"left","type":"back"}]}}},"pages/index/site/ConcreteDetails.html":{"window":{"navigationBarTitleText":"混凝土回弹详情","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869"}},"pages/index/site/Concrete.html":{"window":{"navigationBarTitleText":"混凝土回弹","navigationBarTextStyle":"white","navigationBarBackgroundColor":"#17A869"}}},"global":{"window":{"navigationBarTextStyle":"black","navigationBarTitleText":"uni-app","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"}},"tabBar":{"color":"#929292","selectedColor":"#17a869","backgroundColor":"#ffffff","borderStyle":"black","list":[{"pagePath":"pages/index/index.html","text":"首页"},{"pagePath":"pages/index/index.html","text":"消息"},{"pagePath":"pages/index/index.html","text":"设置"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/index/index","pages/login/login","pages/index/quality/safetyCheck","pages/index/quality/qualityManagement","pages/index/quality/qualityCheck","pages/index/quality/safetyList","pages/index/site/siteManagement","pages/index/site/ConcreteList","pages/index/site/ConcreteDetails","pages/index/site/Concrete"],"functionalPages":false,"subPackages":[],"workers":"","preloadRule":{},"requiredBackgroundModes":[],"plugins":{},"resizable":false}
+
+        </script>
+        <script>
+            var __id__ = '';
+            window.__dispatchGenerateFunc__ = function(page) {
+                __id__ = page;
+                document.title = page;
+                // window.history.pushState('', '', page);
+                plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+            };
+
+        </script>
+        <script src="uniapp://ready"></script>
+    </head>
+
+    <body>
+        <div></div>
+    </body>
+
+</html>

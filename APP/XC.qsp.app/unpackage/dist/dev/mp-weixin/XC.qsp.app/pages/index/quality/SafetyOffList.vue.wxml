@@ -1,0 +1,22 @@
+<template name="303567a8">
+  <view class="_view data-v-6e2950be content">
+    <view class="_view data-v-6e2950be list-content">
+      <view class="_view data-v-6e2950be uni-list">
+        <block wx:key="index" key="{{index}}" wx:for="{{safetyList}}" wx:for-index="index" wx:for-item="item">
+          <view class="_view data-v-6e2950be uni-list-cell" hover-class="uni-list-cell-hover" bindtap="handleProxy" data-eventid="{{'Cwe-0-'+index}}" data-comkey="{{$k}}">
+            <view class="_view data-v-6e2950be uni-triplex-row">
+              <view class="_view data-v-6e2950be uni-triplex-left">
+                <text class="_text data-v-6e2950be list-title uni-ellipsis">{{item.Title}}</text>
+                <label class="_label data-v-6e2950be">
+                  <text class="_text data-v-6e2950be list-deadline">整改期限至：{{item.ExpirDate}}</text>
+                  <text class="_text data-v-6e2950be list-level {{[  item.CrashLevel == 0 ? 'crash0' : '',  item.CrashLevel == 1 ? 'crash1' : '',  item.CrashLevel == 2 ? 'crash2' : '']}}">{{item.CrashLevelName}}</text>
+                  <text class="_text data-v-6e2950be list-state">未完成</text>
+                </label>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>

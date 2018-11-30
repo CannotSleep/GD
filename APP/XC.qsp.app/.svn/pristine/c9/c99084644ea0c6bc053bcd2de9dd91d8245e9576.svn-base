@@ -1,0 +1,230 @@
+<template>
+	<view class="content">
+		<view class="list-content">
+			<view class="uni-list">
+				<block v-for="(item,index) in messageDatalist" :key="index">
+					<view class="uni-list-cell" hover-class="uni-list-cell-hover">
+						<view class="uni-triplex-row">
+							<view class="uni-triplex-left" @tap="getDetailList(item.type)">
+								<text class="list-title">{{item.contents}}</text>
+								<uni-badge text="1" :text="item.count" type="success"></uni-badge>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+
+</template> 
+ 
+<script>
+	import server from '../../store/server.js';
+	import uniBadge from "../../components/uni-badge.vue";
+	export default {
+		data() {
+			return {
+				messageDatalist: [
+					{
+						"type":19,          
+						"contents":"混凝土浇筑令签字",       
+						"count":1,       //上传人ID
+					},
+					{
+						"type":19,             
+						"contents":"混凝土浇筑令签字",       
+						"count":1,       
+					}
+				],
+			}
+		},
+		onLoad(option) {
+			//根据页面传值判断页面内容：检查记录&整改记录，并动态设置页面标题
+			//获取文件列表
+			this.getMessagelist();
+		},
+		components: {
+			uniBadge
+		},
+		methods: {
+			getMessagelist() {
+				let url = server.net.setUrl('api/NoticeNewsApi/AppGetNotify');
+				
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						Token: server.net.GetSessionToken()
+					},
+					success: (res) => {
+						console.log(res)
+ 						let jsondata = res.data;
+ 						let messArr=jsondata.data;
+						
+						this.messageDatalist = messArr;
+						uni.stopPullDownRefresh();
+					},
+					fail: (f) => {
+						
+					},
+					complete: (c) => {
+						
+					}
+				});
+				
+			},
+			getDetailList(infoType){
+				switch(infoType)
+				{
+					//质量
+					case 0:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 1:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 2:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 3:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//安全	
+					case 4:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 5:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;			
+					case 6:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 7:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//文件	
+					case 8:
+						uni.navigateTo({
+							url: '../index/filesys/fileList?type='+infoType 
+						});
+						break;
+					//质量
+					case 12:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//安全	
+					case 13:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//质量	
+					case 14:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;		
+					case 15:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;	
+					//安全			
+					case 16:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 17:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//进度	
+					case 18:
+						uni.navigateTo({
+							url: '../index/schedule/scheduleList?state=all&notify=true'
+						});
+						break;
+					case 19:
+					//混凝土浇筑
+						uni.navigateTo({
+							url: '../index/site/ConcretePourList?notify=true'
+						});
+						break;
+					//混凝土	
+					case 20:
+						
+						break;		
+				}
+				
+			}
+		},onPullDownRefresh() {
+			console.log('下拉刷新');
+			this.getMessagelist();
+		}
+	}
+</script>
+
+<style scoped>
+	.uni-badge,
+	.title {
+		margin: 20upx;
+	}
+	
+	
+	.input-row {
+		align-items: center;
+	}
+
+	.list-content {
+		margin-top: 0px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		width: 100%;
+		padding: 0px 10px;
+	}
+	
+	.list-title{
+		font-size: 32px;
+		color: #000;
+/* 		display: inline-block; */
+		margin-right: 15px;
+	}
+	
+	.list-count{
+		font-size: 32px;
+		color: #f00;
+/* 		display: inline-block; */
+		margin-right: 10px;
+		float: right;
+	}
+	
+	.uni-triplex-left{
+		display: flex;
+		flex-direction: row;
+		
+	}
+
+	
+</style>

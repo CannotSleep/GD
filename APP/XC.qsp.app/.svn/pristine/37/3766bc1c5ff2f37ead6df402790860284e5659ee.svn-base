@@ -1,0 +1,23 @@
+<template name="8568d3de">
+  <view class="_view data-v-5feaaac4 content">
+    <view class="_view data-v-5feaaac4 img-group mt-20">
+      <image src="{{src}}" class="_image data-v-5feaaac4"></image>
+    </view>
+    <view class="_view data-v-5feaaac4 input-group mt-20">
+      <view class="_view data-v-5feaaac4 login-input-row">
+        <picker bindchange="handleProxy" value="{{index}}" range="{{array}}" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_picker data-v-5feaaac4">
+          <view class="_view data-v-5feaaac4 uni-input">{{array[index]}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-5feaaac4 login-input-row mt-20">
+        <input type="text" value="{{account}}" placeholder="请输入用户名" placeholder-style="color:#fff" bindinput="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_input data-v-5feaaac4" />
+      </view>
+      <view class="_view data-v-5feaaac4 login-input-row mt-20">
+        <input type="password" value="{{password}}" placeholder="请输入密码" placeholder-style="color:#fff" bindinput="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_input data-v-5feaaac4" />
+      </view>
+      <view class="_view data-v-5feaaac4 btn-row">
+        <button type="primary" loading="{{loading}}" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_button data-v-5feaaac4">登录</button>
+      </view>
+    </view>
+  </view>
+</template>

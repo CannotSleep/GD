@@ -1,0 +1,34 @@
+@import "../../../common/vendor.wxss";
+
+.input-label.data-v-4d38266d {
+  width: 45%;
+}
+.reduceWidth.data-v-4d38266d {
+  width: 20% !important;
+}
+.increaseWidth.data-v-4d38266d {
+  width: 80% !important;
+}
+picker.data-v-4d38266d,
+._input.data-v-4d38266d {
+  width: 55%;
+}
+.data-row.data-v-4d38266d {
+  width: 55%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  padding: 15rpx 0;
+}
+.data-row ._button.data-v-4d38266d {
+  color: #fff;
+  background-color: #17A869;
+  border: none;
+}

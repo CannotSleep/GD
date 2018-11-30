@@ -1,0 +1,728 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>项目名称:</text>
+			</view>
+			<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+				<view class="uni-input">{{projectText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>浇筑部位:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写浇筑部位" v-model="Position"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>砼强度:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写浇筑部位" v-model="Grade"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>开盘时间:</text>
+			</view>
+			<picker mode="date" :value="StartDate" start="2018-09-26" end="2028-12-31" @change="changeStartDate">
+				<view class="uni-input">{{StartDate}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>塌落度:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写塌落度" v-model="Angle"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>浇筑方量:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写浇筑方量" v-model="Engineering"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>浇筑持续时间:</text>
+			</view>
+			<picker mode="date" :value="EndDate" start="2018-09-26" end="2028-12-31" @change="changeEndDate">
+				<view class="uni-input">{{EndDate}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>各工种人员配备情况:</text>
+			</view>
+			<view class="day-row">
+				<text>白班</text>
+			</view>
+			<view class="night-row">
+				<text>夜班</text>
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>砼工人数:</text>
+			</view> 
+				<input class="day-row" type="number" value="" placeholder="请填写人数" v-model="dayTg"/>
+				<input class="night-row" type="number" value="" placeholder="请填写人数" v-model="nightTg"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>找平人数:</text>
+			</view>
+			<input class="day-row" type="number" value="" placeholder="请填写人数" v-model="ZDayNum"/>
+			<input class="night-row" type="number" value="" placeholder="请填写人数" v-model="ZNigNum"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>捧手人数:</text>
+			</view>
+			<input class="day-row" type="number" value="" placeholder="请填写人数" v-model="PDayNum"/>
+			<input class="night-row" type="number" value="" placeholder="请填写人数" v-model="PNigNum"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>振动棒台数:</text>
+			</view>
+			<view class="detail-box">
+				<number-box v-on:update="MZnumberUpdate" :value="mzvalue"></number-box>
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>磨光机台数:</text>
+			</view>
+			<view class="detail-box">
+				<number-box v-on:update="MEnumberUpdate" :value="mevalue"></number-box>
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>平板振动器台数:</text>
+			</view>
+			<view class="detail-box">
+				<number-box v-on:update="MPnumberUpdate" :value="mpvalue"></number-box>
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>劳务值班人:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写劳务值班人" v-model="LabourName"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>劳务值班人电话:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写劳务值班人电话" v-model="LabourNumber"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>钢筋值班人:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写钢筋值班人" v-model="RebarName"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>钢筋值班人电话:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写钢筋值班人电话" v-model="RebarNumber"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>木工值班人:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写木工值班人" v-model="CarpentryName"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>木工值班人电话:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写木工值班人电话" v-model="CarpentryNumber"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>水电值班人:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写水电值班人" v-model="PlumberName"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>水电值班人电话:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写水电值班人电话" v-model="PlumberNumber"/>
+		</view>
+		<block v-for="(item,index) in AutographList" :key="index">
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+					<text>{{item.TypeName}}:</text>
+				</view>
+				<input type="text" value="" v-model="item.AccountName" @tap="opselect(index)"/>
+			</view>
+		</block>
+		<view class="button-row">
+			<button type="primary" size="mini"  @tap="addDate()">添加</button>
+			<button  size="mini" @tap="tempS" type="default" class="search-btn">暂存</button>
+		</view>
+		
+	</view>
+
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	//import prompt from '../../../components/prompt.vue';
+	import numberBox from '../../../components/number-box.vue'
+	
+	
+	export default {
+		components: {
+			numberBox
+		},
+		onLoad: function(option) {
+			this.Token = server.net.GetSessionToken();
+			console.log(this.Token)
+			this.getProject();
+		},
+		onShow:function(option){
+			if(this.isfirstopen!=0){
+				let id = uni.getStorageSync('selectID');
+				let name = uni.getStorageSync('selectName');
+				this.AutographList[this.sindex].AccountID = id;
+				this.AutographList[this.sindex].AccountName = name;
+			}
+		},
+		data() {
+			return {
+				mzvalue:0, //震动棒
+				mevalue:0,  //磨光
+				mpvalue:0,  //平板震动
+				Token: '',  //token
+				ProjectName: '',  //项目名称
+				Position: '',   //浇筑部位
+				Engineering: '', //浇筑方量
+				Angle: '',    //塌落度
+				Grade: '',   //砼强度
+				StartDate: '2018-09-26', //  开盘时间
+				EndDate: '2018-09-26', //   浇筑持续时间
+				dayTg: 0,  //童工早
+				nightTg: 0, //童工晚
+				ZNigNum: 0,  //找平晚
+				ZDayNum: 0, //找平早
+				PDayNum: 0, //捧手早
+				PNigNum: 0, //捧手晚
+				LabourName: '', //劳务值班人
+				LabourNumber:'',
+				RebarName: '', //钢筋值班人
+				RebarNumber:'',
+				CarpentryName: '', //木工值班人
+				CarpentryNumber:'',
+				PlumberName: '', //水电值班人
+				PlumberNumber:'',
+				AutographList: [{
+                   "Type":0,
+				   "TypeName":'工程部',
+                   "AccountID":"",
+				   "AccountName":"请选择工程部人员"
+               },
+               {
+                   "Type":1,
+				   "TypeName":'技术部',
+                   "AccountID":"",
+				   "AccountName":"请选择技术部人员"
+               },{
+                   "Type":2,
+				   "TypeName":'材料设备员',
+                   "AccountID":"",
+				   "AccountName":"请选择材料设备员"
+               },
+               {
+                   "Type":3,
+				   "TypeName":'实验员',
+                   "AccountID":"",
+				   "AccountName":"请选择实验员"
+               },{
+                   "Type":4,
+				   "TypeName":'安全部',
+                   "AccountID":"",
+				   "AccountName":"请选择安全部"
+               },
+               {
+                   "Type":5,
+				   "TypeName":'生产经理',
+                   "AccountID":"",
+				   "AccountName":"请选择生产经理"
+               },{
+                   "Type":6,
+				   "TypeName":'技术经理',
+                   "AccountID":"",
+				   "AccountName":"请选择技术经理"
+               },
+               {
+                   "Type":7,
+				   "TypeName":'项目经理',
+                   "AccountID":"",
+				   "AccountName":"请选择项目经理"
+               }],
+				pageId: '',
+				TypeName: '',
+				NeedAutograph: false,
+				sendVal: '',
+				projectList: [],
+				projectText: '请获取项目',
+				projectIndex: 0,
+				projectVal:'',
+				isfirstopen:0,
+				sindex:0
+			}
+		},
+		methods: {
+			openMask(index) {
+				this.sendVal = true;
+			},
+			confirm() {
+				console.log('点击了取消');
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						//token: server.net.GetSessionToken(),
+						token: this.Token
+					},
+					data: {
+						// company: this.companyVal
+					},
+					success: (data) => {
+						console.log(data);
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						if (jsondata.status = 1) {
+							let first={
+								value:"08876894",
+								text:"请选择项目"
+							}
+							dataArr.unshift(first);
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					},
+					complete: () => {}
+				});
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+			},
+			setData(items) {
+				let newItems = [];
+				items.forEach((e) => {
+					newItems.push({
+						text: e.text,
+						value: e.value
+					});
+				});
+				return newItems;
+			},
+			changeStartDate(e){
+				this.StartDate = e.detail.value;
+			},
+			changeEndDate(e){
+				this.EndDate = e.detail.value;
+			},
+			MZnumberUpdate(value){
+				this.mzvalue = value;
+			},
+			MEnumberUpdate(value){
+				this.mevalue = value;
+			},
+			MPnumberUpdate(value){
+				this.mpvalue = value;
+			},
+			opselect(value){
+				this.isfirstopen+=1;
+				this.sindex=value;
+
+				uni.navigateTo({
+					 url: '../../../components/selectPeople'
+				})
+			},
+			addDate() {
+				let url = server.net.setUrl('api/ConcretePouringApi/Add');
+				let newItems = [];
+				for (let i in this.AutographList) {
+					let da = {
+						"Type":this.AutographList[i].Type,
+						"AccountID":this.AutographList[i].AccountID,
+						"Opinion":''
+					}
+					newItems.push(da);
+				}
+				let data = {
+				   "Name":"混凝土浇筑令",//必填
+				   "Position":this.Position,//必填
+				   "Engineering":this.Engineering,//必填
+				   "Grade":this.Grade,//必填
+				   "Angle":this.Angle,//必填
+				   "StartDate":this.StartDate,//必填
+				   "EndDate":this.EndDate,//必填
+				   "TDayNnm":this.dayTg,
+				   "TNigNnm":this.nightTg,
+				   "ZDayNnm":this.ZDayNum,
+				   "ZNigNnm":this.ZNigNum,
+				   "PDayNnm":this.PDayNum,
+				   "PNigNnm":this.PNigNum,
+				   "MechanicalZNnm":this.mzvalue,
+				   "MechanicalMNnm":this.mevalue,
+				   "MechanicalPNnm":this.mpvalue,
+				   "LabourName":this.LabourName,
+				   "LabourPhone":this.LabourNumber,
+				   "RebarName":this.RebarName,
+				   "RebarPhone":this.RebarNumber,
+				   "CarpentryName":this.CarpentryName,
+				   "CarpentryPhone":this.CarpentryNumber,
+				   "PlumberName":this.PlumberName,
+				   "PlumberPhone":this.PlumberNumber,
+				   "ProjectID":this.projectVal,//必填
+				   "AutographList":newItems//必填
+				}
+				
+				/*for (let i = 0; i < this.AutographList.length; i++) {
+					data.type = i;
+					data.opinion = this.AutographList[i].AccountName;
+				}*/
+				console.log(data)
+				let pass = this.formcheck(data);
+				if(pass){
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							//Token:server.net.getSessionToken(),
+							Token: this.Token
+						},
+						data: JSON.stringify(data),
+						success: res => {
+							console.log(res);
+							let result = res.data;
+							let jsondata = result.data;
+							console.log(result.message);
+							if (result.status == 1) {
+								console.log("添加成功");
+								uni.showToast({
+									title: result.message,
+									mask: false,
+									duration: 1500
+								});
+								setTimeout(function() {
+									uni.navigateBack({
+										delta: 1
+									})
+								}, 2000)
+							} else {
+								console.log("添加失败" + result.message);
+								uni.showToast({
+									title: result.message,
+									mask: false,
+									duration: 1500
+								});
+								setTimeout(function() {
+									uni.navigateBack({
+										delta: 1
+									})
+								}, 2000)
+							}
+						},
+						fail: () => {},
+						complete: () => {}
+					});
+				}
+			},
+			tempS:function(e){
+				console.log("暂存")
+				let tempObject={
+					"Name":"混凝土浇筑令",//必填
+					"Position":this.Position,//必填  浇筑部位
+					"Engineering":this.Engineering,//必填  浇筑方量
+					"Grade":this.Grade,//必填 砼强度
+					"Angle":this.Angle,//必填  塌落度
+					"StartDate":this.StartDate,//必填  开盘时间
+					"EndDate":this.EndDate,//必填	浇筑持续时间
+					"TDayNnm":this.dayTg, //  童工早
+					"TNigNnm":this.nightTg,// 童工晚 
+					"ZDayNnm":this.ZDayNum,//  找平早
+					"ZNigNnm":this.ZNigNum,// 找平晚
+					"PDayNnm":this.PDayNum,//  捧手早
+					"PNigNnm":this.PNigNum,//  捧手晚
+					"MechanicalZNnm":this.MechanicalZNum,//  震动棒
+					"MechanicalMNnm":this.MechanicalMNum,//  磨光
+					"MechanicalPNnm":this.MechanicalPNum,// 平板震动
+					"LabourName":this.LabourName,// 劳务值班人
+					"LabourPhone":this.LabourNumber,// 劳务值班人电话
+					"RebarName":this.RebarName,// 钢筋值班人
+					"RebarPhone":this.RebarNumber,// 钢筋值班人电话
+					"CarpentryName":this.CarpentryName,// 木工值班人
+					"CarpentryPhone":this.CarpentryNumber,// 木工值班人电话
+					"PlumberName":this.PlumberName,// 水电值班人
+					"PlumberPhone":this.PlumberNumber,// 水电值班人电话
+					"ProjectID":this.projectVal,//必填 项目ID
+					"ProjectName":this.projectText, // 项目名称
+					"AutographList":this.AutographList,//必填 
+					"isFinish":"未完成",
+					"ProjectIndex":this.projectIndex ,//项目INDEX
+					"mzvalue":this.mzvalue, //振动棒初始值
+					"mevalue":this.mevalue, //磨光机初始值
+					"mpvalue":this.mpvalue, //平板振动器初始值
+				}
+				let conpouroff = uni.getStorageSync('ConcretePourListOffLine');
+				if (conpouroff) {
+					console.log(conpouroff);
+					conpouroff.push(tempObject)
+				}else{
+					conpouroff=[];
+					conpouroff.push(tempObject)
+				}
+				uni.setStorageSync("ConcretePourListOffLine",conpouroff);
+				uni.showToast({
+					title: '暂存成功',
+					mask: false,
+					duration: 1500
+				});
+				setTimeout(function() {
+					uni.navigateBack({
+						delta: 1
+					})
+				}, 2000)
+				
+			},
+			formcheck(data){
+				if(data.ProjectID=='08876894'){
+					uni.showToast({
+						title: '请选择项目',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				
+				if(data.Position==''){
+					uni.showToast({
+						title: '请填写浇筑部位',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+
+				
+				if(data.Grade==''){
+					uni.showToast({
+						title: '请填写砼强度',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+
+				if(data.Angle==''){
+					uni.showToast({
+						title: '请填写塌落度',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.Engineering==''){
+					uni.showToast({
+						title: '请填写浇筑方量',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[0].AccountID==''){
+					uni.showToast({
+						title: '请选择工程部人员',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[1].AccountID==''){
+					uni.showToast({
+						title: '请选择技术部人员',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[2].AccountID==''){
+					uni.showToast({
+						title: '请选择材料设备员',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[3].AccountID==''){
+					uni.showToast({
+						title: '请选择材料设备员',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[4].AccountID==''){
+					uni.showToast({
+						title: '请选择实验员',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[5].AccountID==''){
+					uni.showToast({
+						title: '请选择安全部',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[6].AccountID==''){
+					uni.showToast({
+						title: '请选择生产经理',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[7].AccountID==''){
+					uni.showToast({
+						title: '请选择技术经理',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.AutographList[8].AccountID==''){
+					uni.showToast({
+						title: '请选择项目经理',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+			}	
+		}
+
+	}
+</script>
+
+<style scoped>
+	.detail-box {
+		width: 55%;
+		min-height: 50px;
+		font-size: 28px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.input-label {
+		width: 45%;
+	}
+
+	input {
+		width: 55%;
+	}
+
+	picker {
+		width: 55%;
+	}
+
+	.day-row,
+	.night-row {
+		width: 27.5%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.button-row {
+		margin-top: 10px;
+	}
+</style>

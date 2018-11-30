@@ -1,0 +1,391 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<text>编号:</text>
+			</view>
+			<view class="detail-box">
+				{{Number}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>分公司:</text>
+			</view>
+			<view class="detail-box">
+				{{Company}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>工程项目:</text>
+			</view>
+			<view class="detail-box">
+				{{Project}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>标题:</text>
+			</view>
+			<view class="detail-box">
+				{{Title}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>栋号:</text>
+			</view>
+			<view class="detail-box">
+				{{Floor}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>楼号:</text>
+			</view>
+			<view class="detail-box">
+				{{Building}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>分包单位:</text>
+			</view>
+			<view class="detail-box">
+				{{SubcontractingUnit}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>隐患类型:</text>
+			</view>
+			<view class="detail-box">
+				{{SafetyDanger}}
+			</view>
+		</view>
+
+		<view class="input-row">
+			<view class="input-label">
+				<text>隐患描述:</text>
+			</view>
+			<view class="detail-box">
+				{{DangerDes}}
+			</view>
+		</view>
+
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>整改要求:</text>
+			</view>
+			<view class="detail-box">
+				{{Rectification}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>整改人:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{RectPeople}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>整改日期:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{ExpirDate}}
+			</view>
+		</view>
+
+		<view class="input-row">
+			<view class="input-label">
+				<text>检查日期:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{CheckDate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>复查日期:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{ReCheckDate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>紧急级别:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{State}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>填写人:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{AddPeople}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<text>状态:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{State}}
+			</view>
+		</view>
+		<view class="input-row" v-show="isReply">
+			<view class="input-label">
+				<text>回复:</text>
+			</view>
+			<input type="text" value="" v-model="replyContent" placeholder="请填写回复内容" />
+		</view>
+		<view class="input-row" v-show="isRecheck">
+			<view class="input-label">
+				<text>复查:</text>
+			</view>
+			<input type="text" value="" v-model="replyContent" placeholder="请填写回复内容" />
+		</view>
+		<view class="input-row" v-show="isRejected">
+			<view class="input-label">
+				<text>拒绝理由:</text>
+			</view>
+			<input type="text" value="" v-model="replyContent" placeholder="请填写拒绝理由" />
+		</view>
+		<view class="button-row mt-10">
+			<button class="search-btn" v-show="isReply" size="mini" @tap="Reply(1)">回复</button>
+			<button class="danger-btn" v-show="isApproval" size="mini" @tap="Review(4)">审批拒绝</button>
+			<button class="search-btn" v-show="isRejected" size="mini" @tap="Review(1)">审批通过</button>
+			<button class="search-btn" v-show="isRecheck" size="mini" @tap="Reply(2)">复查</button> 
+			<button class="search-btn" v-show="isFinished" size="mini" @tap="Review(3)">合格完成</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data() {
+			return {
+				pageId: '',
+				testToken: '',
+				SubcontractingUnit: '',
+				Title: '',
+				Number: '',
+				Project: '',
+				RectPeople: '',
+				Company: '',
+				Building: '',
+				Floor: '',
+				SafetyDanger: '',
+				DangerDes: '',
+				ExpirDate: '',
+				CrashLevel: '',
+				CheckDate: '',
+				ReCheckDate: '',
+				State: '',
+				Rectification: '',
+				AddPeople: '',
+				isReply: false, //回复
+				isApproval: false, //审批通过
+				isRejected: false, //审批拒绝
+				isRecheck: false, //复查
+				isFinished: false, //完成
+				replyContent: '', //回复内容
+				rejuectContent: '' //拒绝理由
+
+			}
+		},
+		onLoad(option) {
+			this.pageId = option.id;
+			this.testToken = server.net.GetLocalToken();
+			this.getDetails(option.id);
+		},
+		methods: {
+			getDetails(id) {
+				let url = server.net.setUrl('api/SecurityInspectApi/GetList');
+				console.log(id)
+				let ajaxdata = JSON.stringify({
+					ID: id
+				})
+				uni.request({
+					url: url,
+					method: 'POST',
+					dataType: 'json',
+					header: {
+						Token: this.testToken,
+						"content-type": "application/json"
+					},
+					data: ajaxdata,
+					success: res => {
+						let result = res.data;
+						let jsondata = result.data;
+
+						if (result.status == 1) {
+							//遍历JSON数组，获取数据对象
+							jsondata.forEach((e) => {
+								this.Title = e.Title;
+								this.Company = e.Company;
+								this.Project = e.ProjectName;
+								this.Number = e.Number;
+								this.Floor = e.Floor;
+								this.Building = e.Building;
+								this.SubcontractingUnit = e.SubcontractingUnit;
+								this.SafetyDanger = e.SaftyDanger;
+								this.DangerDes = e.DangerDes;
+								this.RectPeople = e.RectPeopleName
+								this.Rectification = e.Rectification;
+								this.AddPeople = e.AddPeopleName;
+								this.ExpirDate = e.ExpireDate
+								this.CheckDate = e.CheckDate.substring(0, 10);
+								this.ReCheckDate = e.ReCheckDate.substring(0, 10);
+								this.CrashLevel = e.CrashLevelName;
+								this.State = e.StateName;
+								
+								switch (e.State) {
+									case 0:
+										this.isApproval = true;
+										this.isRejected = true;
+										break;
+									case 1:
+										this.isReply = true;
+										break
+									case 2:
+										this.JudgeAc();
+										break
+								}
+							});
+						} else {
+							console.log(result.message);
+							uni.showToast({
+								title: result.message
+							})
+						}
+
+					},
+					fail: (code) => {
+						console.log(code)
+						uni.showToast({
+							title: '数据获取失败，请检查您的网络环境'
+						});
+					},
+
+				});
+			},
+			JudgeAc(){
+				let url = server.net.setUrl('api/QualityApi/JudgeAc?proid='+this.pageId);
+				uni.request({
+					url: url,
+					method: 'POST', 
+					header: {
+						token: this.testToken,
+					},
+					success: res => {
+						console.log(1111111111111)
+						console.log(res)
+						if(res.data=='9'){
+							this.isRecheck = true;
+							this.isFinished = true;
+						}
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			Reply(typea) { //安全隐患回复
+				let url = server.net.setUrl('api/SecurityInspectApi/Reply');
+				let ajaxdata = {
+					securityId: this.pageId,
+					type: typea, //1回复2复查
+					content: this.replyContent
+				}
+
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						token: this.testToken,
+						"content-type": "application/x-www-form-urlencoded"
+					},
+					data: ajaxdata,
+					success: res => {
+						let result = res.data;
+						console.log(result.message)
+						uni.showToast({
+							title: result.message
+						});
+						setTimeout(function() {
+							uni.navigateBack({
+								delta: 1
+							})
+						}, 2000)
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			Review(state) {
+				console.log(state);
+				let url = server.net.setUrl('api/SecurityInspectApi/Review');
+				let ajaxdata = {
+					id: this.pageId,
+					state: state,
+					content: this.rejectContent
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					data: ajaxdata,
+					header: {
+						token: this.testToken,
+						"content-type": "application/x-www-form-urlencoded"
+					},
+					success: res => {
+						let result = res.data;
+						uni.showToast({
+							title: result.message
+						});
+						setTimeout(function() {
+							uni.navigateBack({
+								delta: 1
+							})
+						}, 2000)
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.detail-box {
+		width: 55%;
+		min-height: 50px;
+		font-size: 28px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.input-label {
+		width: 45%;
+	}
+
+	.input-row ._input {
+		width: 55%;
+	}
+
+	picker {
+		width: 55%;
+	}
+</style>

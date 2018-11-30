@@ -1,0 +1,2 @@
+@import "../common/vendor.wxss";
+.ta{border:1rpx solid gray}

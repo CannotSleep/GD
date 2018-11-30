@@ -1,0 +1,90 @@
+<template name="8280a49c">
+  <view class="_view data-v-4d38266d content">
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-02.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">项目名称:</text>
+      </view>
+      <picker bindchange="handleProxy" value="{{projectIndex}}" range="{{projectList}}" range-key="text" data-eventid="{{'HeM-0'}}" data-comkey="{{$k}}" class="_picker data-v-4d38266d">
+        <view class="_view data-v-4d38266d uni-input">{{projectText}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-02.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">构件部位(楼层):</text>
+      </view>
+      <input type="text" value="{{Floor}}" placeholder="请填写测量部位(楼层)" bindinput="handleProxy" data-eventid="{{'WQj-1'}}" data-comkey="{{$k}}" class="_input data-v-4d38266d" />
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-10.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">混凝土强度设计等级:</text>
+      </view>
+      <picker bindchange="handleProxy" value="{{grade}}" range="{{gradeList}}" range-key="text" data-eventid="{{'cGs-2'}}" data-comkey="{{$k}}" class="_picker data-v-4d38266d">
+        <view class="_view data-v-4d38266d uni-input">{{gradeList[grade].text}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-13.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">砼浇筑时间:</text>
+      </view>
+      <picker mode="date" value="{{ConcreteDate}}" start="2000-01-01" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'oZO-3'}}" data-comkey="{{$k}}" class="_picker data-v-4d38266d">
+        <view class="_view data-v-4d38266d uni-input">{{ConcreteDate}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-11.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">测试面状态:</text>
+      </view>
+      <input type="text" value="{{TestState}}" placeholder bindinput="handleProxy" disabled="disabled" data-eventid="{{'7Xc-4'}}" data-comkey="{{$k}}" class="_input data-v-4d38266d" />
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-05.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">构件类型:</text>
+      </view>
+      <picker bindchange="handleProxy" value="{{ComponentIndex}}" range="{{ComponentList}}" range-key="text" data-eventid="{{'ewR-5'}}" data-comkey="{{$k}}" class="_picker data-v-4d38266d">
+        <view class="_view data-v-4d38266d uni-input">{{ComponentList[ComponentIndex].text}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-12.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">日平均温度:</text>
+      </view>
+      <input type="number" value="{{Temperature}}" placeholder="请填写日平均温度" bindinput="handleProxy" data-eventid="{{'rlx-6'}}" data-comkey="{{$k}}" class="_input data-v-4d38266d" />
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-13.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">检查日期:</text>
+      </view>
+      <picker mode="date" value="{{checkDate}}" start="{{ConcreteDate}}" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'wIx-7'}}" data-comkey="{{$k}}" class="_picker data-v-4d38266d">
+        <view class="_view data-v-4d38266d uni-input">{{checkDate}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-4d38266d input-row">
+      <view class="_view data-v-4d38266d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-07.png" mode class="_image data-v-4d38266d"></image>
+        <text class="_text data-v-4d38266d">测量数据:</text>
+      </view>
+      <view class="_view data-v-4d38266d data-row">
+        <button size="mini" type="default" bindtap="handleProxy" data-eventid="{{'vyX-8'}}" data-comkey="{{$k}}" class="_button data-v-4d38266d">添加数据</button>
+      </view>
+    </view>
+    <block wx:key="index" key="{{index}}" wx:if="{{isAdd}}" wx:for="{{dataList}}" wx:for-index="index" wx:for-item="item">
+      <view class="_view data-v-4d38266d input-row" wx:if="{{isAdd}}">
+        <view class="_view data-v-4d38266d input-label reduceWidth"> 数据:{{item.dataNum}} </view>
+        <input class="_input data-v-4d38266d increaseWidth" type="text" value="{{item.dataInput}}" bindinput="handleProxy" placeholder="请输入16条数据,空格隔开" data-eventid="{{'9c4-9-'+index}}" data-comkey="{{$k}}" />
+      </view>
+    </block>
+    <view class="_view data-v-4d38266d input-row-bottom-line"></view>
+    <view class="_view data-v-4d38266d button-row mt-20">
+      <button type="primary" size="mini" bindtap="handleProxy" data-eventid="{{'C8E-10'}}" data-comkey="{{$k}}" class="_button data-v-4d38266d">提交</button>
+      <button type="default" size="mini" bindtap="handleProxy" data-eventid="{{'Ppz-11'}}" data-comkey="{{$k}}" class="_button data-v-4d38266d">暂存</button>
+    </view>
+  </view>
+</template>

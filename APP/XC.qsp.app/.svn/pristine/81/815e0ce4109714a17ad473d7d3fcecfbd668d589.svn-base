@@ -1,0 +1,236 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>工程名称:</text>
+			</view>
+			<view class="detail-box">
+				{{ProjectName}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>测量时间:</text>
+			</view>
+			<view class="detail-box">
+				{{CreateTime}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>总合格率:</text>
+			</view>
+			<view class="detail-box">
+				{{totalRate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>合格个数:</text>
+			</view>
+			<view class="detail-box">
+				{{qualifiedNum}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>不合格个数:</text>
+			</view>
+			<view class="detail-box">
+				{{failedNum}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>陪同检查人:</text>
+			</view>
+			<view class="detail-box">
+				{{checkPerson}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>实测项目:</text>
+			</view>
+			<view class="detail-box">
+				{{engProject}}
+			</view>
+		</view>
+
+		<block v-for="(item,index) in dataNumList" :key="index">
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+					<text>测量数据:{{item.index}}</text>
+				</view>
+				<view class="detail-box">
+					{{item.value}}
+				</view>
+			</view>
+		</block>
+
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>合格率:</text>
+			</view>
+			<view class="detail-box">
+				{{PerRate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>偏差:</text>
+			</view>
+			<view class="detail-box">
+				{{Deviation}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>备注:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{Remarks}}
+			</view>
+		</view>
+
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data() {
+			return {
+				testToken: '',
+				areaVal: 0,
+				dataList: [],
+				ProjectName: '',
+				failedNum: '',
+				totalRate: '',
+				qualifiedNum: '',
+				CreateTime: '',
+				checkPerson: '',
+				Remarks: '',
+				engProject: '',
+				PerRate: '',
+				Deviation: '',
+				dataNum: 0,
+				dataNumList: [],
+				showData: true
+
+			}
+		},
+		onLoad(option) {
+			this.testToken = server.net.GetLocalToken();
+			this.getDetails(option.id);
+		},
+		methods: {
+			getDetails(id) {
+				console.log("Id:" + id);
+				let url = server.net.setUrl('api/ActualQuantityApi/GetDetail');
+				uni.request({
+					url: url,
+					method: 'POST',
+					dataType: 'json',
+					header: {
+						token: this.testToken
+					},
+					data: {
+						Id: id
+					},
+					success: res => {
+						let result = res.data;
+						let jsondata = result.data;
+						if (result.status == 1) {
+							//遍历JSON数组，获取数据对象
+							jsondata.forEach((e) => {
+								this.ProjectName = e.ProjectName;
+								this.failedNum = e.failedNum;
+								this.CreateTime = e.CheckDate.substring(0, 10);
+								this.qualifiedNum = e.qualifiedNum;
+								this.totalRate = e.totalRate;
+								this.checkPerson = e.AccCheckPropleName;
+								this.totalRate = e.QualificationRate;
+								this.qualifiedNum = e.TotalQualified;
+								this.failedNum = e.TotalUnQualified;
+								let arr = e.Children;
+								for (let i in arr) {
+									this.engProject = arr[i].ActualQuantityTermName;
+									this.PerRate = arr[i].PerRate;
+									this.Deviation = arr[i].Deviation;
+									this.Remarks = arr[i].Remark;
+									this.dataList = arr[i].DataAttr;
+									let newItems = [];
+									
+									for (let j = 0; j < this.dataList.length; j++) {
+										newItems.push({
+											value: this.dataList[j],
+											index: Number(j+1)
+										})
+									}
+									this.dataNumList = newItems;
+									console.log(this.dataNumList);
+									/*for (let j = 0; j < arr[i].dataArr.length; j++) {
+										this.dataNumList.push({
+											value: j,
+											text: arr[i].dataArr[j].value
+										})
+										this.dataNum = this.dataNumlist[this.dataNumIndex].value;
+									}*/
+
+								}
+
+
+							});
+						} else {
+							console.log(result.message);
+							uni.showToast({
+								title: result.message
+							})
+						}
+
+					},
+					fail: (code) => {
+						console.log(code)
+						uni.showToast({
+							title: '数据获取失败，请检查您的网络环境'
+						});
+					},
+
+				});
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.detail-box {
+		width: 55%;
+		min-height: 50px;
+		font-size: 28px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.input-label {
+		width: 45%;
+	}
+
+	picker {
+		width: 55%;
+	}
+</style>

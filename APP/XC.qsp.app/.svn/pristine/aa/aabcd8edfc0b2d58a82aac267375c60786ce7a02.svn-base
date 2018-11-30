@@ -1,0 +1,42 @@
+<template name="afb8ce32">
+  <view class="_view data-v-54119b08 page">
+    <page-head title="{{title}}" class="_page-head data-v-54119b08"></page-head>
+    <view class="_view data-v-54119b08 uni-card">
+      <view class="_view data-v-54119b08 uni-list">
+        <button bindtap="handleProxy" data-eventid="{{'TFO-0'}}" data-comkey="{{$k}}" class="_button data-v-54119b08">跳转</button>
+        <block wx:key="index" key="{{index}}" wx:for="{{lists}}" wx:for-index="index" wx:for-item="list">
+          <view class="_view data-v-54119b08 uni-list-cell uni-collapse">
+            <view class="_view data-v-54119b08 uni-list-cell-navigate uni-navigate-bottom {{list.show ? 'uni-active' : ''}}" bindtap="handleProxy" data-eventid="{{'Cri-1-'+index}}" data-comkey="{{$k}}"> {{list.title}} </view>
+            <view class="_view data-v-54119b08 uni-collapse-content {{list.show ? 'uni-active' : ''}}">
+              <swiper wx:if="{{list.type === 'swiper'}}" autoplay="true" indicator-dots="true" circular="true" style="height: 400rpx;" class="_swiper data-v-54119b08">
+                <swiper-item wx:key="key" key="{{key}}" wx:for="{{imgUrls}}" wx:for-index="key" wx:for-item="img" class="_swiper-item data-v-54119b08">
+                  <image src="{{img}}" style="height: 400rpx;" class="_image data-v-54119b08"></image>
+                </swiper-item>
+              </swiper>
+              <view wx:if="{{list.type === 'font'}}" class="_view data-v-54119b08 page-pd">
+                <view class="_view data-v-54119b08 size-5">hello uni-app</view>
+                <view class="_view data-v-54119b08 size-4">hello uni-app</view>
+                <view class="_view data-v-54119b08 size-3">hello uni-app</view>
+                <view class="_view data-v-54119b08 size-2">hello uni-app</view>
+                <view class="_view data-v-54119b08 size-1">hello uni-app</view>
+              </view>
+              <view wx:if="{{list.type === 'list'}}" class="_view data-v-54119b08">
+                <view class="_view data-v-54119b08 uni-list">
+                  <view class="_view data-v-54119b08 uni-list-cell" hover-class="uni-list-cell-hover">
+                    <view class="_view data-v-54119b08 uni-list-cell-navigate uni-navigate-right">hello uni-app</view>
+                  </view>
+                  <view class="_view data-v-54119b08 uni-list-cell" hover-class="uni-list-cell-hover">
+                    <view class="_view data-v-54119b08 uni-list-cell-navigate uni-navigate-right">hello uni-app</view>
+                  </view>
+                  <view class="_view data-v-54119b08 uni-list-cell" hover-class="uni-list-cell-hover">
+                    <view class="_view data-v-54119b08 uni-list-cell-navigate uni-navigate-right">hello uni-app</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,333 @@
+<template>
+	<view class="content">
+		<view class="list-content">
+			<view class="uni-list">
+				<block v-for="(item,index) in fileDatalist" :key="index">
+					<block v-for="(citem,cindex) in item.Detail" :key="cindex">
+						<view class="uni-list-cell" hover-class="uni-list-cell-hover">
+							<view class="uni-triplex-row">
+								<view class="uni-triplex-left">
+									<label class="filetext">
+										<text class="list-title uni-ellipsis">{{citem.FileName}}</text>
+										<text class="list-deadline">{{item.AddUserName}}</text>
+										<text class="list-level">{{item.AddTime}}</text>
+										<text class="list-state">{{item.Type}}</text>
+										<button class="list-button" type="primary" v-if="citem.isDown==0"   :size="mini" @tap="fileDown($event,citem.ID,citem.FileSrc,index,cindex)" :loading="false" >下载</button>
+										<!-- <button class="list-button" type="primary" :class="{classdown:index==current&&cindex==ccurent}" :size="mini" @tap="fileDown(citem.ID,citem.FileSrc,index,cindex)" :loading="false" >下载</button> -->
+										<button class="list-button" type="primary" v-if="citem.isDown==1"  :size="mini" @tap="fileOpen(citem.FileName)" :loading="false" :plain="true">打开</button>
+									</label>
+								</view>
+							</view>
+						</view>
+					</block>
+				</block>
+			</view>
+		</view>
+	</view>
+
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data() {
+			return {
+				fileDatalist: [
+					{
+						"ID":"00000000-0000-0000-0000-0000000000",             //主键ID
+						"ForeignID":"00000000-0000-0000-0000-0000000000",       //外键ID
+						"AddUserID":"00000000-0000-0000-0000-0000000000",       //上传人ID
+						"AddUserName":"管理员2",                                 //上传人名称
+						"Remark":"说明2",                               
+						"AddTime":"2018-10-10",                 
+						"Type":3,                                              // 文件类型
+						"IsDelete":false,
+						"Detail":[{                                             // 子集
+							"ID":"00000000-0000-0000-0000-0000000000",            //子集主键(用于文件下载传参)
+							"MasterID":"00000000-0000-0000-0000-0000000000",
+							"FileName":"文件名2-1",                                  // 文件名
+							"FileSrc":"文件相对路径2-1",
+							"DownloadCount":1,                                   // 下载次数
+							"FileSize":10086,                                    // 文件大小（字节）
+							"FileType":".pdf",
+							"isDown":-1
+						},{                                              //子集
+							"ID":"00000000-0000-0000-0000-0000000000",            //子集主键(用于文件下载传参)
+							"MasterID":"00000000-0000-0000-0000-0000000000",
+							"FileName":"文件名2-2",                                   //文件名
+							"FileSrc":"文件相对路径2-2",
+							"DownloadCount":1,                                    //下载次数
+							"FileSize":10086,                                     //文件大小（字节）
+							"FileType":".pdf",
+							"isDown":-1
+						}]
+					},
+				],
+				filePath:"",
+				typeI:9
+			}
+		},
+		methods: {
+			getFilelist(typeIndex) {
+				let url = server.net.setUrl('api/FileSystemApi/GetList');
+				this.typeI = typeIndex;
+				let data = {
+					page: 1,
+					operate: typeIndex,
+					type: 0,
+					userName:"",
+					fileName:"" 
+				};
+				
+				uni.request({
+					url: url,
+					method: 'GET',
+					data: data,
+					header: {
+						token: this.Token
+					},
+					success: (res) => {
+						console.log(res)
+ 						let jsondata = res.data;
+ 						let fileArr=jsondata.data;
+						for(let f of fileArr){
+							f.AddTime = f.AddTime.substring(0,10)
+							switch(f.Type){
+								case 1:
+									f.Type="安全管理文件";
+									break;
+								case 2:
+									f.Type="质量管理文件";
+									break;
+								case 3:
+									f.Type="工程管理文件";
+									break;
+								case 4:
+									f.Type="其他文件";
+									break;
+							}
+
+							for(let fchild of f.Detail){
+								let oNameAttr =  fchild.FileSrc.split("/");
+								let oName = oNameAttr[oNameAttr.length-1];
+								
+								let value = uni.getStorageSync(oName);
+								if(value){
+									console.log("对比成功")
+									fchild.isDown = 1;
+								}else{
+									console.log("对比失败")
+									fchild.isDown = 0;
+								}
+								
+// 								uni.getStorage({
+// 									key:oName,
+// 									success:(res)=>{
+// 										console.log("对比成功")
+// 										fchild.isDown = 1;
+// 									},fail:(fail)=>{
+// 										console.log("对比失败")
+// 										fchild.isDown = 0;
+// 									}
+// 								});
+							}
+						}
+						console.log(fileArr);
+						this.fileDatalist = fileArr;
+						uni.stopPullDownRefresh();
+					},
+					fail: (f) => {
+						
+					},
+					complete: (c) => {
+						
+					}
+				});
+				
+			},
+			fileDown(e,id,fileSrc,index,cindex){
+				console.log("执行文件下载方法");
+				 
+				
+				let url = server.net.setUrl('api/FileSystemApi/DownloadFile');
+				uni.showLoading({
+					title: '下载中',
+					mask:true
+				});
+			  const downloadTask = 	uni.downloadFile({
+					url: url+"?id="+id+"&filePath="+fileSrc, //仅为示例，并非真实的资源
+					header:  {
+						Token: this.Token, 
+					},
+					success: (res) => {
+						if (res.statusCode === 200) {
+							console.log('下载成功');
+							console.log(res);
+							uni.hideLoading();
+							this.fileDatalist[index].Detail[cindex].isDown=1;
+						}
+						console.log(JSON.stringify(res)); 	
+						let temFile = res.tempFilePath;
+						uni.saveFile({
+									  tempFilePath:temFile ,
+									  success: function (result) {
+										console.log("保存成功");
+										console.log(result.savedFilePath)
+										let savedFilePath = result.savedFilePath+"";
+										let tempFilePath = res.tempFilePath+"";
+										//返回的名称
+										let oldAttr = tempFilePath.split("&")[0].split("/");
+										let oldName = oldAttr[oldAttr.length-1];
+										//保存的名称
+										let newAttr = savedFilePath.split("&")[0].split("/");
+										let newName = newAttr[newAttr.length-1];
+										uni.setStorage({
+											key: oldName,
+											data: newName,
+											success: function () {
+												console.log('保存success');
+											}
+										});
+										
+										uni.setStorage({
+											key: newName,
+											data: oldName,
+											success: function () {
+												console.log('appsuccess');
+											}
+										});
+									  },fail:function(fail){
+									  	console.log("保存失败")
+										console.log(JSON.stringify(fail))
+									  }
+									});
+					},
+					fail:(detail) => {
+						console.log("失败"+detail)
+						console.log(JSON.stringify(detail))
+					},
+					complete:(result) => {
+						console.log(result)
+					}
+				});		
+				
+				downloadTask.onProgressUpdate((res) => {
+					console.log('下载进度' + res.progress);
+					console.log('已经下载的数据长度' + res.totalBytesWritten);
+					console.log('预期需要下载的数据总长度' + res.totalBytesExpectedToWrite);
+				});
+			},
+			fileOpen(fileName){
+				let paName = "";
+				uni.getStorage({
+					key:fileName,
+					success:(res)=>{
+						console.log("对比成功")
+						paName = res.data;
+					}
+				});
+				
+				uni.openDocument({
+					filePath:"_doc/uniapp_temp/download/uniapp_save/"+paName,
+					//_doc/uniapp_save/1539245941096.pdf
+					success:function(result){
+						console.log(JSON.stringify(result))
+						
+						console.log("打开成功");
+					},
+					fail:function(res){
+						console.log(JSON.stringify(res))
+					}
+				})
+			}
+		},
+		onLoad(option) {
+			//根据页面传值判断页面内容：检查记录&整改记录，并动态设置页面标题
+			let Type = option.type;
+			switch (Type) {
+				case '1':
+					uni.setNavigationBarTitle({
+						title: '我的文件'
+					});
+					break;
+				case '2':
+					uni.setNavigationBarTitle({
+						title: '与我相关'
+					});
+					break;
+				case '0':
+					uni.setNavigationBarTitle({
+						title: '共享文件'
+					});
+					break;
+					defualt: break;
+			}
+			
+			this.Token = server.net.GetSessionToken();
+			console.log("测试token："+server.net.GetSessionToken());
+			//获取文件列表
+			this.getFilelist(Type);
+			
+		},onPullDownRefresh() {
+			console.log('下拉刷新');
+			this.getFilelist(this.typeI);
+		}
+	}
+</script>
+
+<style scoped>
+	
+	
+	
+	.input-row {
+		align-items: center;
+	}
+
+	.list-content {
+		margin-top: 0px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		width: 100%;
+		padding: 0px 10px;
+	}
+
+	.list-title {
+		font-size: 32px;
+		color: #000;
+		display: block;
+	}
+
+	.list-deadline,
+	.list-level,
+	.list-state{
+		font-size: 26px;
+		color: #6C6C6C;
+		/* width:30%; */
+		margin-right: 6px;
+	}
+	
+	.filetext{
+/* 		display: flex;
+		flex-direction: row; */
+		width: 100%;
+	}
+	.uni-triplex-left{
+			width: 100%;
+	}
+	
+	.list-button{
+		font-size: 20px;
+		/* color: #6C6C6C; */
+		display: inline-block;
+		margin-right: 2px;
+		float: right;
+		/* height: 100%; */
+	}
+	
+	.classdown{
+		display:none;
+	}
+	
+</style>

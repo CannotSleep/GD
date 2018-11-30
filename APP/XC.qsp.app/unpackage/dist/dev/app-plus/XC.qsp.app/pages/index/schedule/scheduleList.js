@@ -1,0 +1,13 @@
+
+      !(function(){
+        var uniAppViewReadyCallback = function(){
+          setCssToHead([[2,1],".",[1],"list-content { margin-top: ",[0,20],"; display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; flex-direction: column; -webkit-box-pack: start; -webkit-justify-content: flex-start; justify-content: flex-start; -webkit-box-align: start; -webkit-align-items: flex-start; align-items: flex-start; width: 100%; padding: 0 ",[0,10],"; }\n.",[1],"list-title { font-size: ",[0,32],"; color: #000; display: block; }\n.",[1],"list-deadline, .",[1],"list-level, .",[1],"list-state { font-size: ",[0,28],"; color: #6C6C6C; display: inline-block; margin-right: ",[0,15],"; }\n.",[1],"list-level { display: block; }\n",],undefined,{path:"./pages/index/schedule/scheduleList.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/index/schedule/scheduleList.wxml') } }));
+        }
+        if(window.__uniAppViewReady__){
+          uniAppViewReadyCallback()
+        }else{
+          document.addEventListener('uniAppViewReady',uniAppViewReadyCallback)
+        }
+      })();
+      

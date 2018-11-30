@@ -1,0 +1,5 @@
+<import src="/XC.qsp.app/components/load-more.vue.wxml" />
+<import src="/XC.qsp.app/components/mpvue-echarts/src/echarts.vue.wxml" />
+<import src="/XC.qsp.app/components/number-box.vue.wxml" />
+<import src="/XC.qsp.app/components/uni-icon.vue.wxml" />
+<import src="/XC.qsp.app/components/uni-tag.vue.wxml" />

@@ -1,0 +1,94 @@
+@import "../../../common/vendor.wxss";
+
+.block.data-v-3316971a {
+  display: block;
+}
+.uni-uploader.data-v-3316971a {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.uni-uploader-head.data-v-3316971a {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.uni-uploader-info.data-v-3316971a {
+  color: #B2B2B2;
+}
+.uni-uploader-body.data-v-3316971a {
+  margin-top: 16rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.uni-uploader__file.data-v-3316971a {
+  float: left;
+  margin-right: 18rpx;
+  margin-bottom: 18rpx;
+}
+.uni-uploader__img.data-v-3316971a {
+  display: block;
+  width: 158rpx;
+  height: 158rpx;
+}
+.uni-uploader__input-box.data-v-3316971a {
+  float: left;
+  position: relative;
+  margin-right: 18rpx;
+  margin-bottom: 18rpx;
+  width: 154rpx;
+  height: 154rpx;
+  border: 2rpx solid #D9D9D9;
+}
+.uni-uploader__input-box.data-v-3316971a:before,
+.uni-uploader__input-box.data-v-3316971a:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #D9D9D9;
+}
+.uni-uploader__input-box.data-v-3316971a:before {
+  width: 4rpx;
+  height: 79rpx;
+}
+.uni-uploader__input-box.data-v-3316971a:after {
+  width: 79rpx;
+  height: 4rpx;
+}
+.uni-uploader__input-box.data-v-3316971a:active {
+  border-color: #999999;
+}
+.uni-uploader__input-box.data-v-3316971a:active:before,
+.uni-uploader__input-box.data-v-3316971a:active:after {
+  background-color: #999999;
+}
+.uni-uploader__input.data-v-3316971a {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}

@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/index/site/ConcreteList.vue.wxml" /><template is="a110f374" data="{{ ...$root['0'], $root }}"/>

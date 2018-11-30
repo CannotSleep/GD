@@ -1,0 +1,131 @@
+<template name="ce6de87a">
+  <view class="_view data-v-75438aae content">
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">编号:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{Number}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">分公司:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{Company}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">工程项目:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{Project}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">标题:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{Title}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">栋号:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{Floor}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">楼号:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{Building}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">分包单位:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{SubcontractingUnit}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">隐患类型:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{SafetyDanger}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">隐患描述:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{DangerDes}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">整改要求:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box"> {{Rectification}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">整改人:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box "> {{RectPeople}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">整改日期:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box "> {{ExpirDate}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">检查日期:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box "> {{CheckDate}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">复查日期:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box "> {{ReCheckDate}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">紧急级别:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box "> {{State}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">填写人:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box "> {{AddPeople}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">状态:</text>
+      </view>
+      <view class="_view data-v-75438aae detail-box "> {{State}} </view>
+    </view>
+    <view class="_view data-v-75438aae input-row" hidden="{{!(isReply)}}">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">回复:</text>
+      </view>
+      <input type="text" value="{{replyContent}}" bindinput="handleProxy" placeholder="请填写回复内容" data-eventid="{{'wvg-0'}}" data-comkey="{{$k}}" class="_input data-v-75438aae" />
+    </view>
+    <view class="_view data-v-75438aae input-row" hidden="{{!(isRecheck)}}">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">复查:</text>
+      </view>
+      <input type="text" value="{{replyContent}}" bindinput="handleProxy" placeholder="请填写回复内容" data-eventid="{{'uE8-1'}}" data-comkey="{{$k}}" class="_input data-v-75438aae" />
+    </view>
+    <view class="_view data-v-75438aae input-row" hidden="{{!(isRejected)}}">
+      <view class="_view data-v-75438aae input-label">
+        <text class="_text data-v-75438aae">拒绝理由:</text>
+      </view>
+      <input type="text" value="{{replyContent}}" bindinput="handleProxy" placeholder="请填写拒绝理由" data-eventid="{{'XoI-2'}}" data-comkey="{{$k}}" class="_input data-v-75438aae" />
+    </view>
+    <view class="_view data-v-75438aae button-row mt-10">
+      <button class="_button data-v-75438aae search-btn" hidden="{{!(isReply)}}" size="mini" bindtap="handleProxy" data-eventid="{{'MIX-3'}}" data-comkey="{{$k}}">回复</button>
+      <button class="_button data-v-75438aae danger-btn" hidden="{{!(isApproval)}}" size="mini" bindtap="handleProxy" data-eventid="{{'bE8-4'}}" data-comkey="{{$k}}">审批拒绝</button>
+      <button class="_button data-v-75438aae search-btn" hidden="{{!(isRejected)}}" size="mini" bindtap="handleProxy" data-eventid="{{'HUJ-5'}}" data-comkey="{{$k}}">审批通过</button>
+      <button class="_button data-v-75438aae search-btn" hidden="{{!(isRecheck)}}" size="mini" bindtap="handleProxy" data-eventid="{{'PKY-6'}}" data-comkey="{{$k}}">复查</button>
+      <button class="_button data-v-75438aae search-btn" hidden="{{!(isFinished)}}" size="mini" bindtap="handleProxy" data-eventid="{{'47q-7'}}" data-comkey="{{$k}}">合格完成</button>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,95 @@
+@import "../common/vendor.wxss";
+
+.prompt-box {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.prompt-content {
+  width: 600rpx;
+  border-radius: 25rpx;
+  padding: 15rpx;
+  border: 1rpx solid #ccc;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.first-title {
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.second-title {
+  margin-top: 25rpx;
+  font-size: 28rpx;
+  color: #6C6C6C;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.input-row {
+  margin-top: 35rpx;
+  text-align: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.input-row ._input {
+  width: 80%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  text-align: center;
+}
+.button-box {
+  width: 50%;
+  padding: 15rpx 10rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  color: #007AFF;
+}
+.button-box:first-child {
+  border-right: 1rpx solid #ccc;
+}

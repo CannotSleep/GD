@@ -1,0 +1,66 @@
+<template name="7dabd6e8">
+  <view class="_view data-v-3b8b944d content">
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-08.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">计划名称：</text>
+      </view>
+      <view class="_view data-v-3b8b944d detail-box"> {{Name}} </view>
+    </view>
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-05.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">计划类型：</text>
+      </view>
+      <view class="_view data-v-3b8b944d detail-box"> {{PlanType}} </view>
+    </view>
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-14.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">计划开始时间：</text>
+      </view>
+      <view class="_view data-v-3b8b944d detail-box"> {{StartDate}} </view>
+    </view>
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-14.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">计划完成时间：</text>
+      </view>
+      <view class="_view data-v-3b8b944d detail-box"> {{EndDate}} </view>
+    </view>
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-14.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">实际完成时间：</text>
+      </view>
+      <picker mode="date" value="{{RealEndDate}}" start="{{StartDate}}" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'9vF-0'}}" data-comkey="{{$k}}" class="_picker data-v-3b8b944d">
+        <view class="_view data-v-3b8b944d uni-input">{{RealEndDate}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-09.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">实际偏差：</text>
+      </view>
+      <view class="_view data-v-3b8b944d detail-box"> {{Deviation}} </view>
+    </view>
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-10.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">计划纠编措施：</text>
+      </view>
+      <textarea bindblur="handleProxy" auto-height placeholder="计划纠编措施" value="{{Reclaimed}}" bindinput="handleProxy" data-eventid="{{'EPz-1'}}" data-comkey="{{$k}}" class="_textarea data-v-3b8b944d" />
+    </view>
+    <view class="_view data-v-3b8b944d input-row">
+      <view class="_view data-v-3b8b944d input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-08.png" mode class="_image data-v-3b8b944d"></image>
+        <text class="_text data-v-3b8b944d">备注</text>
+      </view>
+      <textarea bindblur="handleProxy" auto-height placeholder="请填写备注" value="{{Remark}}" bindinput="handleProxy" data-eventid="{{'Jqm-2'}}" data-comkey="{{$k}}" class="_textarea data-v-3b8b944d" />
+    </view>
+    <view class="_view data-v-3b8b944d input-row-bottom-line"></view>
+    <view class="_view data-v-3b8b944d button-row" wx:if="{{NeedSub}}">
+      <button type="primary" size="mini" bindtap="handleProxy" data-eventid="{{'Ep0-3'}}" data-comkey="{{$k}}" class="_button data-v-3b8b944d">填报</button>
+    </view>
+  </view>
+</template>

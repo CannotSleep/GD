@@ -1,0 +1,2 @@
+<import src="/components/uni-icon.vue.wxml" />
+<import src="/components/number-box.vue.wxml" />

@@ -1,0 +1,234 @@
+<template>
+	<view class="content">
+		<view class="list-content">
+			<view class="uni-list">
+				<block v-for="(item,index) in messageDatalist" :key="index">
+					<view class="uni-list-cell" hover-class="uni-list-cell-hover">
+						<view class="uni-triplex-row">
+							<view class="uni-triplex-left" @tap="getDetailList(item.type)">
+								<label class="filetext">
+									<text class="list-level">{{item.contents}}</text>
+									<uni-tag :text="item.count" type="success"></uni-tag>
+								</label>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+</template> 
+ 
+<script>
+	import server from '../../store/server.js';
+	import uniTag from '../../components/uni-tag.vue'
+	import uniBadge from "../../components/uni-badge.vue";
+	export default {
+		data() {
+			return {
+				messageDatalist: [],
+				Token:''
+			}
+		},
+		onLoad(option) {
+			this.Token=server.net.GetSessionToken();
+			this.getMessagelist();
+		},
+		components: {
+			uniTag
+		},
+		methods: {
+			getMessagelist() {
+				let url = server.net.setUrl('api/NoticeNewsApi/AppGetNotify');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						Token: this.Token
+					},
+					success: (res) => {
+						// console.log(JSON.stringify(res))
+						server.net.showWrongTipsEx(res);
+ 						let jsondata = res.data;
+ 						let messArr=jsondata.data;
+						this.messageDatalist = messArr;
+						uni.stopPullDownRefresh();
+					},
+					fail: (f) => {
+						server.net.showFailTips(f);
+					},
+					complete: (c) => {
+						console.log(JSON.stringify(c))
+					}
+				});
+				
+			},
+			getDetailList(infoType){
+				switch(infoType)
+				{
+					//质量
+					case 0:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 1:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 2:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 3:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//安全	
+					case 4:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 5:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;			
+					case 6:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 7:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//文件	
+					case 8:
+						uni.navigateTo({
+							url: '../index/filesys/fileList?type='+infoType 
+						});
+						break;
+					//质量
+					case 12:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//安全	
+					case 13:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//质量	
+					case 14:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;		
+					case 15:
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;	
+					//安全			
+					case 16:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 17:
+						uni.navigateTo({
+							url: '../index/quality/safetyList?infoType='+infoType +'&state=3'
+						});
+						break;
+					//进度	
+					case 18:
+						uni.navigateTo({
+							url: '../index/schedule/scheduleList?state=all&notify=true'
+						});
+						break;
+					case 19:
+					//混凝土浇筑
+						uni.navigateTo({
+							url: '../index/site/ConcretePourList?notify=true'
+						});
+						break;
+					//混凝土	
+					case 20:
+						
+						break;		
+				}
+				
+			}
+		},onPullDownRefresh() {
+			console.log('下拉刷新');
+			this.getMessagelist();
+		}
+	}
+</script>
+
+<style scoped>
+	.input-row {
+			align-items: center;
+		}
+	
+		.list-content {
+			margin-top: 0px;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			width: 100%;
+			padding: 0px 0px;
+		}
+	
+		.list-title {
+			font-size: 32px;
+			color: #000;
+			display: block;
+		}
+	
+		.list-deadline,
+		.list-level,
+		.list-state{
+			font-size: 32px;
+			color: #6C6C6C;
+			/* width:30%; */
+			margin-right: 6px;
+		}
+		
+		.filetext{
+	/* 		display: flex;
+			flex-direction: row; */
+			width: 100%;
+		}
+		.uni-triplex-left{
+				width: 100%;
+		}
+		
+		.list-button{
+			font-size: 20px;
+			/* color: #6C6C6C; */
+			display: inline-block;
+			margin-right: 2px;
+			float: right;
+			/* height: 100%; */
+		}
+		
+		.classdown{
+			display:none;
+		}
+		
+		.uni-list-cell{
+			margin-top: 0px;
+		}
+
+	
+</style>

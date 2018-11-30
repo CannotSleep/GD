@@ -1,0 +1,113 @@
+<template>
+	<view class="content">
+		<view class="uni-list">
+			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(value,key) in siteList" :key="key">
+				<view class="uni-media-list" @tap="openViews(value.url)">
+					<label class="list-body">
+						<image class="list-left"  :src="value.img"></image>
+						<text class="list-text">{{value.title}}</text>						
+						<image class="list-right" src="http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/next.png" mode=""></image>
+					</label>
+				</view> 
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				siteList:[{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--01.png',
+					title:'实测实量',
+					url:'Measuring'
+				},{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--02.png',
+					title:'实测实量记录',
+					url:'MeasuringList'
+				},{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--03.png',
+					title:'实测实量离线记录',
+					url:''
+				},{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--04.png',
+					title:'混凝土回弹',
+					url:'Concrete'
+				},{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--05.png',
+					title:'混凝土回弹记录',
+					url:'ConcreteList'
+				},{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--06.png',
+					title:'混凝土回弹离线记录',
+					url:''
+				},{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--07.png',
+					title:'混凝土浇筑表',
+					url:'ConcretePour'
+				},{
+					img:'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/site--08.png',
+					title:'混凝土浇筑表记录',
+					url:'ConcretePourList'
+				}]
+			}
+		},
+		methods:{
+			openViews(url){  //保留当前页面，跳转新页面
+				uni.navigateTo({
+					url:url
+				})
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	
+	.uni-list {
+		border-bottom: 1px solid #ccc;
+	}
+	.uni-media-list{
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+	.uni-list-cell{
+		margin-top: 0px;
+		padding: 10px;
+	}
+	.uni-media-list-logo {
+		height: 70px;
+		width: 70px;
+		margin-right: 20upx;
+	}
+	
+	.list-body{
+		width: 100%;
+	}
+	
+	.list-left{
+		vertical-align:middle;
+		width: 55px;
+		height: 55px;
+	}
+	
+	.list-text{
+		margin-left: 50px;
+		font-size:0.4rem;
+		vertical-align:middle;
+	}
+	
+	.list-right{
+		vertical-align:middle;
+		margin-top: 4px;
+		width: 50px;
+		height: 50px;
+		float:right;
+	}
+	
+	
+	
+	
+</style>

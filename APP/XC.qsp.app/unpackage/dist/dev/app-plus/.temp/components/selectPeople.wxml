@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/components/selectPeople.vue.wxml" /><template is="5d93bdc1" data="{{ ...$root['0'], $root }}"/>

@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/setting/setIndex.vue.wxml" /><template is="56c4ae54" data="{{ ...$root['0'], $root }}"/>

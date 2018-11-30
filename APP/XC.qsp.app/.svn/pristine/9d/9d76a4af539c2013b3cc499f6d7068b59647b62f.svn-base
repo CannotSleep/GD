@@ -1,0 +1,254 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>所属公司:</text>
+			</view>
+			<picker @change="changeCompany" :value="companyIndex" :range="companyList" range-key="text">
+				<view class="uni-input">{{companyText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+				<text>项目名称:</text>
+			</view>
+			<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+				<view class="uni-input">{{projectText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<!-- <button class="search-btn" size="mini" @tap="getCompany">获取公司</button>
+			<button class="search-btn" size="mini" @tap="getProject">获取项目</button> -->
+			<button type="" class="search-btn" size="mini" @tap="searchData">查询</button>
+		</view>
+		<view class="list-content">
+			<view class="uni-list">
+				<block v-for="(item,index) in ConcreteList" :key="index">
+					<view class="uni-list-cell" hover-class="uni-list-cell-hover" @tap="goDetail(item)">
+						<view class="uni-triplex-row">
+							<view class="uni-triplex-left">
+								<text class="list-title uni-ellipsis">{{item.ProjectName}}</text>
+								<text class="list-deadline">{{item.ConcreteDate}}</text>
+								<text class="list-level">{{item.Grade}}</text>
+
+							</view>
+
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		onLoad(option) { //页面加载完毕			
+			this.Token = server.net.GetSessionToken();
+			this.getCompany();
+		},
+		data() {
+			return {
+				Token: '',
+				companyList: [],
+				companyIndex: 0,
+				projectList: [],
+				companyText:'',
+				projectText:'',
+				projectIndex: 0,
+				companyVal: '',
+				projectVal: '',
+				ConcreteList: []
+			}
+		},
+		methods: {
+			getCompany() { //获取公司数据				
+				let url = server.net.setUrl('api/DropDownListApi/GetCompany');
+				uni.request({
+					url: url,
+					dataType: 'json',
+					type: 'GET',
+					header: {
+						Token: this.Token
+					},
+					success: (result) => {
+						var jsondata = result.data;
+						let dataArr = jsondata.data;
+
+						if (jsondata.status = 1) {
+							let first={
+									value:"",
+									text:"请选择公司"
+								}
+							dataArr.unshift(first);
+							console.log("公司获取成功");
+							this.companyList = this.setData(dataArr);
+							this.companyVal = this.companyList[this.companyIndex].value;
+							this.companyText = this.companyList[this.companyIndex].text;
+							this.getProject();
+						} else {
+							console.log(jsondata.status);
+							uni.showToast({
+								title: jsondata.status,
+								mask: false,
+								duration: 1500
+							});
+						}
+					},
+					fail: (data, code) => {
+						console.log("公司获取失败" + data + code);
+					}
+				});
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						Token: this.Token
+					},
+					data: {
+						company: this.companyVal
+					},
+					success: (data) => {
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						if (jsondata.status = 1) {
+                            let first={
+                            		value:"",
+                            		text:"请选择项目"
+                            	}
+                            dataArr.unshift(first);
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					},
+					complete: () => {}
+				});
+			},
+			setData: function(items) { //设置两个picker的数据
+				let newItems = [];
+				items.forEach((e) => {
+					newItems.push({
+						text: e.text,
+						value: e.value
+					});
+				});
+				return newItems;
+			},
+			changeCompany(e) {
+				this.companyIndex = e.detail.value;
+				this.companyVal = this.companyList[e.detail.value].value;
+				this.companyText = this.companyList[this.companyIndex].text;
+				this.getProject();
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+			},
+			searchData() {
+				let cid = this.companyVal;
+				let pid = this.projectVal;
+				this.getListData(cid, pid)
+			},
+			getListData(cid, pid) { //获取列表数据
+				const url = server.net.setUrl('api/QualityConcreteBackApi/GetList');
+				let data = {
+					page: 1
+				};
+				if (cid) {
+					data.CompanyId = cid;
+				}
+				if (pid) {
+					data.ProjectId = pid;
+				}
+				let ajaxdata = JSON.stringify(data);
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data: ajaxdata,
+					success: res => {
+						var jsondata = res.data;
+						if (jsondata.status == 1) {
+							let listData = jsondata.data;
+							let newItems = [];
+							if (listData!='') {
+								listData.forEach((e) => {
+									newItems.push({
+										ConcreteDate: e.ConcreteDate.substring(0, 10),
+										ProjectName: e.ProjectName,
+										ID: e.ID,
+										Grade: e.Grade
+									});
+								});
+							} else{
+								server.net.showWrongTips("暂无数据");
+							}
+							this.ConcreteList = newItems;
+						} else {
+
+						}
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			goDetail: function(e) { //跳转到详情页面
+				let detail = {
+					id: e.ID,
+				}
+				uni.navigateTo({
+					url: "ConcreteDetails?id=" + e.ID
+				})
+			}
+		}
+
+	}
+</script>
+
+<style scoped>
+	.input-row {
+		align-items: center;
+	}
+
+	.list-content {
+		margin-top: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		width: 100%;
+		padding: 0px 10px;
+	}
+
+	.list-title {
+		font-size: 32px;
+		color: #000;
+		display: block;
+	}
+
+	.list-deadline,
+	.list-level,
+	.list-state {
+		font-size: 28px;
+		color: #6C6C6C;
+		display: inline-block;
+		margin-right: 15px;
+
+	}
+</style>

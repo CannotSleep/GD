@@ -1,0 +1,1068 @@
+<template>
+	<view class="content">
+		<form action="" @submit="safetySubmit" @reset="formReset" class="input-form">
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+					<text>所属公司:</text>
+				</view>
+				<picker @change="changeCompany" :value="companyIndex" :range="companyList" range-key="text">
+					<view class="uni-input">{{companyText}}</view>
+				</picker> 
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+					<text>项目名称:</text>
+				</view>
+				<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+					<view class="uni-input">{{projectText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-03.png" mode=""></image>
+					<text>任务名称:</text>
+				</view>
+				<input type="text" @input="nameInput" value="" placeholder="请填写任务名称" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-04.png" mode=""></image>
+					<text>检查楼栋:</text>
+				</view>
+				<input type="text" @input="dongInput" value="" placeholder="请填写检查楼栋号" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-05.png" mode=""></image>
+					<text>检查楼层:</text>
+				</view>
+				<input type="text" @input="cengInput" value="" placeholder="请填写检查楼层号" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-06.png" mode=""></image>
+					<text>检查区域:</text>
+				</view>
+				<picker @change="changeArea" :value="areaIndex" :range="areaList" range-key="text">
+					<view class="uni-input">{{areaText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-07.png" mode=""></image>
+					<text>施工单位:</text>
+				</view>
+				<picker @change="changeUnit" :value="unitIndex" :range="unitList" range-key="text">
+					<view class="uni-input">{{unitText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+					<text>隐患类型:</text>
+				</view>
+				<picker @change="changeDanger" :value="dangerIndex" :range="dangerList" range-key="text">
+					<view class="uni-input">{{dangerText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-09.png" mode=""></image>
+					<text>隐患描述:</text>
+				</view>
+				<picker @change="changeDangerDes" :value="dangerDesVal" :range="dangerDesList" range-key="text">
+					<view class="uni-input">{{dangerDesText}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-11.png" mode=""></image>
+					<text>整改人:</text>
+				</view>
+				<input type="text" :value="rectpeople" @tap="selectRect" placeholder="" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-12.png" mode=""></image>
+					<text>通知人:</text>
+				</view>
+				<input type="text" :value="noticepeople" @tap="selectNotice" placeholder="" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-14.png" mode=""></image>
+					<text>检查日期:</text>
+				</view>
+				<picker mode="date" :value="checkDate" start="2000-01-01" end="2028-12-31" @change="changeCheckDate">
+					<view class="uni-input">{{checkDate}}</view>
+				</picker>
+			</view> 
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+					<text>整改期限:</text>
+				</view>
+				<picker mode="date" :value="deadline" :start="checkDate" end="2028-12-31" @change="changeDeadDate">
+					<view class="uni-input">{{deadline}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+					<text>复查日期:</text>
+				</view>
+				<picker mode="date" :value="ReCheckDate" :start="deadline" end="2028-12-31" @change="changeReCheckDate">
+					<view class="uni-input">{{ReCheckDate}}</view>
+				</picker>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-05.png" mode=""></image>
+					<text>整改要求:</text>
+				</view>
+				<input type="text" @input="recInput" value="" placeholder="请填写整改要求" />
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+					<text>是否隐患:</text>
+				</view>
+				<radio-group class="radio-group" @change="radioChange">
+					<label class="radio" v-for="item in items" :key="item">
+						<radio :value="item.value" :checked="item.checked" />{{item.name}}
+					</label>
+				</radio-group>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+					<text>严重程度:</text>
+				</view>
+				<picker @change="changeDegree" :value="degreeIndex" :range="degreeList" range-key="text">
+					<view class="uni-input">{{degreeText}}</view>
+				</picker>
+			</view>
+			<view class="input-row-bottom-line"></view>
+			<view class="input-row-my">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-15.png" mode=""></image>
+					<text>请选择图片:</text>
+				</view>
+			</view>
+			<view >
+				<view class="uni-list-cell cell-pd">
+					<view class="uni-uploader">
+						<view class="uni-uploader-head">
+							<view class="uni-uploader-title">点击可预览选好的图片</view>
+							<view class="uni-uploader-info">{{imageList.length}}/9</view>
+						</view>
+						<view class="uni-uploader-body">
+							<view class="uni-uploader__files">
+								<block v-for="(image,index) in imageList" :key="index">
+									<view class="uni-uploader__file">
+										<image class="uni-uploader__img" :src="image" :data-src="image" @tap="previewImage"></image>
+									</view>
+								</block>
+							</view>
+							<view class="uni-uploader__input-box_my">
+								<view class="uni-uploader__input_my" @tap="removeImage"></view>
+							</view>
+							<view class="uni-uploader__input-box">
+								<view class="uni-uploader__input" @tap="chooseImage"></view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="mysubmit">
+				<button  size="mini" @tap="submit" class="search-btn">提交</button>
+				<button  size="mini" @tap="tempS" type="default" class="search-btn">暂存</button>
+			</view>
+		</form>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data() {
+			return {
+				Token: '',
+				title: '',
+				companyList: ['请选择分公司'],
+				companyIndex: 0,
+				companyText: '1',
+				companyVal: '1',
+				dong:'',
+				ceng:'',
+				projectList: ['请选择项目'],
+				projectIndex: 0,
+				projectText: '',
+				projectVal: '',
+				areaList: ['请选择区域'],
+				areaVal: '',
+				areaIndex: 0,
+				areaText: '',
+				unitList: ['请选择施工单位'],
+				unitVal: '',
+				unitIndex: 0,
+				unitText: '',
+				rectification:'',
+				dangerList: ['请选择隐患类型'],
+				dangerVal: '0',
+				dangerIndex: 0,
+				dangerText: '请选择隐患描述',
+				dangerDesList: ['请选择隐患描述'],
+				dangerDesVal: 0,
+				dangerDesIndex: 0,
+				dangerDesText: '',
+				rectiList: ['请选择整改人'],
+				rectpeople:'请选择整改人',
+				rectpeopleid:'0',
+				noticeList: ['请选择通知人'],
+				noticepeople:'请选择通知人',
+				noticepeopleid:'0',
+				degreeList:[{text:'一般',value:'0'},{text:'紧急',value:'1'},{text:'严重',value:'2'}],
+				degreeVal: 0,
+				degreeText:'一般',
+				degreeIndex:0,
+				isDanger: 0,
+				checkDate: '2018-09-18',
+				ReCheckDate: '2018-10-18',
+				deadline: '2018-09-21',
+				time: '12:01',
+				sourceTypeIndex: 2,
+				sourceType: ['拍照', '相册', '拍照或相册'],
+				sizeTypeIndex: 2,
+				sizeType: ['压缩', '原图', '压缩或原图'],
+				countIndex: 8,
+				count: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+				isfirstopen:1,
+				items: [
+					{
+						name: '是',
+						value: '1'
+					},
+					{
+						name: '否',
+						value: '0'
+					}
+				],
+				imageList:[],
+				qualityId:'',
+				imgupindex:0
+			}
+		},
+		onLoad(option) {
+			this.Token = server.net.GetSessionToken();
+			this.getCompany(); 
+			//this.getArea();
+			this.getUnit();
+			this.getDanger();
+			var today =server.net.getFormatDate(new Date());
+			console.log(today);
+			this.checkDate = today;
+			this.deadline = today;
+			this.ReCheckDate = today;
+		},
+		onShow:function(){
+			console.log("页面显示")
+			if(this.isfirstopen!=1){
+				let id = uni.getStorageSync('selectID');
+				let name = uni.getStorageSync('selectName');
+				if(name==''){
+					name="请选择整改人";
+				}
+				this.rectpeople = name;
+				this.rectpeopleid = id;
+				
+				let ids = uni.getStorageSync('selectIDs');
+				let names = uni.getStorageSync('selectNames');
+				if(names==''){
+					names="请选择通知人";
+				}
+				this.noticepeople = names;
+				this.noticepeopleid = ids; 
+			}
+		},
+		methods: {
+			submit:function(e){
+				uni.removeStorageSync('selectID');
+				uni.removeStorageSync('selectName');
+				uni.removeStorageSync('selectIDs');
+				uni.removeStorageSync('selectNames');
+				let url = server.net.setUrl('api/QualityApi/Add');
+				let ajaxdata = {
+					"Title":this.title, 
+					"RectPeople":this.rectpeopleid,
+					"ResponsibilityArea":this.areaVal,
+					"ProjectID":this.projectVal,
+					"AdditionalUnit":this.unitVal,
+					"BranchCompany":this.companyVal, 
+					"Building":this.dong, 
+					"Floor":this.ceng,
+					"QualityDangerID":this.dangerVal,
+					"QualityDanger":this.dangerText, 
+					"DangerDesID":this.dangerDesVal,
+					"DangerDes":this.dangerDesText,
+					"Rectification":this.rectification,
+					"NoticePeopleID":this.noticepeopleid,
+					"ExpireDate":this.deadline,
+					"CrashLevel":this.degreeVal,
+					"CheckPeople":server.net.GetUser().ID,
+					"IsDanger":this.isDanger,
+					"Checkdate":this.checkDate,
+					"ReCheckdate":this.ReCheckDate,	
+				} 
+				let ispass = this.formcheck(ajaxdata);
+				if(ispass){
+					uni.showLoading({
+						title: '上传中',
+						mask:true
+					});
+					
+					uni.request({
+						url: url,
+						method: 'POST',
+						header: {
+							Token: this.Token
+						},
+						data: JSON.stringify(ajaxdata),
+						success: res => {
+							server.net.showWrongTipsEx(res);
+							let result = res.data;
+							let jsondata = result.data;
+							if (result.status == 1) {
+								uni.showToast({
+									title: '提交成功',
+									mask: false,
+									duration: 1500
+								});
+								this.qualityId = jsondata;
+								if(this.imageList.length!=0){
+									this.uploadImage();
+								}else{
+									uni.hideLoading();
+									setTimeout(function() {
+										uni.navigateBack({
+											delta: 1
+										})
+									}, 2000)
+								}
+								
+							} else {
+								console.log(res);
+							}
+						},
+						fail: () => {
+							console.log("提交失败");
+						},
+						complete: () => {
+							console.log("完成")
+						}
+					});
+				}
+			},
+			sourceTypeChange: function (e) {
+				this.sourceTypeIndex = e.target.value
+			},
+			sizeTypeChange: function (e) {
+				this.sizeTypeIndex = e.target.value
+			},
+			countChange: function (e) {
+				this.countIndex = e.target.value;
+			},
+			chooseImage: async function () {
+				if(this.imageList.length === 9){
+					let isContinue = await this.isFullImg();
+					console.log("是否继续?",isContinue);
+					if(!isContinue){
+						return;
+					}
+				}
+				uni.chooseImage({
+					sourceType: this.sourceType[this.sourceTypeIndex],
+					sizeType: ['compressed'],
+					count: this.imageList.length + this.count[this.countIndex] > 9 ? 9 - this.imageList.length : this.count[this.countIndex],
+					success: (res) => {
+						//this.imageList = this.imageList.concat(res.tempFilePaths);
+						console.log('压缩前');
+						console.log(JSON.stringify(res.tempFiles));
+                         
+						//#ifdef APP-PLUS
+                            //图片压缩
+							console.log('star compressed')
+                            this.app_img(0,res)   
+                        //#endif
+					}
+				})
+			},
+			isFullImg:function(){
+				return new Promise((res) => {
+					uni.showModal({
+						content:"已经有9张图片了,是否清空现有图片？",
+						success: (e) => {
+							if(e.confirm){
+								this.imageList = [];
+								res(true);
+							}else{
+								res(false)
+							}
+						},
+						fail:() => {
+							res(false)
+						}
+					})
+				})
+			},
+			previewImage: function (e) {
+				var current = e.target.dataset.src
+				uni.previewImage({
+					current: current,
+					urls: this.imageList
+				})
+			},
+			removeImage:function(e){
+				console.log("移除图片");
+				this.imageList.pop();
+			},
+			uploadImage:function(e){ //上传图片
+			
+				
+				console.log("上传图片")
+				
+				if(this.imgupindex!=this.imageList.length){
+					let url = server.net.setUrl('api/FileApi/FileUpload');
+					
+					const uploadTask = uni.uploadFile({
+						url: url, //仅为示例，非真实的接口地址
+						header:{
+							Token:this.Token
+						},
+						filePath:this.imageList[this.imgupindex],
+						name:'123',
+						formData: {
+							'foreignId': this.qualityId,
+							'type':'2'
+						}, 
+						success: (uploadFileRes) => {
+							server.net.showWrongTipsEx(uploadFileRes);
+							console.log(uploadFileRes.data);
+							console.log("上传成功")
+							this.imgupindex+=1;
+							this.uploadImage();
+							uni.showToast({
+								title: '图片上传成功',
+								mask: false,
+								duration: 1500
+							});
+						}
+					});   
+					uploadTask.onProgressUpdate((res) => {
+						console.log('上传进度' + res.progress);
+						console.log('已经上传的数据长度' + res.totalBytesSent);
+						console.log('预期需要上传的数据总长度' + res.totalBytesExpectedToSend);
+					});
+				}else{
+					uni.hideLoading();
+					setTimeout(function() {
+						uni.navigateBack({
+							delta: 1
+						})
+					}, 2000)
+				}
+
+			},
+			tempS:function(e){
+				console.log("暂存")
+				let tempObject={
+					"Title":this.title,
+					"CompanyID":this.companyVal,
+					"CompanyName":this.companyText,
+					"CompanyIndex":this.companyIndex,
+					"ProjectIndex":this.projectIndex,
+					"AreaIndex":this.areaIndex,
+					"UnitIndex":this.unitIndex,
+					"DangerIndex":this.dangerIndex,
+					"DangerDesIndex":this.dangerDesIndex,	
+					"DegreeIndex":this.degreeIndex,
+					"RectPeople":this.rectpeopleid,
+					"RectPeopleName":this.rectpeople,
+					"NoticePeople":this.noticepeopleid,
+					"NoticePeopleName":this.noticepeople,
+					"ProjectId":this.projectVal,
+					"ProjectName":this.projectText,
+					"SubcontractingUnit":this.unitVal,
+					"SubcontractingUnitName":this.unitText,
+					"Building":this.dong,
+					"Floor":this.ceng,
+					"ResponsibilityArea":this.areaVal,
+					"ResponsibilityAreaName":this.areaText,
+					"SaftyDangerID":this.dangerVal,
+					"SaftyDanger":this.dangerText,
+					"DangerDesID":this.dangerDesVal,
+					"DangerDes":this.dangerDesText,
+					"Rectification":this.rectification,
+					"ExpirDate":this.deadline,
+					"CrashLevel":this.degreeVal,
+					"CrashLevelName":this.degreeText,
+					"AddPeopleID":server.net.GetUser().ID,
+					"CheckDate":this.checkDate,
+					"ReCheckDate":this.ReCheckDate,
+					"ImageList":this.imageList,
+					"IsDanger":this.isDanger,
+					
+				}
+			    let safeoff = uni.getStorageSync('QualityListOffLine');
+				if (safeoff) {
+					console.log(safeoff);
+					safeoff.push(tempObject)
+				}else{
+					safeoff=[];
+					safeoff.push(tempObject)
+				}
+				uni.setStorageSync("QualityListOffLine",safeoff);
+				uni.showToast({
+					title: '暂存成功',
+					mask: false,
+					duration: 1500
+				});
+				setTimeout(function() {
+					uni.navigateBack({
+						delta: 1
+					})
+				}, 2000)
+				
+				
+			},
+			getCompany() { //获取公司数据				
+				let url = server.net.setUrl('api/DropDownListApi/GetCompany');
+				uni.request({
+					url: url,
+					dataType: 'json',
+					type: 'GET',
+					header: {
+						Token: this.Token
+					},
+					success: (result) => {
+						server.net.showWrongTipsEx(result);
+						let jsondata = result.data;
+						let dataArr = jsondata.data; 
+						
+						if (jsondata.status == 1) {
+							let first={
+								value:"",
+								text:"请选择公司"
+							}
+							dataArr.unshift(first)
+							this.companyList = this.setData(dataArr);
+							this.companyVal = this.companyList[this.companyIndex].value;
+							this.companyText = this.companyList[this.companyIndex].text;
+							if(this.companyVal!=''){
+								this.getProject();
+							}
+							
+						} else {
+							console.log(jsondata.status);
+							uni.showToast({
+								title: jsondata.status,
+								mask: false,
+								duration: 1500
+							});
+						}
+					},
+					fail: (data, code) => {
+						console.log("公司获取失败" + data + code);
+					}
+				});
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						Token: this.Token
+					},
+					data: {
+						company: this.companyVal
+					},
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						console.log(data);
+						if (jsondata.status == 1) {
+							let first={
+								value:"",
+								text:"请选择项目"
+							}
+							dataArr.unshift(first)
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+							if(this.projectVal!=''){
+								this.getArea();
+							}
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					}
+				});
+			},
+			getArea() { //获取检查区域
+				let url = server.net.setUrl('api/DropDownListApi/GetUtilitySettings');
+				let data = {
+					type: 0
+				}
+				if (this.projectVal != '') {
+					data.projectid = this.projectVal;
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data: JSON.stringify(data),
+					success: (res) => {
+						console.log(res)
+						server.net.showWrongTipsEx(res);
+						let jsondata = res.data;
+						let dataArr = jsondata.data;
+						if (jsondata.status == 1) {
+							console.log("检查区域获取成功");
+							let first={
+								value:"",
+								text:"请选择检查区域"
+							}
+							dataArr.unshift(first)
+							this.areaList = this.setData(dataArr);
+							this.areaVal = this.areaList[this.areaIndex].value;
+							this.areaText = this.areaList[this.areaIndex].text;
+						} else {
+							console.log("检查区域获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("检查区域数据请求失败" + data + code)
+					}
+
+				});
+			},
+			getUnit() {
+				let url = server.net.setUrl('api/DropDownListApi/GetUtilitySettings');
+				let data = {
+					type: 1
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data: JSON.stringify(data),
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						let jsondata = data.data;
+						let dataArr = jsondata.data; 
+						if (jsondata.status == 1) {
+							let first={
+								value:"",
+								text:"请选择整改单位"
+							}
+							dataArr.unshift(first)
+							this.unitList = this.setData(dataArr);
+							this.unitVal = this.unitList[this.unitIndex].value;
+							this.unitText = this.unitList[this.unitIndex].text;
+						} else {
+							console.log("施工单位获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("施工单位数据请求失败" + data + code)
+					}
+				})
+			},
+			getDanger() {
+				let url = server.net.setUrl('api/DropDownListApi/GetQualityDangerType');
+				let data = {
+					"type":1,
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data: JSON.stringify(data),
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						var jsondata = data.data;
+						let dataAtrr = jsondata.data;
+						if (jsondata.status == 1) {
+							let first={
+								value:"",
+								text:"请选择隐患类型"
+							}
+							dataAtrr.unshift(first);
+							this.dangerList = this.setData(dataAtrr);
+							this.dangerVal = this.dangerList[this.dangerIndex].value;
+							this.dangerText = this.dangerList[this.dangerIndex].text;
+							if(this.dangerVal!=''){
+								this.getDangerDes();
+							}
+						} else {
+							console.log("隐患类型获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("施工单位数据请求失败" + data + code)
+					}
+				})
+			},
+			getDangerDes(){
+				let url = server.net.setUrl('api/DropDownListApi/GetQualityDangerDes');
+				let data={
+					"size":"9999",
+					"page":"1",
+					"type":"1",
+					"comid":this.dangerVal
+				};
+				console.log(data);
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data:JSON.stringify(data),
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						let jsondata = data.data;
+						let dataAtrr = jsondata.data;
+						if (jsondata.status == 1) {
+							let first={
+								value:"0",
+								text:"请选择隐患描述"
+							}
+							dataAtrr.unshift(first);
+							this.dangerDesList = this.setData(dataAtrr);
+							this.dangerDesVal = this.dangerDesList[this.dangerDesIndex].value;
+							this.dangerDesText = this.dangerDesList[this.dangerDesIndex].text;
+						} else {
+							console.log("隐患描述获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("隐患描述获取失败" + data + code)
+					}
+				})
+				
+			},
+			setData(items) {
+				let newItems = [];
+				//console.log(items)
+				if(items!=null&&items.length!=0){
+					items.forEach((e) => {
+						newItems.push({ 
+							text: e.text,
+							value: e.value
+						});
+					});
+				}
+				return newItems;
+			},
+			changeCompany(e) {
+				this.companyIndex = e.detail.value;
+				this.companyVal = this.companyList[e.detail.value].value;
+				this.companyText = this.companyList[this.companyIndex].text;
+				this.projectIndex=0;
+				this.getProject();
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+				this.areaIndex=0;
+				this.getArea();
+			},
+			changeArea(e) {
+				this.areaIndex = e.detail.value;
+				this.areaText = this.areaList[this.areaIndex].text;
+				this.areaVal = this.areaList[this.areaIndex].value;
+			},
+			changeUnit(e) {
+				this.unitIndex = e.detail.value;
+				this.unitText = this.unitList[this.unitIndex].text;
+				this.unitVal = this.unitList[this.unitIndex].value;
+			},
+			changeDanger(e) {
+				this.dangerIndex = e.detail.value;
+				this.dangerVal = this.dangerList[this.dangerIndex].value;
+				this.dangerText = this.dangerList[this.dangerIndex].text;
+				this.dangerDesIndex=0;
+				this.getDangerDes();
+			},
+			changeDangerDes(e){
+				this.dangerDesIndex = e.detail.value;
+				this.dangerDesVal = this.dangerDesList[this.dangerDesIndex].value;
+				this.dangerDesText = this.dangerDesList[this.dangerDesIndex].text;
+			},
+			changeDegree(e){
+				this.degreeIndex = e.detail.value;
+				this.degreeVal = this.degreeList[this.degreeIndex].value;
+				this.degreeText = this.degreeList[this.degreeIndex].text;
+			},
+			selectRect(e){
+				this.isfirstopen+=1;
+				uni.navigateTo({
+					url:'../../../components/selectPeople'
+				})
+			},selectNotice(){
+				this.isfirstopen+=1;
+				uni.navigateTo({
+					url:'../../../components/selectPeopleMulti'
+				})
+			},
+			changeCheckDate(e){
+				this.checkDate = e.detail.value;
+			},
+			changeDeadDate(e){
+				this.deadline = e.detail.value;
+			},
+			changeReCheckDate(e){
+				this.ReCheckDate = e.detail.value;
+			},
+			nameInput(e){
+				this.title = e.detail.value;
+			},dongInput(e){
+				this.dong = e.detail.value;
+			},cengInput(e){
+				this.ceng = e.detail.value;
+			},recInput(e){
+				this.rectification =e.detail.value;
+			}, radioChange: function (e) {
+				this.isDanger = e.detail.value;
+			},formcheck(data){
+				if(data.BranchCompany==''){
+					uni.showToast({
+						title: '请选择公司',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(this.projectVal==''){
+					uni.showToast({
+						title: '请选择项目',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+
+				if(data.ResponsibilityArea==''){
+					uni.showToast({
+						title: '请选择检查区域',
+						mask: true,
+						image:null,
+						icon:"none",
+						duration: 1500
+					});
+					return false; 
+				}
+				
+				
+				if(data.AdditionalUnit==''){
+					uni.showToast({
+						title: '请填写整改单位',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.QualityDangerID==''){
+					uni.showToast({
+						title: '请选择隐患类型',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				
+				if(data.RectPeople==''){
+					uni.showToast({
+						title: '请选择整改人',
+						mask: true,
+						image:null,
+						icon:"none",
+						duration: 1500
+					});
+					return false; 
+				}
+				
+				if(data.NoticePeopleID==''){
+					uni.showToast({
+						title: '请选择通知人',
+						mask: false,
+						duration: 1500,
+						image:null,
+						icon:"none"
+					});
+					return false;
+				}
+				return true;
+			}
+			,//app压缩图片  用for循环 来处理图片压缩 的问题，原因是 plus.zip.compressImage 方法 是异步执行的，for循环很快， 同时手机可执行的压缩方法有限制：应该是3个吧。超出直接就不执行了。所以 原理就是 在图片压缩成功后 继续 回调 压缩函数。 以到达循环压缩图片的功能。
+            app_img(num,rem){
+                let that=this
+                let index = rem.tempFiles[num].path.lastIndexOf(".");//获取图片地址最后一个点的位置  
+                let img_type  = rem.tempFiles[num].path.substring(index+1,rem.tempFiles[num].path.length);//截取图片类型如png jpg
+                let img_yuanshi = rem.tempFiles[num].path.substring(0,index);//截取图片原始路径
+                let d2 = new Date().getTime(); //时间戳
+				console.log(img_yuanshi);
+                //压缩图片
+                plus.zip.compressImage(
+                    {
+                        src:rem.tempFiles[num].path,//你要压缩的图片地址
+                        dst:img_yuanshi+d2+'.'+img_type,//压缩之后的图片地址(注意压缩之后的路径最好和原生路径的位置一样，不然真机上报code-5)
+                        quality:10//[10-100]
+                    },
+                    function(e) {
+                        console.log("Compress success!");
+						console.log(JSON.stringify(e));
+
+						that.imageList = that.imageList.concat(e.target);
+						console.log(JSON.stringify(that.imageList))
+                        //利用递归循环来实现多张图片压缩
+                        if(num==rem.tempFiles.length-1){
+                            return
+                        }else{
+                            that.app_img(num+1,rem)
+                        }
+                        console.log('end',that.imageList)
+                    },function(error) {
+                        console.log("Compress error!");
+                        console.log(JSON.stringify(error));
+                    }    
+                );
+            }
+		}
+	}
+</script>
+
+<style scoped>
+	@import "../../../common/uni.css";
+	
+	.cell-pd {
+		padding: 22upx 30upx;
+	} 
+
+	.list-pd {
+		margin-top: 50upx;
+	}
+	
+	.input-row-my{
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		font-size: 28px;
+		/* border-bottom: 0; */
+		border: none;
+		/* display: flex; */
+	}
+	
+	.uni-list-cell{
+		margin-top: 0;
+		border-bottom: 0;
+	}
+	
+	.uni-list-cell cell-pd{
+		border: none;
+	}
+
+	.mysubmit{
+		margin-top: 30px;
+		text-align: center;
+	}
+	
+	.uni-uploader-head{
+		font-size: 30px;
+	}
+	
+	.block {
+		display: block;
+	}
+
+	.uni-uploader__input-box_my {
+		float: left;
+		position: relative;
+		margin-right: 18upx;
+		margin-bottom: 18upx;
+		width: 154upx;
+		height: 154upx;
+		border: 2upx solid #D9D9D9;
+	}
+
+	.uni-uploader__input-box_my:before,
+	.uni-uploader__input-box_my:after {
+		content: " ";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+		background-color: #D9D9D9;
+	}
+
+	.uni-uploader__input-box_my:before {
+		width: 0upx;
+		height: 0upx;
+	}
+
+	.uni-uploader__input-box_my:after {
+		width: 79upx;
+		height: 4upx;
+	}
+
+	.uni-uploader__input-box_my:active {
+		border-color: #999999;
+	}
+
+	.uni-uploader__input-box_my:active:before,
+	.uni-uploader__input-box_my:active:after {
+		background-color: #999999;
+	}
+
+	.uni-uploader__input_my {
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+	}
+	
+	.radio-group{
+		height:50rpx;
+        line-height:70rpx;
+        font-size:28rpx;
+	}
+</style>

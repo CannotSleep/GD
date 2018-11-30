@@ -1,0 +1,494 @@
+{
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "星层现场管理系统",
+				"navigationBarBackgroundColor": "#17a869",
+				"navigationBarTextStyle": "#f0f0f0"
+
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录-星层现场管理系统",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/quality/safetyCheck",
+			"style": {
+				"navigationBarTitleText": "安全隐患检查",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		}, {
+			"path": "pages/index/quality/qualityManagement",
+			"style": {
+				"navigationBarTitleText": "质量安全管理系统",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		
+		{
+			"path": "pages/index/quality/safetyList",
+			"style": {
+				"navigationBarTitleText": "安全记录列表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/quality/SafetyDetails",
+			"style": {
+				"navigationBarTitleText": "安全记录列详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/quality/qualityCheck",
+			"style": {
+				"navigationBarTitleText": "质量隐患检查",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/quality/QualityList",
+			"style": {
+				"navigationBarTitleText": "质量检查记录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/quality/QualityDetails",
+			"style": {
+				"navigationBarTitleText": "质量检查记录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/site/siteManagement",
+			"style": {
+				"navigationBarTitleText": "现场管理系统",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/site/ConcreteList",
+			"style": {
+				"navigationBarTitleText": "混凝土回弹记录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+			}
+		},
+		{
+			"path": "pages/index/site/ConcreteDetails",
+			"style": {
+				"navigationBarTitleText": "混凝土回弹详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "pages/index/site/Concrete",
+			"style": {
+				"navigationBarTitleText": "混凝土回弹",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "pages/index/site/Measuring",
+			"style": {
+				"navigationBarTitleText": "实测实量",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "pages/index/site/MeasuringList",
+			"style": {
+				"navigationBarTitleText": "实测实量记录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "pages/index/site/MeasuringDetails",
+			"style": {
+				"navigationBarTitleText": "实测实量记录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "pages/index/site/ConcretePourList",
+			"style": {
+				"navigationBarTitleText": "混凝土浇筑表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		}, {
+			"path": "pages/index/site/ConcretePourDetails",
+			"style": {
+				"navigationBarTitleText": "混凝土浇筑表详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "pages/index/schedule/index",
+			"style": {
+				"navigationBarTitleText": "进度管理系统",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "pages/index/schedule/scheduleList",
+			"style": {
+				"navigationBarTitleText": "进度管理系统",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		}, {
+			"path": "pages/index/schedule/scheduleDetails",
+			"style": {
+				"navigationBarTitleText": "进度计划详情",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		}, {
+			"path": "pages/index/schedule/Statistics",
+			"style": {
+				"navigationBarTitleText": "进度管理系统",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+		{
+			"path": "components/prompt",
+			"style": {
+				"navigationBarTitleText": "prompt组件",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},
+        {
+            "path" : "pages/index/filesys/fileManage",
+            "style" : {
+				"navigationBarTitleText" : "文件管理系统",
+				"navigationBarBackgroundColor" : "#17a869",
+				"navigationBarTextStyle" : "#f0f0f0"
+			}
+        },{
+            "path" : "pages/index/filesys/fileList",
+            "style" : {
+				"navigationBarTitleText" : "文件管理列表",
+				"navigationBarBackgroundColor" : "#17a869",
+				"navigationBarTextStyle" : "#f0f0f0",
+				"enablePullDownRefresh": true
+			}
+        },{
+            "path" : "pages/index/filesys/downFile",
+            "style" : {
+				"navigationBarTitleText" : "文件下载管理",
+				"navigationBarBackgroundColor" : "#17a869",
+				"navigationBarTextStyle" : "#f0f0f0",
+				"enablePullDownRefresh": true
+			}
+        },{
+            "path" : "pages/message/messageList",
+            "style" : {
+				"navigationBarTitleText" : "消息管理",
+				"navigationBarBackgroundColor" : "#17a869",
+				"navigationBarTextStyle" : "#f0f0f0",
+				"enablePullDownRefresh": true
+			}
+        },{
+            "path" : "components/selectPeople",
+            "style" : {
+				"navigationBarTitleText" : "人员选择",
+				"navigationBarBackgroundColor" : "#17a869",
+				"navigationBarTextStyle" : "#f0f0f0",
+				"enablePullDownRefresh": true				
+					}
+        },
+		{
+			"path" : "components/selectPeopleMulti",
+			"style" : {
+			"navigationBarTitleText" : "人员多选择",
+			"navigationBarBackgroundColor" : "#17a869",
+			"navigationBarTextStyle" : "#f0f0f0",
+			"enablePullDownRefresh": true
+				}
+		},
+		{
+			"path" : "components/test",
+			"style" : {
+			"navigationBarTitleText" : "github",
+			"navigationBarBackgroundColor" : "#17a869",
+			"navigationBarTextStyle" : "#f0f0f0",
+			"enablePullDownRefresh": true
+					}
+		},
+		{
+			"path":"pages/setting/setIndex",
+			 "style" : {
+					"navigationBarTitleText" : "设置",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+        },
+		{
+			"path":"pages/setting/userDetail",
+			"style" : {
+					"navigationBarTitleText" : "用户详情",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},
+		{
+			"path":"pages/setting/aboutus",
+			"style" : {
+					"navigationBarTitleText" : "关于我们",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},
+		{
+			"path":"pages/setting/instruction",
+			"style" : {
+					"navigationBarTitleText" : "软件介绍",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/site/ConcretePour",
+			"style" : {
+					"navigationBarTitleText" : "混凝土浇筑表",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/quality/QualityOffList",
+			"style" : {
+					"navigationBarTitleText" : "质量离线记录",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/quality/SafetyOffList",
+			"style" : {
+					"navigationBarTitleText" : "安全离线记录",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/quality/QualityEdit",
+			"style" : {
+					"navigationBarTitleText" : "质量离线编辑",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/quality/SafetyEdit",
+			"style" : {
+					"navigationBarTitleText" : "安全离线编辑",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"components/Autograph",
+			"style" : {
+					"navigationBarTitleText" : "混凝土浇筑表签字",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/site/ConcretePourOffList",
+			"style" : {
+					"navigationBarTitleText" : "混凝土浇筑表离线记录",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/site/ConcretePourEdit",
+			"style" : {
+					"navigationBarTitleText" : "混凝土浇筑表编辑",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/site/ConcreteEdit",
+			"style" : {
+					"navigationBarTitleText" : "混凝土回弹离线编辑",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/site/ConcreteOffList",
+			"style" : {
+					"navigationBarTitleText" : "混凝土回弹离线记录",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path":"pages/index/quality/Repley",
+			"style" : {
+					"navigationBarTitleText" : "回复",
+					"navigationBarBackgroundColor" : "#17a869",
+					"navigationBarTextStyle" : "#f0f0f0"
+				}
+		},{
+			"path": "pages/index/site/Measuring-back",
+			"style": {
+				"navigationBarTitleText": "实测实量",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},{
+			"path": "pages/index/site/MeasuringEdit",
+			"style": {
+				"navigationBarTitleText": "实测实量离线编辑",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},{
+			"path": "pages/index/site/MeasuringOffList",
+			"style": {
+				"navigationBarTitleText": "实测实量离线记录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		},{
+			"path": "pages/index/quality/safeChart",
+			"style": {
+				"navigationBarTitleText": "安全隐患报表",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#17A869"
+
+			}
+		}
+	], 
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"condition": {
+		"current": 18,
+		"list": [{
+				"name": "login",
+				"path": "pages/login/login"
+			}, {
+				"name": "index",
+				"path": "pages/index/index"
+			}, {
+				"name": "现场管理系统",
+				"path": "pages/index/site/siteManagement"
+			},
+			{
+				"name": "进度管理系统",
+				"path": "pages/index/schedule/index"
+			},
+			{
+				"name": "prompt组件",
+				"path": "components/prompt"
+			},
+			{
+				"name": "实测实量测试",
+				"path": "pages/index/site/Measuring-back"
+			},{
+				"name" : "文件管理系统",
+				"path" : "pages/index/filesys/fileManage"
+			},{
+				"name" : "消息管理",
+				"path" : "pages/message/messageList"
+			},{
+				"name" : "人员选择", 
+				"path" : "components/selectPeople"
+			},{
+				"name" : "github",
+				"path" : "components/test"
+			},{
+				"name" : "人员多选择",
+				"path" : "components/selectPeopleMulti"
+			},{
+				"name" : "设置",
+				"path" : "pages/setting/setIndex"
+			},{
+				"name" : "用户详情",
+				"path" : "pages/setting/userDetail"
+			},{
+				"name" : "关于我们",
+				"path" : "pages/setting/aboutus"
+			},{
+				"name" : "软件介绍",
+				"path" : "pages/setting/instruction"
+			},{
+				"name" : "混凝土浇筑",
+				"path" : "pages/index/site/ConcretePour"
+			},{
+				"path": "pages/index/quality/safetyCheck",
+				"name": "安全检查"
+			  },{
+				"path": "pages/index/quality/qualityCheck",
+				"name": "质量检查"
+			  },{
+				"path": "pages/index/quality/safeChart",
+				"name": "安全隐患报表"
+			  }
+		]
+	},   
+	"tabBar": {
+		"color": "#929292",
+		"selectedColor": "#17a869",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"selectedIconPath": "static/img/index/app-s.png",
+				"iconPath" : "static/img/index/app.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/message/messageList",
+				"selectedIconPath": "static/img/index/message-s.png",
+				"iconPath" : "static/img/index/message.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/setting/setIndex",
+				"selectedIconPath": "static/img/index/setting-s.png",
+				"iconPath" : "static/img/index/setting.png",
+				"text": "设置"
+			}
+		]
+	}
+}

@@ -1,0 +1,133 @@
+<template>
+	<view class="content">
+		<view class="module-row">
+			<view class="module-title">
+				<rich-text class="richText" :nodes="qualityTitle" @tap="openViews('quality/qualityManagement')"></rich-text>
+			</view>
+			<view class="img-group">
+				<image src="../../static/img/quality_sys.png" mode="aspectFit" class="index-img" @tap="openViews('quality/qualityManagement')"></image>
+			</view>
+		</view>
+		<view class="module-row right">
+			<view class="module-title">
+				<rich-text class="richText" :nodes="sceneTitle" @tap="openViews('site/siteManagement')"></rich-text>
+			</view>
+			<view class="img-group">
+				<image src="../../static/img/security_sys.png" mode="aspectFit" class="index-img" @tap="openViews('site/siteManagement')"></image>
+			</view>
+		</view>
+		<view class="module-row">
+			<view class="module-title">
+				<rich-text class="richText" :nodes="scheduleTitle" @tap="openViews('schedule/index')"></rich-text>
+			</view>
+			<view class="img-group">
+				<image src="../../static/img/schedule_sys.png" mode="aspectFit" class="index-img" @tap="openViews('schedule/index')"></image>
+			</view>
+		</view>
+		<view class="module-row right">
+			<view class="module-title">
+				<rich-text class="richText" :nodes="fileTitle" @tap="openViews(quality)"></rich-text>
+			</view>
+			<view class="img-group">
+				<image src="../../static/img/file_sys.png" mode="aspectFit" class="index-img" @tap="openViews('filesys/fileManage')"></image>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../store/server.js';
+	export default {
+		onLoad() {
+			this.checkLogin();
+			//server.net.TestToken();
+		},
+		data(){
+			return{
+				title: 'Hello',
+				qualityTitle: '<h4 class="module-title">质量安全管理系统</h4>',
+				sceneTitle: '<h4 class="module-title module-title-right">现场管理系统</h4>',
+				scheduleTitle: '<h4 class="module-title">进度管理系统</h4>',
+				fileTitle: '<h4 class="module-title module-title-right">文件管理系统</h4>'
+			}
+		},
+		methods: {
+			openViews(url) {
+				uni.navigateTo({
+					url: url
+				})
+			},
+			checkLogin() {
+				let localToken = server.net.GetLocalToken(); 
+				if (localToken == '') {
+					uni.redirectTo({
+						url: '../login/login'
+					})
+					console.log("没有保存到本地Token")
+				} else {
+					server.net.SetSessionToken(localToken); 
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+	page {
+		background-image: url("http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/background.png");
+	}
+
+	.content {
+		flex: 1;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+
+	.title {
+		font-size: 36px;
+		color: #8f8f94;
+	}
+	
+	.richText{
+		font-size: 36px;
+	}
+
+	.module-row {
+		width: 100%;
+		height: 300px;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: flex-start;
+		align-items: flex-start;
+		padding: 0px;
+	}
+
+	.right {
+		margin-top: -70px;
+		align-items: flex-end;
+		font-size: 32px;
+	}
+
+	.module-title {
+		font-size: 32px;
+		color: #F0F0F0;
+		font-weight: 400;
+		text-align: center;
+		/* margin-left: 25px; */
+		width: 330px;
+	}
+
+	.module-title-right {
+		font-size: 32px;
+		color: #F0F0F0;
+		font-weight: 400;
+		text-align: center;
+		margin-left: 0px;
+		margin-right: 25px;
+	}
+
+	.index-img {
+		width: 330px;
+		height: 260px;
+	}
+</style>

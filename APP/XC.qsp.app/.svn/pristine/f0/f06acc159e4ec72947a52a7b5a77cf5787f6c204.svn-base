@@ -1,0 +1,209 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-02.png" mode=""></image>
+				<text>工程名称:</text>
+			</view>
+			<view class="detail-box">
+				{{ProjectName}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+				<text>构件部位(楼层):</text>
+			</view>
+			<view class="detail-box">
+				{{Floor}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-10.png" mode=""></image>
+				<text>混凝土强度设计等级:</text>
+			</view>
+			<view class="detail-box">
+				{{Grade}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-11.png" mode=""></image>
+				<text>测试面状态:</text>
+			</view>
+			<view class="detail-box">
+				{{TestState}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-05.png" mode=""></image>
+				<text>构件类型:</text>
+			</view>
+			<view class="detail-box">
+				{{ComponentType}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+				<text>砼浇筑时间:</text>
+			</view>
+			<view class="detail-box">
+				{{ConcreteDate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+				<text>测量时间:</text>
+			</view>
+			<view class="detail-box">
+				{{CheckDate}}
+			</view>
+		</view>
+		<block v-for="(item,index) in dataNumList" :key="index">
+			<view class="input-row increaseHeight">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list2_icon-07.png" mode=""></image>
+					<text>测量数据:{{item.index}}</text>
+				</view>
+				<view class="detail-box">
+					{{item.value}}
+				</view>
+			</view>
+		</block>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-09.png" mode=""></image>
+				<text>计算结果:</text>
+			</view>
+			<view class="detail-box">
+				{{Calculation}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-08.png" mode=""></image>
+				<text>备注:</text>
+			</view>
+			<view class="detail-box auto-height">
+				{{Remarks}}
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data() {
+			return {
+				Token: '',
+				areaVal: 0,
+				areaList: [{
+					value: 1,
+					text: '测区1'
+				}],
+				ProjectName: '',
+				TestState: '',
+				ComponentType: '',
+				Grade: '',
+				CheckDate: '',
+				ConcreteDate:'',
+				dataNumList: [],
+				Calculation: '',
+				Remarks: '',
+				Floor:''
+			}
+		},
+		onLoad(option) {
+			this.Token = server.net.GetSessionToken();
+			this.getDetails(option.id);
+		},
+		methods: {
+			getDetails(id) {
+				let url = server.net.setUrl('api/QualityConcreteBackApi/GetDetail');
+				let ajaxdata = JSON.stringify({
+					ID: id
+				})
+				uni.request({
+					url: url,
+					method: 'POST',
+					dataType: 'json',
+					header: {
+						Token: this.Token,
+						"content-type": "application/json"
+					},
+					data: ajaxdata,
+					success: res => {
+						let result = res.data;
+						let jsondata = result.data;
+
+						if (result.status == 1) {
+							//遍历JSON数组，获取数据对象
+							jsondata.forEach((e) => {
+								this.ProjectName = e.ProjectName;
+								this.TestState = e.TestState;
+								this.CheckDate = e.CheckDate.substring(0, 10);
+								this.Grade = e.Grade;
+								this.ComponentType = e.ComponentType;
+								this.Calculation = e.Calculation;
+								this.Remarks = e.Remark;
+								this.Floor = e.Floor;
+								this.ConcreteDate = e.ConcreteDate.substring(0, 10);
+								let arr = e.DetailCollection;
+								for (let i in arr) {
+                                    this.dataNumList.push(
+									{
+										"index":arr[i].Name,
+										"value":arr[i].DataAttr.join(" ")
+									})
+								}
+								console.log(e);
+							});
+						} else {
+							console.log(result.message);
+							uni.showToast({
+								title: result.message
+							})
+						}
+
+					},
+					fail: (code) => {
+						console.log(code)
+						uni.showToast({
+							title: '数据获取失败，请检查您的网络环境'
+						});
+					},
+
+				});
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.detail-box {
+		width: 55%;
+		min-height: 50px;
+		font-size: 28px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.input-label {
+		width: 45%;
+	}
+
+	picker {
+		width: 55%;
+	}
+	.increaseHeight{
+		height: 120px;
+	}
+</style>

@@ -1,0 +1,386 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>所属公司:</text>
+			</view>
+			<picker @change="changeCompany" :value="companyIndex" :range="companyList" range-key="text">
+				<view class="uni-input">{{companyText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+				<text>项目名称:</text>
+			</view>
+			<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+				<view class="uni-input">{{projectText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<button type="" class="search-btn" size="mini" @tap="searchBtn">查询</button>
+		</view>
+		<view class="list-content" v-if="safetyList.length!=0">
+			<view class="uni-list">
+				<block v-for="(item,index) in safetyList" :key="index">
+					<view class="uni-list-cell" hover-class="uni-list-cell-hover" @tap="goDetail(item)">
+						<view class="uni-triplex-row">
+							<view class="uni-triplex-left">
+								<text class="list-title uni-ellipsis">{{item.Title}}</text>
+								<label>
+									<text class="list-deadline">整改期限至：{{item.ExpireDate}}</text>
+									<text class="list-level" v-bind:class="{crash0:item.CrashLevel==0,crash1:item.CrashLevel==1,crash2:item.CrashLevel==2}">{{item.CrashLevelName}}</text>
+									<text  class="list-state" v-bind:class="{state0:item.State==0,state1:item.State==1,state2:item.State==2,state3:item.State==3,state4:item.State==4}">{{item.StateName}}</text>
+								</label>
+							</view>
+						</view>
+					</view>
+				</block>
+				<load-more :loadingType="loadingType" :contentText="contentText"></load-more>
+			</view>
+		</view>
+	</view>
+
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	import loadMore from '../../../components/load-more.vue'
+
+	export default {
+		onLoad(option) {
+			//根据页面传值判断页面内容：检查记录&整改记录，并动态设置页面标题
+			let State = option.state;
+			this.needautograph = option.infoType+'';
+			this.Token = server.net.GetSessionToken();
+			switch (State) {
+				case '0':
+					uni.setNavigationBarTitle({
+						title: '安全检查记录'
+					});
+					this.searchType = 0;
+					break;
+				case 'my':
+					uni.setNavigationBarTitle({
+						title: '我的安全检查'
+					});
+					this.searchType = 2;
+					break;
+				case '1':
+					uni.setNavigationBarTitle({
+						title: '安全整改记录'
+					});
+					this.searchType = 1;
+					break;
+			case '3':
+					uni.setNavigationBarTitle({
+						title: '消息记录'
+					});
+					this.searchType = 3;
+					break;
+					defualt: break;
+			}
+			this.getCompany();
+		},
+		onShow(){
+			if(this.isfirstopen!=0){
+				this.searchData();
+			}
+		},onReachBottom(){
+			if (this.loadingType !== 0) {
+				return;
+			}
+			
+			this.page=this.page+1;
+			console.log(this.page)
+			this.loadingType = 1;	
+			this.searchData();
+		},
+		data() {
+			return {
+				Token: '',
+				companyList: [],
+				companyIndex: 0,
+				projectList: [],
+				companyText: '',
+				projectText: '',
+				projectIndex: 0,
+				companyVal: '',
+				projectVal: '',
+				safetyList: [],
+				searchType: '',
+				needautograph:'',
+				isfirstopen:0,
+				page:1,
+				size:10,
+				loadingType: 0,
+				contentText: {
+					contentdown: "上拉显示更多",
+					contentrefresh: "正在加载...",
+					contentnomore: "没有更多数据了"
+				}
+			}
+		},
+		methods: {
+			getCompany() { //获取公司数据				
+				let url = server.net.setUrl('api/DropDownListApi/GetCompany');
+				uni.request({
+					url: url,
+					dataType: 'json',
+					type: 'GET',
+					header: {
+						Token: this.Token
+					},
+					success: (result) => {
+						server.net.showWrongTipsEx(result);
+						var jsondata = result.data;
+						let dataArr = jsondata.data;
+
+						if (jsondata.status == 1) {
+							console.log("公司获取成功");
+							let first={
+								value:"08876894",
+								text:"请选择公司"
+							}
+							dataArr.unshift(first)
+							this.companyList = this.setData(jsondata.data);
+							this.companyVal = this.companyList[this.companyIndex].value;
+							this.companyText = this.companyList[this.companyIndex].text;
+							if(this.companyVal!='08876894'){
+								this.getProject();
+							}
+						} else {
+							console.log(jsondata.status);
+							uni.showToast({
+								title: jsondata.status,
+								mask: false,
+								duration: 1500
+							});
+						}
+					},
+					fail: (data, code) => {
+						console.log("公司获取失败" + data + code);
+					}
+				});
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						Token: this.Token
+					},
+					data: {
+						company: this.companyVal
+					},
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						if (jsondata.status == 1) {
+
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					},
+					complete: () => {}
+				});
+			},
+			setData: function(items) { //设置两个picker的数据
+				let newItems = [];
+				items.forEach((e) => {
+					newItems.push({
+						text: e.text,
+						value: e.value
+					});
+				});
+				return newItems;
+			},
+			changeCompany(e) {
+				this.companyIndex = e.detail.value;
+				this.companyVal = this.companyList[e.detail.value].value;
+				this.companyText = this.companyList[this.companyIndex].text;
+				this.projectIndex=0;
+				this.getProject();
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+			},
+			searchBtn:function(){
+				this.page=1;
+				//this.safetyList=[];
+				this.searchData();
+			},
+			searchData:function(){
+				
+				let url = server.net.setUrl('api/SecurityInspectApi/GetList?operate='+this.searchType+'&page='+this.page);
+				let data ={
+					
+				};
+				if(this.needautograph!='undefined'){
+					data.needautograph = this.needautograph;
+				}
+				if(this.projectVal!=''){
+					data = {
+						Company:this.companyVal,
+						ProjectId:this.projectVal
+					}
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data: JSON.stringify(data),
+					success: res => {
+						server.net.showWrongTipsEx(res);
+						let result = res.data;
+						let jsondata = result.data;
+						
+						console.log(res)
+						if (result.status == 1) {
+							let newItems = [];
+							if (jsondata != '') {
+								jsondata.forEach((e) => {
+									newItems.push({
+										Title: e.Title,
+										CrashLevelName: e.CrashLevelName,
+										ID: e.ID,
+										ExpireDate:e.ExpireDate.substring(0,10),
+										StateName: e.StateName,
+										State:e.State,
+										CrashLevel:e.CrashLevel
+									});
+								});
+							} else {
+								uni.showToast({
+									title: '暂无数据'
+								})
+								this.loadingType = 2; 
+								return;
+							}
+							
+							if(newItems.length<1){
+								this.loadingType = 2; 
+								return;
+							}
+							if(this.page==1){
+								this.safetyList=[];
+							}
+							console.log(newItems)
+							this.safetyList = this.safetyList.concat(newItems);
+							this.loadingType = 0; 
+							
+							//this.safetyList = newItems;
+						} else {
+							console.log(result.message);
+							uni.showToast({
+								title: '暂无数据',
+								mask: false,
+								duration: 1500
+							});
+						}
+						
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			goDetail: function(e) { //跳转到详情页面
+			this.isfirstopen+=1;
+				let detail = {
+					id: e.ID,
+				}
+				uni.navigateTo({
+					url: "SafetyDetails?id=" + e.ID
+				})
+			}
+		},components: {
+			loadMore
+		}
+
+	}
+</script>
+
+<style scoped>
+	
+	@import "../../../common/uni.css"; 
+	
+	
+	.input-row {
+		align-items: center;
+	}
+
+	.list-content {
+		margin-top: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		width: 100%;
+		padding: 0px 10px;
+	}
+
+	.list-title {
+		font-size: 36px;
+		color: #000;
+		display: block;
+	}
+
+	.list-deadline,
+	.list-level,
+	.list-state {
+		font-size: 26px;
+		color: #6C6C6C;
+		display: inline-block;
+		margin-right: 15px;
+	}
+	
+	.state0{
+		color:#FF8C69;
+	}
+	
+	.state1{
+		/* 待修改 */
+		color:#1C86EE;
+	}
+	
+	.state2{
+		/* 待复查 */
+		color:#EEAD0E;
+	}
+	
+	.state3{
+		/* 完成 */
+		color:#17A869;
+	}
+	
+	.state4{
+		/* 审批不通过 */
+		color:#CD2626;
+	}
+	
+	.crash0{
+		/* 一般 */
+		color:#17A869;
+	}
+	.crash1{
+		/* 严重 */
+		color:#FFB90F;
+	}
+	.crash2{
+		/* 紧要 */
+		color:#f00; 
+	}
+</style>

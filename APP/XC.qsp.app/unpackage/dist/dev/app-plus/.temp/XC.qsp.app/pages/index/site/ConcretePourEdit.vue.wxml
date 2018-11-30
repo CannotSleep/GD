@@ -1,0 +1,193 @@
+<import src="/XC.qsp.app/components/number-box.vue.wxml" />
+<template name="65c686ae">
+  <view class="_view data-v-c4e3ac2e content">
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">项目名称:</text>
+      </view>
+      <picker bindchange="handleProxy" value="{{projectIndex}}" range="{{projectList}}" range-key="text" data-eventid="{{'mKX-0'}}" data-comkey="{{$k}}" class="_picker data-v-c4e3ac2e">
+        <view class="_view data-v-c4e3ac2e uni-input">{{projectText}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">浇筑部位:</text>
+      </view>
+      <input type="text" value="{{Position}}" placeholder="请填写浇筑部位" bindinput="handleProxy" data-eventid="{{'NEB-1'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">砼强度:</text>
+      </view>
+      <input type="text" value="{{Grade}}" placeholder="请填写浇筑部位" bindinput="handleProxy" data-eventid="{{'QMP-2'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">开盘时间:</text>
+      </view>
+      <picker mode="date" value="{{StartDate}}" start="2001-01-01" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'1iG-3'}}" data-comkey="{{$k}}" class="_picker data-v-c4e3ac2e">
+        <view class="_view data-v-c4e3ac2e uni-input">{{StartDate}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">塌落度:</text>
+      </view>
+      <input type="text" value="{{Angle}}" placeholder="请填写塌落度" bindinput="handleProxy" data-eventid="{{'lj0-4'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">浇筑方量:</text>
+      </view>
+      <input type="text" value="{{Engineering}}" placeholder="请填写浇筑方量" bindinput="handleProxy" data-eventid="{{'h9v-5'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">浇筑持续时间:</text>
+      </view>
+      <picker mode="date" value="{{EndDate}}" start="{{StartDate}}" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'MbY-6'}}" data-comkey="{{$k}}" class="_picker data-v-c4e3ac2e">
+        <view class="_view data-v-c4e3ac2e uni-input">{{EndDate}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">各工种人员配备情况:</text>
+      </view>
+      <view class="_view data-v-c4e3ac2e day-row">
+        <text class="_text data-v-c4e3ac2e">白班</text>
+      </view>
+      <view class="_view data-v-c4e3ac2e night-row">
+        <text class="_text data-v-c4e3ac2e">夜班</text>
+      </view>
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">砼工人数:</text>
+      </view>
+      <input class="_input data-v-c4e3ac2e day-row" type="number" value="{{dayTg}}" placeholder="请填写人数" bindinput="handleProxy" data-eventid="{{'oyT-7'}}" data-comkey="{{$k}}" />
+      <input class="_input data-v-c4e3ac2e night-row" type="number" value="{{nightTg}}" placeholder="请填写人数" bindinput="handleProxy" data-eventid="{{'ITP-8'}}" data-comkey="{{$k}}" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">找平人数:</text>
+      </view>
+      <input class="_input data-v-c4e3ac2e day-row" type="number" value="{{ZDayNum}}" placeholder="请填写人数" bindinput="handleProxy" data-eventid="{{'KRR-9'}}" data-comkey="{{$k}}" />
+      <input class="_input data-v-c4e3ac2e night-row" type="number" value="{{ZNigNum}}" placeholder="请填写人数" bindinput="handleProxy" data-eventid="{{'myx-10'}}" data-comkey="{{$k}}" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">捧手人数:</text>
+      </view>
+      <input class="_input data-v-c4e3ac2e day-row" type="number" value="{{PDayNum}}" placeholder="请填写人数" bindinput="handleProxy" data-eventid="{{'zy4-11'}}" data-comkey="{{$k}}" />
+      <input class="_input data-v-c4e3ac2e night-row" type="number" value="{{PNigNum}}" placeholder="请填写人数" bindinput="handleProxy" data-eventid="{{'cEq-12'}}" data-comkey="{{$k}}" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">振动棒台数:</text>
+      </view>
+      <view class="_view data-v-c4e3ac2e detail-box">
+        <template bindupdate="handleProxy" data-eventid="{{'3vc-13'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'KVi-0'],$root}}" is="e3ac5c46"></template>
+      </view>
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">磨光机台数:</text>
+      </view>
+      <view class="_view data-v-c4e3ac2e detail-box">
+        <template bindupdate="handleProxy" data-eventid="{{'KeI-14'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'QBD-1'],$root}}" is="e3ac5c46"></template>
+      </view>
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">平板振动器台数:</text>
+      </view>
+      <view class="_view data-v-c4e3ac2e detail-box">
+        <template bindupdate="handleProxy" data-eventid="{{'WJw-15'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'KQr-2'],$root}}" is="e3ac5c46"></template>
+      </view>
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">劳务值班人:</text>
+      </view>
+      <input type="text" value="{{LabourName}}" placeholder="请填写劳务值班人" bindinput="handleProxy" data-eventid="{{'qwa-16'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">劳务值班人电话:</text>
+      </view>
+      <input type="text" value="{{LabourPhone}}" placeholder="请填写劳务值班人电话" bindinput="handleProxy" data-eventid="{{'LzV-17'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">钢筋值班人:</text>
+      </view>
+      <input type="text" value="{{RebarName}}" placeholder="请填写钢筋值班人" bindinput="handleProxy" data-eventid="{{'0ye-18'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">钢筋值班人电话:</text>
+      </view>
+      <input type="text" value="{{RebarPhone}}" placeholder="请填写钢筋值班人电话" bindinput="handleProxy" data-eventid="{{'CMI-19'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">木工值班人:</text>
+      </view>
+      <input type="text" value="{{CarpentryName}}" placeholder="请填写木工值班人" bindinput="handleProxy" data-eventid="{{'hGa-20'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">木工值班人电话:</text>
+      </view>
+      <input type="text" value="{{CarpentryPhone}}" placeholder="请填写木工值班人电话" bindinput="handleProxy" data-eventid="{{'xeg-21'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">水电值班人:</text>
+      </view>
+      <input type="text" value="{{PlumberName}}" placeholder="请填写水电值班人" bindinput="handleProxy" data-eventid="{{'cQ4-22'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <view class="_view data-v-c4e3ac2e input-row">
+      <view class="_view data-v-c4e3ac2e input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+        <text class="_text data-v-c4e3ac2e">水电值班人电话:</text>
+      </view>
+      <input type="text" value="{{PlumberPhone}}" placeholder="请填写水电值班人电话" bindinput="handleProxy" data-eventid="{{'eOf-23'}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+    </view>
+    <block wx:key="index" key="{{index}}" wx:for="{{AutographList}}" wx:for-index="index" wx:for-item="item">
+      <view class="_view data-v-c4e3ac2e input-row">
+        <view class="_view data-v-c4e3ac2e input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-c4e3ac2e"></image>
+          <text class="_text data-v-c4e3ac2e">{{item.TypeName}}:</text>
+        </view>
+        <input type="text" value="{{item.AccountName}}" bindinput="handleProxy" bindtap="handleProxy" data-eventid="{{'UZw-24-'+index}}" data-comkey="{{$k}}" class="_input data-v-c4e3ac2e" />
+      </view>
+    </block>
+    <view class="_view data-v-c4e3ac2e input-row-bottom-line"></view>
+    <view class="_view data-v-c4e3ac2e button-row">
+      <button type="primary" size="mini" bindtap="handleProxy" data-eventid="{{'WOy-25'}}" data-comkey="{{$k}}" class="_button data-v-c4e3ac2e">添加</button>
+      <button size="mini" bindtap="handleProxy" type="default" class="_button data-v-c4e3ac2e search-btn" data-eventid="{{'Ws0-26'}}" data-comkey="{{$k}}">暂存</button>
+    </view>
+  </view>
+</template>

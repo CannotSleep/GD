@@ -1,0 +1,33 @@
+@import "../common/vendor.wxss";
+
+.page {
+  padding-top: 60rpx;
+}
+page {
+  background: #efeff4;
+}
+.list-collapse {
+  padding-left: 36rpx;
+  box-sizing: border-box;
+}
+image {
+  width: 100%;
+}
+.page-pd {
+  padding: 36rpx;
+}
+.size-5 {
+  font-size: 50rpx;
+}
+.size-4 {
+  font-size: 40rpx;
+}
+.size-3 {
+  font-size: 30rpx;
+}
+.size-2 {
+  font-size: 20rpx;
+}
+.size-1 {
+  font-size: 10rpx;
+}

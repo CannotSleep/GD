@@ -1,0 +1,29 @@
+<template name="2c2600a6">
+  <view class="_view data-v-31ecf256 content">
+    <view class="_view data-v-31ecf256 img-group mt-20">
+      <image src="{{src}}" class="_image data-v-31ecf256"></image>
+    </view>
+    <view class="_view data-v-31ecf256 input-group mt-20">
+      <view class="_view data-v-31ecf256 login-input-row">
+        <picker bindchange="handleProxy" value="{{index}}" range="{{array}}" data-eventid="{{'QSb-0'}}" data-comkey="{{$k}}" class="_picker data-v-31ecf256">
+          <view class="_view data-v-31ecf256 uni-input">{{array[index]}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-31ecf256 login-input-row mt-20">
+        <input type="text" value="{{account}}" placeholder="请输入用户名" placeholder-style="color:#fff" bindinput="handleProxy" data-eventid="{{'ukX-1'}}" data-comkey="{{$k}}" class="_input data-v-31ecf256" />
+      </view>
+      <view class="_view data-v-31ecf256 login-input-row mt-20">
+        <input type="password" value="{{password}}" placeholder="请输入密码" placeholder-style="color:#fff" bindinput="handleProxy" data-eventid="{{'zy5-2'}}" data-comkey="{{$k}}" class="_input data-v-31ecf256" />
+      </view>
+      <view class="_view data-v-31ecf256 login-input-row mt-20 ">
+        <view class="_view data-v-31ecf256 uni-list-cell uni-list-cell-pd">
+          <view class="_view data-v-31ecf256 uni-list-cell-db">自动登录</view>
+          <switch bindchange="handleProxy" color="#0ce998" data-eventid="{{'EkQ-3'}}" data-comkey="{{$k}}" class="_switch data-v-31ecf256" />
+        </view>
+      </view>
+      <view class="_view data-v-31ecf256 btn-row">
+        <button type="primary" loading="{{loading}}" bindtap="handleProxy" data-eventid="{{'Obh-4'}}" data-comkey="{{$k}}" class="_button data-v-31ecf256">登录</button>
+      </view>
+    </view>
+  </view>
+</template>

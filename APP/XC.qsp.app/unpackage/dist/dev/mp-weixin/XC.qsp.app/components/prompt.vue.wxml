@@ -1,0 +1,25 @@
+<template name="8f137b0c">
+  <view class="_view data-v-42fd541b">
+    <view class="_view data-v-42fd541b prompt-box" hidden="{{!(showMask)}}">
+      <view class="_view data-v-42fd541b prompt-content">
+        <view class="_view data-v-42fd541b first-title">
+          <text class="_text data-v-42fd541b">{{firstTitle}}</text>
+        </view>
+        <view class="_view data-v-42fd541b second-title">
+          <text class="_text data-v-42fd541b">{{secondTitle}}</text>
+        </view>
+        <view class="_view data-v-42fd541b input-row">
+          <input type="text" value="{{promptInput}}" bindinput="handleProxy" placeholder="请输入" data-eventid="{{'Ty7-0'}}" data-comkey="{{$k}}" class="_input data-v-42fd541b" />
+        </view>
+        <view class="_view data-v-42fd541b button-row">
+          <view class="_view data-v-42fd541b button-box" bindtap="handleProxy" data-eventid="{{'KY3-1'}}" data-comkey="{{$k}}">
+            <text class="_text data-v-42fd541b">取消</text>
+          </view>
+          <view class="_view data-v-42fd541b button-box" bindtap="handleProxy" data-eventid="{{'85D-2'}}" data-comkey="{{$k}}">
+            <text class="_text data-v-42fd541b">确认</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

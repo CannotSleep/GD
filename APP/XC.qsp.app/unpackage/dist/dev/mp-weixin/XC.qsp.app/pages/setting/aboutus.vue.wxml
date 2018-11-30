@@ -1,0 +1,12 @@
+<template name="35010f52">
+  <view class="_view data-v-f2508302 page">
+    <view class="_view data-v-f2508302 img-group">
+      <image src="../../static/img/logo.png" mode="aspectFit" class="_image data-v-f2508302 index-img"></image>
+    </view>
+    <view class="_view data-v-f2508302 content">
+      <text class="_text data-v-f2508302 cont_text">       广东星层建筑科技股份有限公司(简称星层科技)，总部位于广州市天河区珠江新城，是独立的第三方建筑科技公司，基于国际及国内丰富的工程实践经验，主要从事BIM技术研发（包括BIM专业解决方案 和软件开发）及工程咨询服务。</text>
+      <text class="_text data-v-f2508302 cont_text">       公司拥有一支朝气蓬勃技术全面的专业团队，包括美国注册土木工程师、国家一级注册结构工程师、国家注册岩土工程师、造价工程师，具有十年施工经验的钢筋工程时，及其他从美国、法国留学归来的 既懂专业又有丰富BIM工程经验的高级人才。</text>
+      <text class="_text data-v-f2508302 cont_text">        星层科技秉承"诚信、创新、严谨、务实"的态度，依托国内外先进的技术和经验，结合国内建筑行业的特点，在建筑行业变革的浪潮中，通过技术创新及优质服务为客户创造价值和机遇，提升客户核心 竞争力</text>
+    </view>
+  </view>
+</template>

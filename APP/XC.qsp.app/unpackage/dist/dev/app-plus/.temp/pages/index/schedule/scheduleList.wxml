@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/index/schedule/scheduleList.vue.wxml" /><template is="bf376830" data="{{ ...$root['0'], $root }}"/>

@@ -1,0 +1,1 @@
+<import src="/pages/index/schedule/Statistics.vue.wxml" /><template is="cb8e2456" data="{{ ...$root['0'], $root }}"/>

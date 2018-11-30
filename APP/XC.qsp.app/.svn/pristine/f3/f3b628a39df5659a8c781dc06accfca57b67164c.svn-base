@@ -1,0 +1,434 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-02.png" mode=""></image>
+				<text>项目名称:</text>
+			</view>
+			<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+				<view class="uni-input">{{projectText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+				<text>构件部位(楼层):</text>
+			</view>
+			<input type="text" value="" placeholder="请填写测量部位(楼层)" v-model="Floor"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-10.png" mode=""></image>
+				<text>混凝土强度设计等级:</text>
+			</view>
+			<picker @change="changeGrade" :value="grade" :range="gradeList" range-key="text">
+				<view class="uni-input">{{gradeList[grade].text}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+				<text>砼浇筑时间:</text>
+			</view>
+			<picker mode="date" :value="ConcreteDate" start="2000-01-01" end="2028-12-31" @change="changeConcreteDate">
+				<view class="uni-input">{{ConcreteDate}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-11.png" mode=""></image>
+				<text>测试面状态:</text>
+			</view>
+			<input type="text" :value="TestState" placeholder="" v-model="TestState" disabled="disabled" />
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-05.png" mode=""></image>
+				<text>构件类型:</text>
+			</view>
+			<picker @change="changeComponent" :value="ComponentIndex" :range="ComponentList" range-key="text">
+				<view class="uni-input">{{ComponentList[ComponentIndex].text}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-12.png" mode=""></image>
+				<text>日平均温度:</text>
+			</view>
+			<input type="number" value="" placeholder="请填写日平均温度" v-model="Temperature"/>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+				<text>检查日期:</text>
+			</view>
+			<picker mode="date" :value="checkDate" :start="ConcreteDate" end="2028-12-31" @change="changeCheckDate">
+				<view class="uni-input">{{checkDate}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-07.png" mode=""></image>
+				<text>测量数据:</text>
+			</view>
+			<view class="data-row">
+				<button size="mini" type="default" @tap="addDatas">添加数据</button>
+			</view>
+		</view>
+		<block v-for="(item,index) in dataList" :key="index" v-if="isAdd">
+			<view class="input-row" v-if="isAdd">
+				<view class="input-label reduceWidth">
+					数据:{{item.dataNum}}
+				</view>
+				<input class="increaseWidth" type="text" v-model="item.dataInput" placeholder="请输入16条数据,空格隔开">
+			</view>
+		</block>
+		<view class="input-row-bottom-line"></view>
+		<view class="button-row mt-20">
+			<button type="primary" size="mini" @tap="submit">提交</button>
+			<button type="default" size="mini" @tap="tempS" >暂存</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		onLoad(option) {
+			let index = option.index;
+			this.editIndex = index;
+			this.Token=server.net.GetSessionToken();
+			this.getProject();
+			this.initDate();
+		},
+		data() {
+			return {
+				projectList: [],
+				projectIndex: 0,
+				projectVal: '',
+				projectText: '',
+				gradeList: [{
+					value: 'C15',
+					text: 'C15'
+				}, {
+					value: 'C20',
+					text: 'C20'
+				}, {
+					value: 'C25',
+					text: 'C25'
+				}, {
+					value: 'C30',
+					text: 'C30'
+				}, {
+					value: 'C35',
+					text: 'C35'
+				}, {
+					value: 'C40',
+					text: 'C40'
+				}, {
+					value: 'C45',
+					text: 'C45'
+				}, {
+					value: 'C50',
+					text: 'C50'
+				}, {
+					value: 'C55',
+					text: 'C55'
+				}, {
+					value: 'C60',
+					text: 'C60'
+				}],
+				grade: 0,
+				gradeVal:'',
+				checkDate: '',
+				ConcreteDate:'',
+				ComponentList: [{
+					value: 0,
+					text: '墙柱'
+				}, {
+					value: 1,
+					text: '梁板'
+				}],
+				ComponentIndex: 0,
+				ComponentVal: '',
+				TestState: '侧面',
+				isAdd: true,
+				tapTimes: 0,
+				dataList: [],
+				Floor:'',
+				Temperature:'',
+				editIndex:0,
+				tempList:[]
+
+			}
+		},
+		methods: {
+			initDate(){
+				let concreteOff = uni.getStorageSync('ConcreteListOffLine');
+				this.tempList = concreteOff;
+				let chooseItem = concreteOff[this.editIndex];
+				console.log(chooseItem);
+				this.projectVal = chooseItem.ProjectID;
+				this.projectIndex = chooseItem.ProjectIndex;
+				//this.projectText = chooseItem.ProjectName;
+				this.Floor = chooseItem.Floor;
+				this.grade = chooseItem.GradeIndex;
+				this.gradeVal = chooseItem.GradeVal;
+				this.TestState = chooseItem.TestState;
+				this.ConcreteDate = chooseItem.ConcreteDate;
+				this.checkDate = chooseItem.CheckDate;
+				this.ComponentVal = chooseItem.ComponentVal;
+				this.ComponentIndex = chooseItem.ComponentIndex;
+				this.Temperature = chooseItem.Temperature;
+				//console.log(chooseItem.DetailCollection);
+				if(chooseItem.DetailCollection)
+				{
+					let arr = chooseItem.DetailCollection;
+					for (let i in arr) {
+						this.dataList.push(
+						{
+							"dataNum":arr[i].Name,
+							"dataInput":arr[i].DataAttr.join(" ")
+						})
+					}
+				}			
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						Token: this.Token
+					},
+					
+					success: (data) => {
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						
+						let first={
+							value:"",
+							text:"请选择项目"
+						}
+						dataArr.unshift(first)
+						
+						if (jsondata.status = 1) {
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					},
+					complete: () => {}
+				});
+			},
+			addDatas() {
+				//this.isAdd = true;
+				let addTimes = this.dataList.length + 1;
+				if (addTimes < 10) {
+					this.dataList.push({
+						dataNum: addTimes
+					});
+					addTimes += 1;
+				} else {
+					console.log(this.dataList)
+					uni.showToast({
+						icon:'none',
+						title: '最多添加10条'
+					})
+					return false;
+				}
+			},
+			changeCheckDate(e) {
+				this.checkDate = e.detail.value;
+			},
+			changeConcreteDate(e){
+				this.ConcreteDate = e.detail.value;
+			},
+			changeComponent(e) {
+				this.ComponentIndex = e.detail.value;
+				this.ComponentVal = this.ComponentList[this.ComponentIndex].text;
+			},
+			changeGrade(e) {
+				this.grade = e.detail.value;
+				this.gradeVal = this.gradeList[this.grade].text;
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+			},
+			setData: function(items) { //设置两个picker的数据
+				let newItems = [];
+				items.forEach((e) => {
+					newItems.push({
+						text: e.text,
+						value: e.value
+					}); 
+				});
+				return newItems;
+			},
+			submit() {
+				let url = server.net.setUrl('api/QualityConcreteBackApi/AddOrUpdate');
+				let newItems = [];
+				for (let i in this.dataList) {
+					newItems.push({
+						"Name":this.dataList[i].dataNum,
+						"DataAttr":this.dataList[i].dataInput.split(' ')
+					});
+				}
+				
+                if(!this.projectVal)
+				{
+					server.net.showWrongTips("请选择项目");
+					return false; 
+				}
+				if(!this.Floor)
+				{
+					server.net.showWrongTips("请输入构件部位/楼层");
+					return false; 
+				}
+				if(!this.Temperature)
+				{
+					server.net.showWrongTips("请输入日平均温度");
+					return false; 
+				}
+				var d1 = new Date(this.ConcreteDate);  
+				var d2 = new Date(this.checkDate); 
+				if(d2.getTime() < d1.getTime())  
+				{  
+					uni.showModal({
+						title: '提示',
+						content: '检查日期不能比浇筑日期早',
+						showCancel:false
+					});
+					return false;  
+				}
+				console.log(newItems);
+				let ajaxdata = {
+					ProjectID: this.projectVal, //项目ID
+					ProjectName:this.projectText,
+					Grade: this.gradeVal,
+					Floor:this.Floor,
+					TestState: this.TestState,
+					ConcreteDate: this.ConcreteDate, //检查日期
+					CheckDate:this.checkDate,
+					ComponentType:this.ComponentVal,
+					Temperature:this.Temperature,
+					Remark:'',
+					DetailCollection: newItems
+				};
+				console.log(ajaxdata);
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data: JSON.stringify(ajaxdata),
+					success: res => {
+						let result = res.data;
+						let jsondata = result.data;
+						if (result.status == 1) {
+							//todo 成功后清除该离线缓存记录
+							this.tempList.splice(this.editIndex,1);
+							uni.setStorageSync("ConcreteListOffLine",this.tempList);
+							
+							uni.showToast({
+								title: '提交成功',
+								mask: false,
+								duration: 1500
+							});
+							setTimeout(function() {
+								uni.navigateBack({
+									delta: 1
+								})
+							}, 2000)
+						} else {
+							console.log(result.message);
+							server.net.showWrongTips("请填写正确数据");
+						}
+					},
+					fail: () => {
+						console.log("实测实量提交失败");
+					},
+					complete: () => {}
+				});
+			},
+			tempS(){
+				console.log("暂存")
+				let detailCollections = [];
+				for (let i in this.dataList) {
+					detailCollections.push({
+						"Name":this.dataList[i].dataNum,
+						"DataAttr":this.dataList[i].dataInput.split(' ')
+					});
+				}
+				let tempObject={
+					ProjectID: this.projectVal, //项目ID
+					ProjectIndex: this.projectIndex,
+					ProjectName:this.projectText,
+					GradeIndex: this.grade,
+					GradeVal: this.gradeVal,
+					Floor:this.Floor,
+					TestState: this.TestState,
+					ConcreteDate: this.ConcreteDate, //检查日期
+					CheckDate:this.checkDate,
+					ComponentVal:this.ComponentVal,
+					ComponentIndex:this.ComponentIndex,
+					Temperature:this.Temperature,
+					DetailCollection: detailCollections
+				}
+				this.tempList[this.editIndex] = tempObject;
+				uni.setStorageSync("ConcreteListOffLine",this.tempList);
+				uni.showToast({
+					title: '暂存成功',
+					mask: false,
+					duration: 1500
+				});
+				setTimeout(function() {
+					uni.navigateBack({
+						delta: 1
+					})
+				}, 2000)
+				
+				
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.input-label {
+		width: 45%;
+	}
+	.reduceWidth{
+		width: 20% !important;
+	}
+	.increaseWidth{
+		width: 80% !important;
+	}
+
+	picker,
+	input {
+		width: 55%;
+	}
+
+	.data-row {
+		width: 55%;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		padding: 15px 0px;
+	}
+
+	.data-row button {
+		color: #fff;
+		background-color: #17A869;
+		border: none;
+	}
+</style>

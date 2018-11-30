@@ -1,0 +1,2 @@
+@import "../../../common/vendor.wxss";
+.input-label.data-v-302c76c3{width:45%}._input.data-v-302c76c3,picker.data-v-302c76c3{width:55%}.data-row.data-v-302c76c3{width:55%;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;flex-direction:row;-webkit-box-pack:end;-webkit-justify-content:flex-end;justify-content:flex-end;padding:15rpx 0}.data-row ._button.data-v-302c76c3{color:#fff;background-color:#17a869;border:none}

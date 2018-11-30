@@ -1,0 +1,378 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>工程名称:</text>
+			</view>
+			<view class="detail-box">
+				{{ProjectName}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>浇筑部位:</text>
+			</view>
+			<view class="detail-box">
+				{{Position}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>砼强度:</text>
+			</view>
+			<view class="detail-box">
+				{{Grade}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>开盘时间:</text>
+			</view>
+			<view class="detail-box">
+				{{StartDate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>塌落度:</text>
+			</view>
+			<view class="detail-box">
+				{{Angle}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>浇筑持续时间:</text>
+			</view>
+			<view class="detail-box">
+				{{EndDate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>各工种人员配备情况:</text>
+			</view>
+			<view class="day-row">
+				<text>白班</text>
+			</view>
+			<view class="night-row">
+				<text>夜班</text>
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>砼工人数:</text>
+			</view>
+			<view class="day-row">
+				{{dayTg}}
+			</view>
+			<view class="night-row">
+				{{nightTg}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>找平人数:</text>
+			</view>
+			<view class="day-row">
+				{{ZDayNum}}
+			</view>
+			<view class="night-row">
+				{{ZNigNum}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>捧手人数:</text>
+			</view>
+			<view class="day-row">
+				{{PDayNum}}
+			</view>
+			<view class="night-row">
+				{{PNigNum}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>振动棒台数:</text>
+			</view>
+			<view class="detail-box">
+				{{MechanicalZNum}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>磨光机台数:</text>
+			</view>
+			<view class="detail-box">
+				{{MechanicalMNum}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>平板振动器台数:</text>
+			</view>
+			<view class="detail-box">
+				{{MechanicalPNum}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>劳务值班人:</text>
+			</view>
+			<view class="detail-box" @tap="openMask">
+				{{LabourName}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>钢筋值班人:</text>
+			</view>
+			<view class="detail-box">
+				{{RebarName}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>木工值班人:</text>
+			</view>
+			<view class="detail-box">
+				{{CarpentryName}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+				<text>水电值班人:</text>
+			</view>
+			<view class="detail-box">
+				{{PlumberName}}
+			</view>
+		</view>
+		<block v-for="(item,index) in AutographList" :key="index">
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/list1_icon/list1_icon-08.png" mode=""></image>
+					<text>{{item.TypeName}}:</text>
+				</view>
+				<input type="text" value="" v-model="item.AccountName" />
+			</view>
+		</block>
+		<view class="button-row">
+			<button type="primary" size="mini" @tap="upDate(pageId)">签字</button>
+		</view>
+		
+	</view>
+
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	//import prompt from '../../../components/prompt.vue';
+	export default {
+		/*components: {
+			'prompt': prompt
+		},*/
+		onLoad: function(option) {
+			console.log(option.id);
+			this.testToken = server.net.GetLocalToken();
+			this.getDetails(option.id);
+			this.pageId = option.id;
+
+
+		},
+		data() {
+			return {
+				testToken: '',
+				ProjectName: '',
+				Position: '',
+				Engineering: '',
+				Angle: '',
+				Grade: '',
+				StartDate: '',
+				EndDate: '',
+				dayTg: '',
+				nightTg: '',
+				ZNigNum: '',
+				ZDayNum: '',
+				PDayNum: '',
+				PNigNum: '',
+				MechanicalZNum: '',
+				MechanicalMNum: '',
+				MechanicalPNum: '',
+				LabourName: '',
+				RebarName: '',
+				CarpentryName: '',
+				PlumberName: '',
+				AutographList: [],
+				pageId: '',
+				TypeName: '',
+				NeedAutograph: false,
+				sendVal: ''
+			}
+		},
+		methods: {
+			openMask(index) {
+				this.sendVal = true;
+			},
+			confirm() {
+				console.log('点击了取消');
+			},
+			getDetails(id) { //获取详情数据
+				let url = server.net.setUrl('api/ConcretePouringApi/Detail?id=' + JSON.parse(id));
+				console.log(url);
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//Token:server.net.getSessionToken(),
+						Token: this.testToken
+					},
+					success: res => {
+						let result = res.data;
+						let jsondata = result.data;
+						if (result.status == 1) {
+							console.log("数据获取成功");
+							this.ProjectName = jsondata.Name;
+							this.Position = jsondata.Position;
+							this.Engineering = jsondata.Engineer;
+							this.Angle = jsondata.Angle;
+							this.Grade = jsondata.Grade;
+							this.StartDate = jsondata.StartDate.substring(0, 10);
+							this.EndDate = jsondata.EndDate.substring(0, 10);
+							this.dayTg = jsondata.TDayNum;
+							this.nightTg = jsondata.TNigNum;
+							this.ZDayNum = jsondata.ZDayNum;
+							this.ZNigNum = jsondata.ZNigNum;
+							this.PDayNum = jsondata.PDayNum;
+							this.PNigNum = jsondata.PNigNum;
+							this.MechanicalZNum = jsondata.MechanicalZNum;
+							this.MechanicalMNum = jsondata.MechanicalMNum;
+							this.MechanicalPNum = jsondata.MechanicalPNum;
+							this.LabourName = jsondata.LabourName;
+							this.RebarName = jsondata.RebarName;
+							this.CarpentryName = jsondata.CarpentryName;
+							this.PlumberName = jsondata.PlumberName;
+							jsondata.AutographList.forEach((e) => {
+								this.AutographList.push({
+									TypeName: e.TypeName,
+									AccountID: e.AccountID,
+									AccountName: e.AccountName,
+									IsFinish: e.IsFinish,
+									NeedAutograph: e.NeedAutograph
+								});
+							})
+						} else {
+							console.log(result.message)
+						}
+					},
+					fail: () => {
+						console.log("数据获取失败");
+					},
+					complete: () => {}
+				});
+			},
+			upDate(id) {
+				console.log("混凝土浇筑表更新" + this.pageId);
+				let url = server.net.setUrl('api/ConcretePouringApi/Autograph');
+				let data = {
+					id: id
+				}
+				if (this.AutographList[0]) {
+					data.type = 0;
+					data.opinion = this.AutographList[0].AccountName;
+				}
+				/*for (let i = 0; i < this.AutographList.length; i++) {
+					data.type = i;
+					data.opinion = this.AutographList[i].AccountName;
+				}*/
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//Token:server.net.getSessionToken(),
+						Token: this.testToken
+					},
+					data: JSON.stringify(data),
+					success: res => {
+						let result = res.data;
+						let jsondata = result.data;
+						console.log(result.message);
+						if (result.status == 1) {
+							console.log("更新成功");
+							uni.showToast({
+								title: result.message,
+								mask: false,
+								duration: 1500
+							});
+						} else {
+							console.log("更新失败" + result.message);
+							uni.showToast({
+								title: result.message,
+								mask: false,
+								duration: 1500
+							});
+						}
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			}
+		}
+
+	}
+</script>
+
+<style scoped>
+	.detail-box {
+		width: 55%;
+		min-height: 50px;
+		font-size: 28px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.input-label {
+		width: 45%;
+	}
+
+	input {
+		width: 55%;
+	}
+
+	picker {
+		width: 55%;
+	}
+
+	.day-row,
+	.night-row {
+		width: 27.5%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.button-row {
+		margin-top: 10px;
+	}
+</style>

@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/components/prompt.vue.wxml" /><template is="8f137b0c" data="{{ ...$root['0'], $root }}"/>

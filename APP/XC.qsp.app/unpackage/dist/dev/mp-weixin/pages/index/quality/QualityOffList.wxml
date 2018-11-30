@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/index/quality/QualityOffList.vue.wxml" /><template is="b1f33066" data="{{ ...$root['0'], $root }}"/>

@@ -1,0 +1,416 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/hnt/list1_icon2-03.png"
+				 mode=""></image>
+				<text>项目名称:</text>
+			</view>
+			<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+				<view class="uni-input">{{projectText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>项目编号:</text>
+			</view>
+			<input type="text" value="" placeholder="请填写项目编号" v-model="projectNum" />
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>陪同检查人:</text>
+			</view>
+			<input type="text" :value="rectpeople" @tap="selectRect" placeholder="" />
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+				<text>检查日期:</text>
+			</view>
+			<picker mode="date" :value="checkDate" start="2018-09-26" end="2028-12-31" @change="changeCheckDate">
+				<view class="uni-input">{{checkDate}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>测量区域:</text>
+			</view>
+			<picker @change="changeArea" :value="areaIndex" :range="areaList" range-key="text">
+				<view class="uni-input">{{areaText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>构件类别:</text>
+			</view>
+			<picker @change="changeConstruct" :value="ConstructIndex" :range="ConstructList" range-key="text">
+				<view class="uni-input">{{ConstructText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>主控项目:</text>
+			</view>
+			<picker @change="changeEngproject" :value="engProjectIndex" :range="engProjectList" range-key="text">
+				<view class="uni-input">{{engProjectText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+				<text>测量数据:</text>
+			</view>
+			<view class="data-row">
+				<button size="mini" type="default" @tap="addDatas">添加数据</button>
+			</view>
+		</view>
+		<block v-for="(item,index) in dataList" :key="index" v-if="isAdd">
+			<view class="input-row" v-if="isAdd">
+				<view class="input-label">
+					数据:{{item.dataNum}}
+				</view>
+				<input type="text" v-model="item.dataInput" placeholder="请输入测量数据">
+			</view>
+		</block>
+		<!-- <view class="input-row auto-height">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-13.png" mode=""></image>
+				<text>备注:</text>
+			</view>
+			<view>
+				<textarea @blur="bindTextAreaBlur" auto-height placeholder="请填写备注" />
+				</view>
+		</view> -->
+
+		<view class="button-row">
+			<button type="primary" size="mini" @tap="submit">提交</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		onLoad: function() {
+			//this.newsitems = this.randomfn()
+			this.testToken = server.net.GetLocalToken();
+// 			this.getArea();
+// 			this.getConstruction();
+			this.getProject();
+		},
+		onShow:function(){
+			console.log("页面显示")
+			if(this.isfirstopen!=1){
+				let id = uni.getStorageSync('selectID');
+				let name = uni.getStorageSync('selectName');
+				this.rectpeople = name;
+				this.rectpeopleid = id;
+			}
+		},
+		data() {
+			return {
+				testToken: '',
+				projectName: '',
+				projectNum: '',
+				checkPer: '',
+				checkDate: '请选择检查日期',
+				areaVal: '',
+				areaList: [],
+				areaIndex: 0,
+				areaText: '',
+				ConstructVal: '',
+				ConstructList: [],
+				ConstructIndex: 0,
+				ConstructText: '',
+				engProjectVal: '',
+				engProjectList: [],
+				engProjectIndex: 0,
+				engProjectText: '',
+				isAdd: true,
+				dataList: [],
+				projectList: [],
+				projectText: '请获取项目',
+				projectIndex: 0,
+				projectVal:'',
+				rectpeople:'整改人',
+				rectpeopleid:'',
+				isfirstopen:1
+			}
+		},
+		methods: {
+			getArea() {
+				//获取测量区域
+				console.log(this.testToken); 
+				let url = server.net.setUrl('api/DropDownListApi/GetActualQuaAreaList');
+				let data = {};
+				if (this.projectVal != '') {
+					data.projectid = this.projectVal;
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//token:server.net.GetSessionToken(),
+						token: this.testToken
+					},
+					//data: JSON.stringify(data),
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						console.log(data);
+						let jsondata = data.data;
+						if (jsondata.status == 1) {
+							console.log("检查区域获取成功");
+							this.areaList = this.setData(jsondata.data);
+							this.areaVal = this.areaList[this.areaIndex].value;
+							this.areaText = this.areaList[this.areaIndex].text;
+						} else {
+							console.log("检查区域获取失败" + jsondata.status);
+						}
+
+					},
+					fail: (data, code) => {
+						console.log("检查区域数据请求失败" + data + code)
+					}
+				});
+			},
+			getConstruction() {
+				let url = server.net.setUrl('api/DropDownListApi/GetActualQuaComList');
+				let data = {};
+				if (this.projectVal != '') {
+					data.projectid = this.projectVal;
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						//token:server.net.GetSessionToken(),
+						token: this.testToken
+					},
+					data: JSON.stringify(data),
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						let jsondata = data.data;
+						if (jsondata.status == 1) {
+							console.log("构件类型获取成功");
+							this.ConstructList = this.setData(jsondata.data);
+							this.ConstructVal = this.ConstructList[this.ConstructIndex].value;
+							this.ConstructText = this.ConstructList[this.ConstructIndex].text;
+							this.GetActualQuaTermList(); //获取主控项目
+						} else {
+							console.log("构件类型获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("构件类型数据请求失败" + data + code)
+					}
+				});
+			},
+			GetActualQuaTermList() {
+				//获取主控项目
+				let url = server.net.setUrl('api/DropDownListApi/GetActualQuaTermList');
+				let ajaxdata = {
+					comid: this.ConstructVal
+				};
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.testToken
+					},
+					data: JSON.stringify(ajaxdata),
+					success: res => {
+						server.net.showWrongTipsEx(res);
+						let jsondata = res.data;
+						if (jsondata.status == 1) {
+							console.log("主控项目获取成功");
+							this.engProjectList = this.setData(jsondata.data);
+							this.engProjectVal = this.engProjectList[this.engProjectIndex].value;
+							this.engProjectText = this.engProjectList[this.engProjectIndex].text;
+						} else {
+							console.log("主控项目获取失败" + jsondata.status);
+						}
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						//token: server.net.GetSessionToken(),
+						token: this.testToken
+					},
+					data: {
+						// company: this.companyVal
+					},
+					success: (data) => {
+						server.net.showWrongTipsEx(data);
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						if (jsondata.status == 1) {
+							let first={
+								value:"",
+								text:"请选择项目"
+							}
+							dataArr.unshift(first);
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+							if(this.projectVal!=''){
+								this.getArea();
+								this.getConstruction();
+							}
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					},
+					complete: () => {}
+				});
+			},
+			setData(items) {
+				let newItems = [];
+				items.forEach((e) => {
+					newItems.push({
+						text: e.text,
+						value: e.value
+					});
+				});
+				return newItems;
+			},
+			changeArea(e) {
+				this.areaIndex = e.detail.value;
+				this.areaText = this.areaList[this.areaIndex].text;
+				this.areaVal = this.areaList[this.areaIndex].value;
+			},
+			changeConstruct(e) {
+				this.ConstructIndex = e.detail.value;
+				this.ConstructVal = this.ConstructList[this.ConstructIndex].value;
+				this.ConstructText = this.ConstructList[this.ConstructIndex].text;
+				this.GetActualQuaTermList(); //重新获取主控项目
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+				this.getArea();
+				this.getConstruction();
+			},
+			changeEngproject(e) {
+				this.engProjectIndex = e.detail.value;
+				this.engProjectVal = this.engProjectList[this.engProjectIndex].value;
+				this.engProjectText = this.engProjectList[this.engProjectIndex].text;
+			},
+			changeCheckDate(e) {
+				this.checkDate = e.detail.value;
+			},
+			selectRect(e){
+				this.isfirstopen+=1;
+				uni.navigateTo({
+					url:'../../../components/selectPeople'
+				})
+			},
+			addDatas() {
+				//this.isAdd = true;
+				let addTimes = this.dataList.length + 1;
+				if (addTimes < 11) {
+					this.dataList.push({
+						dataNum: addTimes
+					});
+					addTimes += 1;
+				} else {
+					uni.showToast({
+						title: '最多添加10条'
+					})
+					return false;
+				}
+			},
+			submit() {
+				uni.removeStorageSync('selectID');
+				uni.removeStorageSync('selectName');
+				let url = server.net.setUrl('api/ActualQuantityApi/Add');
+				let newItems = [];
+				for (let i in this.dataList) {
+					newItems.push(this.dataList[i].dataInput);
+				}
+				console.log(newItems);
+				let ajaxdata = {
+					ProjectID: this.projectVal, //项目ID
+					CheckPeople: server.net.GetUser().ID, //检查人
+					AccCheckProple: this.rectpeopleid, //陪同检查人
+					CheckDate: this.checkDate, //检查日期
+					Children: [{
+						ActualQuantityAreaID: this.areaVal, //检查区域
+						DataAttr: newItems, //检查数据
+						Remark: "111", //备注
+						ComId: this.ConstructVal, //构件部位
+						ActualQuantityTermID: this.engProjectVal //主控项目				
+					}],
+
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.testToken
+					},
+					data: JSON.stringify(ajaxdata),
+					success: res => {
+						server.net.showWrongTipsEx(res);
+						let result = res.data;
+						let jsondata = result.data;
+						if (result.status == 1) {
+							uni.showToast({
+								title: '提交成功',
+								mask: false,
+								duration: 1500
+							});
+							setTimeout(function() {
+								uni.navigateBack({
+									delta: 1
+								})
+							}, 2000)
+						} else {
+							console.log(result.message);
+						}
+					},
+					fail: () => {
+						console.log("实测实量提交失败");
+					},
+					complete: () => {}
+				});
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	page {
+		display: flex;
+	}
+
+	.data-row {
+		width: 70%;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		padding: 15px 0px;
+	}
+
+	.data-row button {
+		color: #fff;
+		background-color: #17A869;
+		border: none;
+		position: relative;
+	}
+</style>

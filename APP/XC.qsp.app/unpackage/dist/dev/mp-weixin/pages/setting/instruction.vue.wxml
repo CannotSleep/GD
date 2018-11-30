@@ -1,0 +1,12 @@
+<template name="61789679">
+  <view class="_view data-v-aa5f963e page">
+    <view class="_view data-v-aa5f963e img-group">
+      <image src="../../static/img/logo.png" mode="aspectFit" class="_image data-v-aa5f963e index-img"></image>
+    </view>
+    <view class="_view data-v-aa5f963e">
+      <text class="_text data-v-aa5f963e cont_text">星层项目现场管理系统 </text>
+      <view class="_br data-v-aa5f963e"></view>
+      <text class="_text data-v-aa5f963e cont_text">当前版本号： </text>
+    </view>
+  </view>
+</template>

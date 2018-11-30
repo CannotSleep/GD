@@ -1,0 +1,399 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>所属公司:</text>
+			</view>
+			<picker @change="changeCompany" :value="companyIndex" :range="companyList" range-key="text">
+				<view class="uni-input">{{companyText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-02.png" mode=""></image>
+				<text>项目名称:</text>
+			</view>
+			<picker @change="changeProject" :value="projectIndex" :range="projectList" range-key="text">
+				<view class="uni-input">{{projectText}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>年份选择:</text>
+			</view>
+			<picker mode="selector" :value="yearIndex" :range="yearList" @change="changeYears">
+				<view class="uni-input">{{yearList[yearIndex].text}}</view>
+			</picker>
+		</view>
+		<view class="input-row" v-if="secondPicker">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-01.png" mode=""></image>
+				<text>{{planType}}选择:</text>
+			</view>
+			<picker mode="selector" :value="monthIndex" :range="monthList" @change="changeMonth" range-key="text" v-if="month">
+				<view class="uni-input">{{monthList[monthIndex].text}}</view>
+			</picker>
+			<picker mode="selector" :value="seasonIndex" :range="seasonList" @change="changeSeason" range-key="text" v-if="season">
+				<view class="uni-input">{{seasonList[seasonIndex].text}}</view>
+			</picker>
+			
+		</view>
+		<view class="button-row">
+			<button type="" class="search-btn" size="mini" @tap="searchData">查询</button>
+		</view>
+		<view class="static-content">
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/jindu_icon/No.png" mode=""></image>
+					<text>时间:</text>
+				</view>
+				<view class="detail-box">
+					{{Date}}
+				</view>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/jindu_icon/No.png" mode=""></image>
+					<text>本月重要节点计划个数:</text>
+				</view>
+				<view class="detail-box">
+					{{planNum}}
+				</view>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/jindu_icon/No.png" mode=""></image>
+					<text>本月重要节点完成个数:</text>
+				</view>
+				<view class="detail-box">
+					{{realNum}}
+				</view>
+			</view>
+			<view class="input-row">
+				<view class="input-label">
+					<image src="../../../static/img/jindu_icon/No.png" mode=""></image>
+					<text>本月重要节点完成个数:</text>
+				</view>
+				<view class="detail-box">
+					{{rate}}
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		onLoad(option) {
+			//根据页面传值判断页面内容，并动态设置页面标题
+			let State = option.state;
+			switch (State) {
+				case 'month':
+					uni.setNavigationBarTitle({
+						title: '月进度统计'
+					});
+					this.searchType = 3;
+					break;
+				case 'season':
+					uni.setNavigationBarTitle({
+						title: '季度进度统计'
+					});
+					this.month = false;
+					this.season = true;
+					this.planType = '季度';
+					this.searchType = 2;
+					break;
+
+				case 'year':
+					uni.setNavigationBarTitle({
+						title: '年度进度统计'
+					});
+					this.secondPicker = false;
+					this.planType = '';
+					this.searchType = 1;
+					break;
+
+					defualt: break;
+			}
+
+			this.testToken = server.net.getTestToken();
+			console.log("测试token：" + this.testToken)
+			this.getCompany();
+
+		},
+		data() {
+			return {
+				testToken: '',
+				planType: '月份',
+	
+				
+				companyList: [],
+				companyVal: '',
+				companyIndex: 0,
+				companyText: '',
+				projectList: [],
+				projectIndex: 0,
+				projectVal: '',
+				projectText: '',
+				yearIndex: 0,
+				yearList: [{
+					text: "2018年",
+					value: 2018
+				}, {
+					text: "2019年",
+					value: 2019
+				}, {
+					text: "2020年",
+					value: 2020
+				}],
+				yearVal: '',
+				monthList: [{
+					value: 1,
+					text: '1月'
+				}, {
+					value: 2,
+					text: '2月'
+				}, {
+					value: 3,
+					text: '3月'
+				}, {
+					value: 4,
+					text: '4月'
+				}, {
+					value: 5,
+					text: '5月'
+				}, {
+					value: 6,
+					text: '6月'
+				}, {
+					value: 7,
+					text: '7月'
+				}, {
+					value: 8,
+					text: '8月'
+				}, {
+					value: 9,
+					text: '9月'
+				}, {
+					value: 10,
+					text: '10月'
+				}, {
+					value: 11,
+					text: '11月'
+				}, {
+					value: 12,
+					text: '12月'
+				}],
+				monthIndex: 0,
+				monthVal: '',
+				monthText: '',
+				seasonList: [{
+					value: 1,
+					text: '第一季度'
+				}, {
+					value: 2,
+					text: '第二季度'
+				}, {
+					value: 3,
+					text: '第三季度'
+				}, {
+					value: 4,
+					text: '第四季度'
+				}],
+				seasonVal: '',
+				seasonIndex: 0,
+				scheduleList: [],
+				month: true, //用于判断是月计划查询还是季度计划查询
+				season: false,
+				year: false,
+				secondPicker: true,
+				Date: '2018-10-8',
+				Number: 0,
+				planNum: 0,
+				realNum: 0,
+				rate: '',
+				searchType: 1
+			}
+		},
+		methods: {
+			getCompany() { //获取公司数据				
+				let url = server.net.setUrl('api/DropDownListApi/GetCompany');
+				uni.request({
+					url: url,
+					dataType: 'json',
+					type: 'GET',
+					header: {
+						//token: server.net.GetSessionToken()
+						token: this.testToken
+					},
+					success: (result) => {
+						var jsondata = result.data;
+						let dataArr = jsondata.data;
+
+						if (jsondata.status = 1) {
+							console.log("公司获取成功");
+							this.companyList = this.setData(jsondata.data);
+							this.companyVal = this.companyList[this.companyIndex].value;
+							this.companyText = this.companyList[this.companyIndex].text;
+							this.getProject();
+						} else {
+							console.log(jsondata.status);
+							uni.showToast({
+								title: jsondata.status,
+								mask: false,
+								duration: 1500
+							});
+						}
+					},
+					fail: (data, code) => {
+						console.log("公司获取失败" + data + code);
+					}
+				});
+			},
+			getProject() { //获取项目数据
+				let url = server.net.setUrl('api/DropDownListApi/GetProject');
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						//token: server.net.GetSessionToken(),
+						token: this.testToken
+					},
+					data: {
+						company: this.companyVal
+					},
+					success: (data) => {
+						let jsondata = data.data;
+						let dataArr = jsondata.data;
+						if (jsondata.status = 1) {
+
+							this.projectList = this.setData(dataArr);
+							this.projectVal = this.projectList[this.projectIndex].value;
+							this.projectText = this.projectList[this.projectIndex].text;
+						} else {
+							console.log("项目获取失败" + jsondata.status);
+						}
+					},
+					fail: (data, code) => {
+						console.log("项目数据请求失败" + data + code)
+					},
+					complete: () => {}
+				});
+			},
+			setData: function(items) { //设置两个picker的数据
+				let newItems = [];
+				items.forEach((e) => {
+					newItems.push({
+						text: e.text,
+						value: e.value
+					});
+				});
+				return newItems;
+			},
+			searchData() {
+				let url = server.net.setUrl('api/ScheduleApi/Statistics');
+				this.yearVal = this.yearList[this.yearIndex].value;
+				this.monthVal = this.monthList[this.monthIndex].value;
+				this.seasonVal = this.seasonList[this.seasonIndex].value;
+				console.log(this.searchType)
+				let ajaxdata = {
+					StatisticsType: this.searchType
+				}
+				if (this.companyVal) {
+					ajaxdata.CompanyID = this.companyVal;
+				}
+				if (this.projectVal) {
+					ajaxdata.ProjectID = this.projectVal;
+				}
+				//判断月/季度查询
+				if (this.searchType == 1) {
+					ajaxdata.Year = this.yearVal;
+				} else if (this.searchType == 2) {
+					ajaxdata.Quarter = this.seasonVal;
+				} else {
+					ajaxdata.Month = this.monthVal;
+				}
+				
+				uni.request({
+					url: url,
+					method: 'POST',
+					data: JSON.stringify(ajaxdata),
+					header: {
+						Token: this.testToken
+					},
+					success: res => {
+						let result = res.data;
+						let jsondata = result.data;
+						if (result.status == 1) {
+							if (jsondata!='') {
+								jsondata.forEach((e) => {
+									this.Date = e.StatisticsName;
+									this.planNum = e.PlanCount;
+									this.realNum = e.FinishCount;
+									this.rate = e.FinishPercent;
+								})
+							} else{
+								uni.showToast({
+									title:"无法查询数据，请更换条件"
+								})
+							}
+						} else {
+							console.log(result.message);
+							uni.showToast({
+								title: result.message
+							})
+						}
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			changeCompany(e) {
+				this.companyIndex = e.detail.value;
+				this.companyVal = this.companyList[e.detail.value].value;
+				this.companyText = this.companyList[this.companyIndex].text;
+				this.getProject();
+			},
+			changeProject(e) {
+				this.projectIndex = e.detail.value;
+				this.projectVal = this.projectList[e.detail.value].value;
+				this.projectText = this.projectList[this.projectIndex].text;
+			},
+			changeYears(e) {
+				this.yearIndex = e.detail.value;
+				this.yearVal = this.yearList[this.yearIndex].value;
+			},
+			changeMonth(e) {
+				this.monthIndex = e.detail.value;
+				this.monthVal = this.monthList[this.monthIndex].value;
+			},
+			changeSeason(e) {
+				this.seasonIndex = e.detail.value;
+				this.seasonVal = this.seasonList[this.seasonIndex].value;
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.static-content {
+		margin-top: 30px;
+		width: 100%;
+	}
+
+	.static-content .input-label {
+		width: 45%;
+	}
+
+	.static-content .detail-box {
+		width: 53%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+		padding-left: 10px;
+	}
+</style>

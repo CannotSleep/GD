@@ -1,0 +1,20 @@
+<template name="36d2c8f9">
+  <view class="_view data-v-5d4011b9 content">
+    <view class="_view data-v-5d4011b9 input-row">
+      <view class="_view data-v-5d4011b9 input-label">
+        <text class="_text data-v-5d4011b9">选项1:</text>
+      </view>
+      <picker bindchange="handleProxy" value="{{index}}" range="{{List1}}" range-key="text" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_picker data-v-5d4011b9">
+        <view class="_view data-v-5d4011b9 uni-input">{{List1[index].text}}</view>
+      </picker>
+    </view>
+    <view class="_view data-v-5d4011b9 input-row">
+      <view class="_view data-v-5d4011b9 input-label">
+        <text class="_text data-v-5d4011b9">选项2:</text>
+      </view>
+      <picker bindchange="handleProxy" value="{{index}}" range="{{List2}}" range-key="text" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_picker data-v-5d4011b9">
+        <view class="_view data-v-5d4011b9 uni-input">{{List2[index].text}}</view>
+      </picker>
+    </view>
+  </view>
+</template>

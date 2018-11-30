@@ -1,0 +1,96 @@
+<template>
+	<view class="content">
+		<view class="uni-list">
+			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(value,key) in scheduleList" :key="key">
+				<view class="uni-media-list" @tap="openViews(value.url)">
+					<view class="uni-media-list-logo">
+						<image  :src="value.img"></image>
+					</view>
+					<view class="uni-media-list-body">
+						<view class="uni-media-list-text-top">{{value.title}}</view>						
+						<image src="http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/Site/next.png" mode=""></image>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		data(){
+			return{
+				scheduleList:[{
+					img:'../../../static/img/Schedule/schedule-04.png',
+					title:'月进度计划',
+					url:'scheduleList?state=month'
+				},{
+					img:'../../../static/img/Schedule/schedule-05.png',
+					title:'季度进度计划',
+					url:'scheduleList?state=season'
+				},{
+					img:'../../../static/img/Schedule/schedule-01.png',
+					title:'月进度统计',
+					url:'Statistics?state=month'
+				},{
+					img:'../../../static/img/Schedule/schedule-02.png',
+					title:'季度进度统计',
+					url:'Statistics?state=season'
+				},{
+					img:'../../../static/img/Schedule/schedule-03.png',
+					title:'年进度统计',
+					url:'Statistics?state=year'
+				}]
+			}
+		},
+		methods:{
+			openViews(url){  //，保留当前页面，跳转新页面
+				uni.navigateTo({
+					url:url
+				})
+			}
+		}
+	}
+</script>
+
+<style scoped>
+.uni-list {
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	}
+	.uni-media-list{
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+	.uni-list-cell{
+		margin-top: 0px;
+		padding: 10px;
+	}
+	.uni-media-list-logo {
+		height: 70px;
+		width: 70px;
+		margin-right: 20upx;
+	}
+	
+	.uni-media-list-logo image {
+		height: 100%;
+		width: 100%;
+	}
+	.uni-media-list-body{
+		width: 80%;
+		padding: 0px 15px;
+		font-size: 28px;
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.uni-media-list-body image{
+		justify-content: flex-end;
+		align-items: center;
+		width: 36px;
+		height: 28px;
+	}
+</style>

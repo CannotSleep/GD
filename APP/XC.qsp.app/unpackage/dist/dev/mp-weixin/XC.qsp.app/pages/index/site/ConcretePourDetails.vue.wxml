@@ -1,0 +1,182 @@
+<template name="3bc46564">
+  <view class="_view data-v-0b2a1c33 content">
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-02.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">工程名称:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{ProjectName}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">浇筑部位:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{Position}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-10.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">砼强度:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{Grade}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-13.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">开盘时间:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{StartDate}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-03.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">塌落度:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{Angle}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">浇筑方量:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{Engineering}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-13.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">浇筑持续时间:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{EndDate}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-03.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">各工种人员配备情况:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 day-row">
+        <text class="_text data-v-0b2a1c33">白班</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 night-row">
+        <text class="_text data-v-0b2a1c33">夜班</text>
+      </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">砼工人数:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 day-row"> {{dayTg}} </view>
+      <view class="_view data-v-0b2a1c33 night-row"> {{nightTg}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">找平人数:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 day-row"> {{ZDayNum}} </view>
+      <view class="_view data-v-0b2a1c33 night-row"> {{ZNigNum}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">捧手人数:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 day-row"> {{PDayNum}} </view>
+      <view class="_view data-v-0b2a1c33 night-row"> {{PNigNum}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">振动棒台数:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{MechanicalZNum}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">磨光机台数:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{MechanicalMNum}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">平板振动器台数:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{MechanicalPNum}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-11.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">劳务值班人:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{LabourName}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-13.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">劳务值班人电话:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{LabourPhone}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-11.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">钢筋值班人:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{RebarName}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-13.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">钢筋值班人电话:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{RebarPhone}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-11.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">木工值班人:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{CarpentryName}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-13.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">木工值班人电话:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{CarpentryPhone}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list1_icon-11.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">水电值班人:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{PlumberName}} </view>
+    </view>
+    <view class="_view data-v-0b2a1c33 input-row">
+      <view class="_view data-v-0b2a1c33 input-label">
+        <image src="../../../static/img/list1_icon/list2_icon-13.png" mode class="_image data-v-0b2a1c33"></image>
+        <text class="_text data-v-0b2a1c33">水电值班人电话:</text>
+      </view>
+      <view class="_view data-v-0b2a1c33 detail-box"> {{PlumberPhone}} </view>
+    </view>
+    <block wx:key="index" key="{{index}}" wx:for="{{AutographList}}" wx:for-index="index" wx:for-item="item">
+      <view class="_view data-v-0b2a1c33 input-row">
+        <view class="_view data-v-0b2a1c33 input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-12.png" mode class="_image data-v-0b2a1c33"></image>
+          <text class="_text data-v-0b2a1c33">{{item.TypeName}}:</text>
+        </view>
+        <view class="_view data-v-0b2a1c33 detail-box"> {{item.AccountName}} (
+          <view wx:if="{{item.IsFinish}}" class="_h1 data-v-0b2a1c33">已签</view>
+          <view wx:else class="_h1 data-v-0b2a1c33">未签</view>)
+          <block wx:if="{{item.NeedAutograph}}">
+            <button class="_button data-v-0b2a1c33 sm" type="primary" size="mini" bindtap="handleProxy" data-eventid="{{'FN8-0-'+index}}" data-comkey="{{$k}}">签字</button>
+          </block>
+        </view>
+      </view>
+    </block>
+    <view class="_view data-v-0b2a1c33 input-row-bottom-line"></view>
+  </view>
+</template>

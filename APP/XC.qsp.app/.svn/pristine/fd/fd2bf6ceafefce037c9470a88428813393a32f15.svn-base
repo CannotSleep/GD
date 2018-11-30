@@ -1,0 +1,128 @@
+<template>
+	<view class="content">
+		<view class="module-row mt-30">
+			<view class="module-box" v-for="(value,key) in moduleList" :key="key">
+				<text class="" :style="{'color':value.color}">{{value.title}}</text>
+				<image :src="value.img" mode="aspectFit" class="module-img" @tap="openViews(value.url)"></image>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				moduleList: [{
+					"id": 1,
+					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(1).png',
+					"url": 'safetyCheck?type=safety',
+					"title": '安全隐患检查',
+					"color": "#fff"
+				}, {
+					"id": 2,
+					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(2).png',
+					"url": 'safetyList?state=my',
+					"title": '安全检查记录',
+					"color": "#fff"
+				}, {
+					"id": 3,
+					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(3).png',
+					"url": 'safetyList?state=1',
+					"title": '安全整改记录',
+					"color": "#fff"
+				}, 
+// 				{
+// 					"id": 4,
+// 					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(4).png',
+// 					"url": '',
+// 					"title": '安全离线记录',
+// 					"color": "#dca13a"
+// 				}, 
+				{
+					"id": 5,
+					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(5).png',
+					"url": '',
+					"title": '安全隐患报表',
+					"color": "#fff"
+				}, {
+					"id": 6,
+					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(6).png',
+					"url": 'qualityCheck?type=quality',
+					"title": '质量隐患检查',
+					"color": "#fff"
+				}, {
+					"id": 7, 
+					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(7).png',
+					"url": 'QualityList?state=my',
+					"title": '质量检查记录',
+					"color": "#fff"
+				}, {
+					"id": 8,
+					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(8).png',
+					"url": 'QualityList?state=1',
+					"title": '质量整改记录',
+					"color": "#fff"
+				}, 
+// 				{
+// 					"id": 9,
+// 					"img": 'http://xcbucket.oss-cn-beijing.aliyuncs.com/%E6%98%9F%E5%B1%82%E7%8E%B0%E5%9C%BA%E7%AE%A1%E7%90%86APP/img/quality/quality%20(9).png',
+// 					"url": '',
+// 					"title": '质量离线记录',
+// 					"color": "#e58513"
+// 				},
+				]
+			}
+		},
+		methods:{
+			openViews(url){  //，保留当前页面，跳转新页面
+				uni.navigateTo({
+					url:url
+				})
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.content {
+		flex: 1;
+		justify-content: flex-start;
+		align-items: flex-start;
+		background:#17A869;
+	}
+
+	.module-row {
+		width: 100%;
+		height: 226px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+
+	.module-box {
+		width:50%;
+		/* width: 226px; */
+		text-align: center;
+		height: 226px;
+		/* background-color: #fff; */
+		margin-top: 30px;
+		font-size: 28px;
+		color: #21AA6A;
+	}
+
+	.module-title {
+		font-size: 0.5rem;
+		color: #21aa6a;
+	}
+
+	.module-img {
+		width: 200px;
+		height: 200px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-end;
+	}
+</style>

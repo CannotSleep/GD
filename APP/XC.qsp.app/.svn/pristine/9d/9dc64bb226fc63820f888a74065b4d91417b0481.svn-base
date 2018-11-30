@@ -1,0 +1,162 @@
+<template>
+	<view class="content">
+		<view class="list-content">
+			<view class="uni-list">
+				<block v-for="(item,index) in messageDatalist" :key="index">
+					<view class="uni-list-cell" hover-class="uni-list-cell-hover">
+						<view class="uni-triplex-row">
+							<view class="uni-triplex-left" @tap="getDetailList(item.type)">
+								<text class="list-title">{{item.contents}}</text>
+								<text class="list-count">{{item.count}}</text>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+
+</template> 
+ 
+<script>
+	import server from '../../store/server.js';
+	export default {
+		data() {
+			return {
+				messageDatalist: [
+					{
+						"type":19,          
+						"contents":"混凝土浇筑令签字",       
+						"count":1,       //上传人ID
+					},
+					{
+						"type":19,             
+						"contents":"混凝土浇筑令签字",       
+						"count":1,       
+					}
+				],
+			}
+		},
+		methods: {
+			getMessagelist() {
+				let url = server.net.setUrl('api/NoticeNewsApi/AppGetNotify');
+				
+				uni.request({
+					url: url,
+					method: 'GET',
+					header: {
+						Token: server.net.GetSessionToken()
+					},
+					success: (res) => {
+						console.log(res)
+ 						let jsondata = res.data;
+ 						let messArr=jsondata.data;
+						
+						this.messageDatalist = messArr;
+						uni.stopPullDownRefresh();
+					},
+					fail: (f) => {
+						
+					},
+					complete: (c) => {
+						
+					}
+				});
+				
+			},
+			getDetailList(infoType){
+				switch(infoType)
+				{
+					case 1:
+					    break;
+						uni.navigateTo({
+							url: '../index/quality/QualityList?infoType='+infoType +'&state=3'
+						});
+						break;
+					case 18:
+					    uni.navigateTo({
+					    	url: '../index/schedule/scheduleList?state=all&notify=true'
+					    });
+					    break;
+					case 19:
+					    uni.navigateTo({
+					    	url: '../index/site/ConcretePourList?notify=true'
+					    });
+					    break;
+					
+				}
+				
+			}
+		},
+		onLoad(option) {
+			//根据页面传值判断页面内容：检查记录&整改记录，并动态设置页面标题
+			//获取文件列表
+			this.getMessagelist();
+			
+		},onPullDownRefresh() {
+			console.log('下拉刷新');
+			this.getMessagelist();
+		}
+	}
+</script>
+
+<style scoped>
+	.input-row {
+		align-items: center;
+	}
+
+	.list-content {
+		margin-top: 0px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		width: 100%;
+		padding: 0px 10px;
+	}
+
+	.list-title {
+		font-size: 36px;
+		color: #000;
+		display: block;
+	}
+
+	.list-deadline,
+	.list-level,
+	.list-state{
+		font-size: 32px;
+		color: #6C6C6C;
+		display: inline-block;
+		margin-right: 15px;
+	}
+	
+	.list-button{
+		font-size: 22px;
+		/* color: #6C6C6C; */
+		display: inline-block;
+		margin-right: 10px;
+		float: right;
+		height: 100%;
+	}
+	
+	.list-title{
+		font-size: 32px;
+		color: #000;
+		display: inline-block;
+		margin-right: 15px;
+	}
+	
+	.list-count{
+		font-size: 32px;
+		color: #f00;
+		display: inline-block;
+		margin-right: 10px;
+		float: right;
+	}
+	
+	
+	.classdown{
+		display:none;
+	}
+	
+</style>

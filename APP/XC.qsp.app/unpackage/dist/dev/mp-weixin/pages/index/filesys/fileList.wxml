@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/index/filesys/fileList.vue.wxml" /><template is="367e2ce7" data="{{ ...$root['0'], $root }}"/>

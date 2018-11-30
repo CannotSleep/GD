@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/index/schedule/Statistics.vue.wxml" /><template is="283ea116" data="{{ ...$root['0'], $root }}"/>

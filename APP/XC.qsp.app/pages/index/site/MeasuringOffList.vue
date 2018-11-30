@@ -1,0 +1,137 @@
+<template>
+	<view class="content">
+		<view class="list-content">
+			<view class="uni-list">
+				<block v-for="(item,index) in MeasuringList" :key="index">
+					<view class="uni-list-cell" hover-class="uni-list-cell-hover" @tap="goEdit(index)">
+						<view class="uni-triplex-row">
+							<view class="uni-triplex-left">
+								<text class="list-title uni-ellipsis">{{item.ProjectText}}</text>
+								<label>
+									<text class="list-deadline">{{item.CheckDate}}</text>
+									<text class="list-level">{{item.Rectpeople}}</text>
+								</label>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		onLoad(option) {
+			//根据页面传值判断页面内容：检查记录&整改记录，并动态设置页面标题
+			this.initDate();
+		},
+		onShow(){
+			this.initDate();
+		},
+		data() {
+			return {
+				MeasuringList: [],
+			}
+		},
+		methods: {
+			initDate:function(e){
+				let measuringOff = uni.getStorageSync('MeasuringListOffLine');
+				if (measuringOff.length == 0) {
+					measuringOff=[];
+					uni.showToast({
+						title: '没有离线记录',
+						mask: false,
+						duration: 1500
+					});
+				}
+				else
+				{
+				    this.MeasuringList = measuringOff;
+				}
+			},
+			goEdit: function(index) { //跳转到详情页面
+				console.log(index);
+  
+				uni.navigateTo({
+					url: "MeasuringEdit?index=" + index
+				})
+			}
+		}
+
+	}
+</script>
+
+<style scoped>
+	
+	@import "../../../common/uni.css"; 
+	
+	
+	.input-row {
+		align-items: center;
+	}
+
+	.list-content {
+		margin-top: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		width: 100%;
+		padding: 0px 10px;
+	}
+
+	.list-title {
+		font-size: 36px;
+		color: #000;
+		display: block;
+	}
+
+	.list-deadline,
+	.list-level,
+	.list-state {
+		font-size: 26px;
+		color: #6C6C6C;
+		display: inline-block;
+		margin-right: 15px;
+	}
+	
+	.state0{
+		color:#FF8C69;
+	}
+	
+	.state1{
+		/* 待修改 */
+		color:#1C86EE;
+	}
+	
+	.state2{
+		/* 待复查 */
+		color:#EEAD0E;
+	}
+	
+	.state3{
+		/* 完成 */
+		color:#17A869;
+	}
+	
+	.state4{
+		/* 审批不通过 */
+		color:#CD2626;
+	}
+	
+	.crash0{
+		/* 一般 */
+		color:#17A869;
+	}
+	.crash1{
+		/* 严重 */
+		color:#FFB90F;
+	}
+	.crash2{
+		/* 紧要 */
+		color:#f00; 
+	}
+</style>

@@ -1,0 +1,228 @@
+<template>
+	<view class="content">
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-08.png" mode=""></image>
+				<text>计划名称：</text>
+			</view>
+			<view class="detail-box">
+				{{Name}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-05.png" mode=""></image>
+				<text>计划类型：</text>
+			</view>
+			<view class="detail-box">
+				{{PlanType}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-14.png" mode=""></image>
+				<text>计划开始时间：</text>
+			</view>
+			<view class="detail-box">
+				{{StartDate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-14.png" mode=""></image>
+				<text>计划完成时间：</text>
+			</view>
+			<view class="detail-box">
+				{{EndDate}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-14.png" mode=""></image>
+				<text>实际完成时间：</text>
+			</view>
+			<picker mode="date" :value="RealEndDate" :start="StartDate" end="2028-12-31" @change="changeDate">
+				<view class="uni-input">{{RealEndDate}}</view>
+			</picker>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-09.png" mode=""></image>
+				<text>实际偏差：</text>
+			</view>
+			<view class="detail-box">
+				{{Deviation}}
+			</view>
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list1_icon-10.png" mode=""></image>
+				<text>计划纠编措施：</text>
+			</view>
+			<textarea @blur="bindTextAreaBlur" auto-height placeholder="计划纠编措施" v-model="Reclaimed" />
+		</view>
+		<view class="input-row">
+			<view class="input-label">
+				<image src="../../../static/img/list1_icon/list2_icon-08.png" mode=""></image>
+				<text>备注</text>
+			</view>
+			<textarea @blur="bindTextAreaBlur" auto-height placeholder="请填写备注" v-model="Remark"/>
+		</view>
+		<view class="input-row-bottom-line"></view>
+		<view class="button-row" v-if="NeedSub">
+			<button type="primary" size="mini" @tap="submit">填报</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	import server from '../../../store/server.js';
+	export default {
+		onLoad: function(option) {
+			this.Token = server.net.GetSessionToken();
+			this.pageId = option.id;
+			this.getDetails(option.id,option.notify);
+		},
+		data() {
+			return {
+				Token:'',
+				pageId: '',
+				Name: '',
+				ProjectName: '',
+				StartDate: '',
+				EndDate: '',
+				RealEndDate: '',
+				Remark: '',
+				Reclaimed: '',
+				Deviation: '',
+				PlanType: '',
+				NeedSub:false
+			}
+		},
+		methods: {
+			changeDate(e){
+				this.RealEndDate = e.detail.value;
+			},
+			getDetails(id,notify) {
+				console.log(id);
+				let url = server.net.setUrl('api/ScheduleApi/GetList?page=1');
+				let ajaxdata = {};
+				ajaxdata.ID = id;
+				if(notify == "true"){
+					ajaxdata.NeedSub = 'true';
+				}
+				uni.request({
+					url: url,
+					method: 'POST',
+					data: ajaxdata,
+					header: {
+						Token: this.Token,
+						"content-type": "application/json"
+					},
+					success: res => {
+						server.net.showWrongTipsEx(res);
+						let result = res.data;
+						let jsondata = result.data;
+						if (result.status == 1) {
+							jsondata.forEach((e) => {
+								this.ProjectName = e.ProjectName;
+								this.Name = e.Name;
+								this.StartDate = e.StartDate.substring(0, 10);
+								this.EndDate = e.EndDate.substring(0, 10);
+								this.RealEndDate = e.RealEndDate.substring(0, 10);
+								this.Reclaimed = e.Reclaimed;
+								if (e.Deviation == null) {
+									this.Deviation = '暂无';
+									this.RealEndDate = '未完成';
+								} else {
+									this.Deviation = e.Deviation;
+								}
+								if (e.Type == 1) {
+									this.PlanType = '月进度计划'
+								} else {
+									this.PlanType = '季度进度计划'
+								}
+								this.Remark=e.Remark;
+								this.NeedSub = e.NeedSub;
+							});
+						} else {
+							console.log(result.message);
+						}
+					},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			submit(){
+				let url = server.net.setUrl('api/ScheduleApi/Update');
+				if(this.RealEndDate == '未完成')
+				{
+					server.net.showWrongTips("请选择实际完成时间");
+					return false; 
+				}
+				let ajaxdata = {
+					id:this.pageId,
+					realEndDate:this.RealEndDate,
+					reclaimed:this.Reclaimed,
+					remark:this.Remark
+				}
+				console.log(ajaxdata);
+				uni.request({
+					url: url,
+					method: 'POST',
+					header: {
+						Token: this.Token
+					},
+					data: JSON.stringify(ajaxdata),
+					success: res => {
+						server.net.showWrongTipsEx(res);
+						let result = res.data;
+						let jsondata = result.data;
+						if (result.status == 1) {
+							uni.showToast({
+								title: '填报成功',
+								mask: false,
+								duration: 1500
+							});
+							setTimeout(function() {
+								uni.navigateBack({
+									delta: 1
+								})
+							}, 2000)
+						} else {
+							console.log(result.message);
+						}
+					},
+					fail: () => {
+						console.log("填报失败");
+					},
+					complete: () => {}
+				});
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.detail-box {
+		width: 55%;
+		min-height: 50px;
+		font-size: 28px;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.input-label {
+		width: 45%;
+	}
+
+	picker {
+		width: 55%;
+	}
+	textarea{
+		width: 55%;
+	}
+</style>

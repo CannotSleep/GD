@@ -1,0 +1,96 @@
+<import src="/XC.qsp.app/components/uni-icon.vue.wxml" />
+<template name="5d93bdc1">
+  <view class="_view data-v-359552a2 content">
+    <view class="_view data-v-359552a2 list-content">
+      <view class="_view data-v-359552a2 uni-list">
+        <radio-group class="_radio-group data-v-359552a2 radio-group" bindchange="handleProxy" data-eventid="{{'8Uq-0'}}" data-comkey="{{$k}}">
+          <block wx:key="index" key="{{index}}" wx:for="{{peopleDatalist}}" wx:for-index="index" wx:for-item="item">
+            <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+              <label class="_label data-v-359552a2">
+                <template data="{{...$root['0'], ...$root[$kk+'Qqt-0-'+index],$root}}" is="e02e9068"></template>
+                <text class="_text data-v-359552a2 list-first">{{item.Name}}</text>
+              </label>
+            </view>
+            <block wx:if="{{item.children!=null}}" wx:key="sindex" key="{{sindex}}" wx:for="{{item.children}}" wx:for-index="sindex" wx:for-item="sitem">
+              <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+                <label wx:if="{{sitem.Account==null}}" class="_label data-v-359552a2">
+                  <template data="{{...$root['0'], ...$root[$kk+'58q-1-'+index+'-'+sindex],$root}}" is="e02e9068"></template>
+                  <text class="_text data-v-359552a2 list-second">{{sitem.Name}}</text>
+                </label>
+                <label class="_label data-v-359552a2 radio list-second" wx:if="{{sitem.Account!=null}}">
+                  <radio value="{{sitem.Account.ID+sitem.Name}}" checked="{{true}}" class="_radio data-v-359552a2" />
+                  <template data="{{...$root['0'], ...$root[$kk+'WPr-2-'+index+'-'+sindex],$root}}" is="e02e9068"></template> {{sitem.Name}} </label>
+              </view>
+              <block wx:if="{{sitem.children!=null}}" wx:key="tindex" key="{{tindex}}" wx:for="{{sitem.children}}" wx:for-index="tindex" wx:for-item="titem">
+                <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+                  <label wx:if="{{titem.Account==null}}" class="_label data-v-359552a2">
+                    <template data="{{...$root['0'], ...$root[$kk+'xJ3-3-'+index+'-'+sindex+'-'+tindex],$root}}" is="e02e9068"></template>
+                    <text class="_text data-v-359552a2 list-third">{{titem.Name}}</text>
+                  </label>
+                  <label class="_label data-v-359552a2 radio list-third" wx:if="{{titem.Account!=null}}">
+                    <radio value="{{titem.Account.ID+titem.Name}}" checked="{{true}}" class="_radio data-v-359552a2" />
+                    <template data="{{...$root['0'], ...$root[$kk+'djH-4-'+index+'-'+sindex+'-'+tindex],$root}}" is="e02e9068"></template> {{titem.Name}} </label>
+                </view>
+                <block wx:if="{{titem.children!=null}}" wx:key="findex" key="{{findex}}" wx:for="{{titem.children}}" wx:for-index="findex" wx:for-item="fitem">
+                  <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+                    <label wx:if="{{fitem.Account==null}}" class="_label data-v-359552a2">
+                      <template data="{{...$root['0'], ...$root[$kk+'fUw-5-'+index+'-'+sindex+'-'+tindex+'-'+findex],$root}}" is="e02e9068"></template>
+                      <text class="_text data-v-359552a2 list-fourth">{{fitem.Name}}</text>
+                    </label>
+                    <label class="_label data-v-359552a2 radio list-fourth" wx:if="{{fitem.Account!=null}}">
+                      <radio value="{{fitem.Account.ID+fitem.Name}}" checked="{{true}}" class="_radio data-v-359552a2" />
+                      <template data="{{...$root['0'], ...$root[$kk+'lNP-6-'+index+'-'+sindex+'-'+tindex+'-'+findex],$root}}" is="e02e9068"></template> {{fitem.Name}} </label>
+                  </view>
+                  <block wx:if="{{fitem.children!=null}}" wx:key="sxindex" key="{{sxindex}}" wx:for="{{fitem.children}}" wx:for-index="sxindex" wx:for-item="sxitem">
+                    <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+                      <label wx:if="{{sxitem.Account==null}}" class="_label data-v-359552a2">
+                        <template data="{{...$root['0'], ...$root[$kk+'XPR-7-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex],$root}}" is="e02e9068"></template>
+                        <text class="_text data-v-359552a2 list-fifth">{{sxitem.Name}}</text>
+                      </label>
+                      <label class="_label data-v-359552a2 radio list-fifth" wx:if="{{sxitem.Account!=null}}">
+                        <radio value="{{sxitem.Account.ID+sxitem.Name}}" checked="{{true}}" class="_radio data-v-359552a2" />
+                        <template data="{{...$root['0'], ...$root[$kk+'lKK-8-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex],$root}}" is="e02e9068"></template> {{sxitem.Name}} </label>
+                    </view>
+                    <block wx:if="{{sxitem.children!=null}}" wx:key="seindex" key="{{seindex}}" wx:for="{{sxitem.children}}" wx:for-index="seindex" wx:for-item="seitem">
+                      <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+                        <label wx:if="{{seitem.Account==null}}" class="_label data-v-359552a2">
+                          <template data="{{...$root['0'], ...$root[$kk+'yIH-9-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex],$root}}" is="e02e9068"></template>
+                          <text class="_text data-v-359552a2 list-sixth">{{seitem.Name}}</text>
+                        </label>
+                        <label class="_label data-v-359552a2 radio list-sixth" wx:if="{{seitem.Account!=null}}">
+                          <radio value="{{seitem.Account.ID+seitem.Name}}" checked="{{true}}" class="_radio data-v-359552a2" />
+                          <template data="{{...$root['0'], ...$root[$kk+'N4X-10-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex],$root}}" is="e02e9068"></template> {{seitem.Name}} </label>
+                      </view>
+                      <block wx:if="{{seitem.children!=null}}" wx:key="eindex" key="{{eindex}}" wx:for="{{seitem.children}}" wx:for-index="eindex" wx:for-item="eitem">
+                        <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+                          <label wx:if="{{eitem.Account==null}}" class="_label data-v-359552a2">
+                            <template data="{{...$root['0'], ...$root[$kk+'LEW-11-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex],$root}}" is="e02e9068"></template>
+                            <text class="_text data-v-359552a2 .list-senth">{{eitem.Name}}</text>
+                          </label>
+                          <label class="_label data-v-359552a2 radio .list-senth" wx:if="{{eitem.Account!=null}}">
+                            <radio value="{{eitem.Account.ID+eitem.Name}}" checked="{{true}}" class="_radio data-v-359552a2" />
+                            <template data="{{...$root['0'], ...$root[$kk+'VUY-12-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex],$root}}" is="e02e9068"></template> {{eitem.Name}} </label>
+                        </view>
+                        <block wx:if="{{eitem.children!=null}}" wx:key="nindex" key="{{nindex}}" wx:for="{{eitem.children}}" wx:for-index="nindex" wx:for-item="nitem">
+                          <view class="_view data-v-359552a2 uni-list-cell" hover-class="uni-list-cell-hover">
+                            <label wx:if="{{nitem.Account==null}}" class="_label data-v-359552a2">
+                              <template data="{{...$root['0'], ...$root[$kk+'K5L-13-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex+'-'+nindex],$root}}" is="e02e9068"></template>
+                              <text class="_text data-v-359552a2 list-eight">{{nitem.Name}}</text>
+                            </label>
+                            <label class="_label data-v-359552a2 radio list-eight" wx:if="{{nitem.Account!=null}}">
+                              <radio value="{{nitem.Account.ID+nitem.Name}}" checked="{{true}}" class="_radio data-v-359552a2" />
+                              <template data="{{...$root['0'], ...$root[$kk+'BSo-14-'+index+'-'+sindex+'-'+tindex+'-'+findex+'-'+sxindex+'-'+seindex+'-'+eindex+'-'+nindex],$root}}" is="e02e9068"></template> {{nitem.Name}} </label>
+                          </view>
+                        </block>
+                      </block>
+                    </block>
+                  </block>
+                </block>
+              </block>
+            </block>
+          </block>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+</template>

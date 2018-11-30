@@ -1,0 +1,165 @@
+<template name="933f0232">
+  <view class="_view data-v-08ece39c content">
+    <form action bindsubmit="handleProxy" bindreset="handleProxy" class="_form data-v-08ece39c input-form" data-eventid="{{'tSW-20'}}" data-comkey="{{$k}}">
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-01.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">所属公司:</text>
+        </view>
+        <picker bindchange="handleProxy" value="{{companyIndex}}" range="{{companyList}}" range-key="text" data-eventid="{{'Ycy-0'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{companyText}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-02.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">项目名称:</text>
+        </view>
+        <picker bindchange="handleProxy" value="{{projectIndex}}" range="{{projectList}}" range-key="text" data-eventid="{{'6Av-1'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{projectText}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-03.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">任务名称:</text>
+        </view>
+        <input type="text" bindinput="handleProxy" value="" placeholder="请填写任务名称" data-eventid="{{'NmS-2'}}" data-comkey="{{$k}}" class="_input data-v-08ece39c" />
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-04.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">检查楼栋:</text>
+        </view>
+        <input type="text" bindinput="handleProxy" value="" placeholder="请填写检查楼栋号" data-eventid="{{'UXM-3'}}" data-comkey="{{$k}}" class="_input data-v-08ece39c" />
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-05.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">检查楼层:</text>
+        </view>
+        <input type="text" bindinput="handleProxy" value="" placeholder="请填写检查楼层号" data-eventid="{{'TBe-4'}}" data-comkey="{{$k}}" class="_input data-v-08ece39c" />
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-07.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">施工单位:</text>
+        </view>
+        <picker bindchange="handleProxy" value="{{unitIndex}}" range="{{unitList}}" range-key="text" data-eventid="{{'GNl-5'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{unitText}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-08.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">隐患类型:</text>
+        </view>
+        <picker bindchange="handleProxy" value="{{dangerIndex}}" range="{{dangerList}}" range-key="text" data-eventid="{{'JlY-6'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{dangerText}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-09.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">隐患描述:</text>
+        </view>
+        <picker bindchange="handleProxy" value="{{dangerDesVal}}" range="{{dangerDesList}}" range-key="text" data-eventid="{{'XCZ-7'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{dangerDesText}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-11.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">整改人:</text>
+        </view>
+        <input type="text" bindtap="handleProxy" placeholder value="{{rectpeople}}" bindinput="handleProxy" data-eventid="{{'LLT-8'}}" data-comkey="{{$k}}" class="_input data-v-08ece39c" />
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-12.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">通知人:</text>
+        </view>
+        <input type="text" bindtap="handleProxy" placeholder value="{{noticepeople}}" bindinput="handleProxy" data-eventid="{{'g1V-9'}}" data-comkey="{{$k}}" class="_input data-v-08ece39c" />
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-14.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">检查日期:</text>
+        </view>
+        <picker mode="date" value="{{checkDate}}" start="2000-01-01" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'oEl-10'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{checkDate}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-13.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">整改期限:</text>
+        </view>
+        <picker mode="date" value="{{deadline}}" start="{{checkDate}}" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'YJs-11'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{deadline}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-14.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">复查日期:</text>
+        </view>
+        <picker mode="date" value="{{recheckDate}}" start="{{deadline}}" end="2028-12-31" bindchange="handleProxy" data-eventid="{{'JV4-12'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{recheckDate}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-05.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">整改要求:</text>
+        </view>
+        <input type="text" bindinput="handleProxy" value="" placeholder="请填写整改要求" data-eventid="{{'QMt-13'}}" data-comkey="{{$k}}" class="_input data-v-08ece39c" />
+      </view>
+      <view class="_view data-v-08ece39c input-row">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list2_icon-10.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">严重程度:</text>
+        </view>
+        <picker bindchange="handleProxy" value="{{degreeIndex}}" range="{{degreeList}}" range-key="text" data-eventid="{{'2yD-14'}}" data-comkey="{{$k}}" class="_picker data-v-08ece39c">
+          <view class="_view data-v-08ece39c uni-input">{{degreeText}}</view>
+        </picker>
+      </view>
+      <view class="_view data-v-08ece39c input-row-bottom-line"></view>
+      <view class="_view data-v-08ece39c input-row-my">
+        <view class="_view data-v-08ece39c input-label">
+          <image src="../../../static/img/list1_icon/list1_icon-15.png" mode class="_image data-v-08ece39c"></image>
+          <text class="_text data-v-08ece39c">请选择图片:</text>
+        </view>
+      </view>
+      <view class="_view data-v-08ece39c">
+        <view class="_view data-v-08ece39c uni-list-cell cell-pd">
+          <view class="_view data-v-08ece39c uni-uploader">
+            <view class="_view data-v-08ece39c uni-uploader-head">
+              <view class="_view data-v-08ece39c uni-uploader-title">点击可预览选好的图片</view>
+              <view class="_view data-v-08ece39c uni-uploader-info">{{imageList.length}}/9</view>
+            </view>
+            <view class="_view data-v-08ece39c uni-uploader-body">
+              <view class="_view data-v-08ece39c uni-uploader__files">
+                <block wx:key="index" key="{{index}}" wx:for="{{imageList}}" wx:for-index="index" wx:for-item="image">
+                  <view class="_view data-v-08ece39c uni-uploader__file">
+                    <image class="_image data-v-08ece39c uni-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="handleProxy" data-eventid="{{'TRI-15-'+index}}" data-comkey="{{$k}}"></image>
+                  </view>
+                </block>
+              </view>
+              <view class="_view data-v-08ece39c uni-uploader__input-box_my">
+                <view class="_view data-v-08ece39c uni-uploader__input_my" bindtap="handleProxy" data-eventid="{{'LiH-16'}}" data-comkey="{{$k}}"></view>
+              </view>
+              <view class="_view data-v-08ece39c uni-uploader__input-box">
+                <view class="_view data-v-08ece39c uni-uploader__input" bindtap="handleProxy" data-eventid="{{'HpW-17'}}" data-comkey="{{$k}}"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="_view data-v-08ece39c mysubmit">
+        <button size="mini" bindtap="handleProxy" class="_button data-v-08ece39c search-btn" data-eventid="{{'gmK-18'}}" data-comkey="{{$k}}">提交</button>
+        <button size="mini" bindtap="handleProxy" type="default" class="_button data-v-08ece39c search-btn" data-eventid="{{'JTZ-19'}}" data-comkey="{{$k}}">暂存</button>
+      </view>
+    </form>
+  </view>
+</template>

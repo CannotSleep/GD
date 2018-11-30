@@ -1,0 +1,1 @@
+<import src="/XC.qsp.app/pages/index/quality/safetyCheck.vue.wxml" /><template is="933f0232" data="{{ ...$root['0'], $root }}"/>
