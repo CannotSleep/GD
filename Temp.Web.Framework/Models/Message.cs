@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Temp.Web.Framework.Models
 {
-    class Message
+    public class Message
     {
     }
 }

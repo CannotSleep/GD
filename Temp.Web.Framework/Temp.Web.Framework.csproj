@@ -103,6 +103,10 @@
       <Project>{27b7b17f-2b66-4490-9846-ebd5185748d8}</Project>
       <Name>Temp.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Temp.Data\Temp.Data.csproj">
+      <Project>{42314EA8-9685-4B0C-BF9F-D3825DDB87B4}</Project>
+      <Name>Temp.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Temp.Service\Temp.Service.csproj">
       <Project>{1289b296-f39d-4c06-adec-a5cf9480ca5e}</Project>
       <Name>Temp.Service</Name>

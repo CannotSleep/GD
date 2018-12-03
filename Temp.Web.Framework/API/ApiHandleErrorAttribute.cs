@@ -9,6 +9,7 @@ using Temp.Core.Dependency;
 using Temp.Service;
 using Temp.Service.Common;
 using Temp.Data.Entity;
+using Tmp.Service;
 
 namespace Temp.Web.Framework.API
 {

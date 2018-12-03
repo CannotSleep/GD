@@ -44,10 +44,39 @@
     <Compile Include="Common\ErrorInfoService.cs" />
     <Compile Include="Common\ICodeTableService.cs" />
     <Compile Include="Common\IErrorInfoService.cs" />
+    <Compile Include="Common\ILogService.cs" />
     <Compile Include="Common\IService.cs" />
     <Compile Include="Common\IVersionControlService.cs" />
+    <Compile Include="Common\LogService.cs" />
     <Compile Include="Common\VersionControlService.cs" />
+    <Compile Include="Dto\AccountDto.cs" />
+    <Compile Include="Dto\AccountOfRoleSearchDto.cs" />
+    <Compile Include="Dto\AccountTreeByDept.cs" />
+    <Compile Include="Dto\CodeTableDto.cs" />
+    <Compile Include="Dto\MenuDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryExtensions.cs" />
+    <Compile Include="Security\AccountOfRoleService.cs" />
+    <Compile Include="Security\AccountService.cs" />
+    <Compile Include="Security\AppVersionService.cs" />
+    <Compile Include="Security\DepartmentService.cs" />
+    <Compile Include="Security\IAccountOfRoleService.cs" />
+    <Compile Include="Security\IAccountService.cs" />
+    <Compile Include="Security\IAppVersionService.cs" />
+    <Compile Include="Security\IDepartmentService.cs" />
+    <Compile Include="Security\IMenuService.cs" />
+    <Compile Include="Security\IPermissionService.cs" />
+    <Compile Include="Security\IRoleService.cs" />
+    <Compile Include="Security\IUserLoginService.cs" />
+    <Compile Include="Security\IUserLoginTokenService.cs" />
+    <Compile Include="Security\IViewAccountService.cs" />
+    <Compile Include="Security\MenuService.cs" />
+    <Compile Include="Security\PermissionService.cs" />
+    <Compile Include="Security\RoleService.cs" />
+    <Compile Include="Security\UserLoginService.cs" />
+    <Compile Include="Security\UserLoginTokenService.cs" />
+    <Compile Include="Security\ViewAccountService.cs" />
+    <Compile Include="ServiceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Temp.Core\Temp.Core.csproj">
@@ -59,8 +88,6 @@
       <Name>Temp.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dto\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
