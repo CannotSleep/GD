@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Temp.Service.Security
 {
-    class ViewAccountService
+    public class ViewAccountService:IViewAccountService
     {
+
+
+
     }
 }

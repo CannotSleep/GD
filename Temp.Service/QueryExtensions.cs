@@ -70,7 +70,7 @@ namespace Tmp.Service.Extension
         /// <returns></returns>
         public static List<T> Paging<T>(IQueryable<T> q, GridParams grid)
         {
-            return q.ToList().Skip((grid.PageIndex - 1) * grid.PageSize).Take(grid.PageSize).ToList();
+            return q.Skip((grid.PageIndex - 1) * grid.PageSize).Take(grid.PageSize).ToList();
         }
     }
 }

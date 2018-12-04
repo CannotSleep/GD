@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Temp.Data.Entity;
+using Temp.Service.Common;
 
 namespace Temp.Service.Security
 {
-    class IPermissionService
+    public interface IPermissionService:IService<Permission>
     {
+
+        bool Assign(string menusId, List<Guid> departmentId, string roleList);
+
+        bool AssignSimplify(Guid RefDepartmentID, Guid DepartmentID);
+
     }
 }

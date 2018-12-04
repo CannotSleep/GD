@@ -85,6 +85,11 @@ namespace Temp.Data.Entity
         /// 是否启用
         ///</summary>
         public bool IsUse { get; set; } // IsUse
+
+        ///<summary>
+        /// 有效时间
+        ///</summary>
+        public DateTime ExpireDate { get; set; } // ExpireDate
         
         public Account()
         {

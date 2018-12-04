@@ -64,6 +64,12 @@
     <Compile Include="Entity\AccountOfRoleConfiguration.cs">
       <DependentUpon>Template.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\AppVersionControl.cs">
+      <DependentUpon>Template.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\AppVersionControlConfiguration.cs">
+      <DependentUpon>Template.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\CodeTable.cs">
       <DependentUpon>Template.tt</DependentUpon>
     </Compile>
@@ -74,6 +80,12 @@
       <DependentUpon>Template.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\DepartmentConfiguration.cs">
+      <DependentUpon>Template.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Domain.cs">
+      <DependentUpon>Template.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DomainConfiguration.cs">
       <DependentUpon>Template.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\EfRepository.cs" />

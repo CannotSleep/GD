@@ -51,6 +51,7 @@ namespace Temp.Data.Entity
             Property(x => x.Img).HasColumnName("Img").IsRequired().HasColumnType("nvarchar");
             Property(x => x.Department).HasColumnName("Department").IsRequired().HasColumnType("uniqueidentifier");
             Property(x => x.IsUse).HasColumnName("IsUse").IsRequired().HasColumnType("bit");
+            Property(x => x.ExpireDate).HasColumnName("ExpireDate").IsRequired().HasColumnType("datetime");
             InitializePartial();
         }
         partial void InitializePartial();

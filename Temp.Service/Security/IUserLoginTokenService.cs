@@ -8,7 +8,7 @@ using Temp.Service.Common;
 
 namespace Temp.Service.Security
 {
-    public interface IUserLoginTokenService:IService<UserLogin>
+    public interface IUserLoginTokenService:IService<UserLoginToken>
     {
     }
 }

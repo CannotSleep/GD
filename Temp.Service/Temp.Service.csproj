@@ -60,10 +60,12 @@
     <Compile Include="Security\AccountService.cs" />
     <Compile Include="Security\AppVersionService.cs" />
     <Compile Include="Security\DepartmentService.cs" />
+    <Compile Include="Security\DomainService.cs" />
     <Compile Include="Security\IAccountOfRoleService.cs" />
     <Compile Include="Security\IAccountService.cs" />
     <Compile Include="Security\IAppVersionService.cs" />
     <Compile Include="Security\IDepartmentService.cs" />
+    <Compile Include="Security\IDomainService.cs" />
     <Compile Include="Security\IMenuService.cs" />
     <Compile Include="Security\IPermissionService.cs" />
     <Compile Include="Security\IRoleService.cs" />

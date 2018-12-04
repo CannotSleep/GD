@@ -30,8 +30,10 @@ namespace Temp.Data.Entity
     {
         DbSet<Account> Accounts { get; set; } // tbLOG_Account
         DbSet<AccountOfRole> AccountOfRoles { get; set; } // tbLOG_AccountOfRole
+        DbSet<AppVersionControl> AppVersionControls { get; set; } // tbCOM_AppVersionControl
         DbSet<CodeTable> CodeTables { get; set; } // tbCOM_CodeTable
         DbSet<Department> Departments { get; set; } // tbLOG_Department
+        DbSet<Domain> Domains { get; set; } // tbCOM_Domain
         DbSet<ErrorInfo> ErrorInfoes { get; set; } // tbLOG_ErrorInfo
         DbSet<Log> Logs { get; set; } // tbLOG_Log
         DbSet<Menu> Menus { get; set; } // tbLOG_Menu

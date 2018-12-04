@@ -30,8 +30,10 @@ namespace Temp.Data.Entity
     {
         public DbSet<Account> Accounts { get; set; } // tbLOG_Account
         public DbSet<AccountOfRole> AccountOfRoles { get; set; } // tbLOG_AccountOfRole
+        public DbSet<AppVersionControl> AppVersionControls { get; set; } // tbCOM_AppVersionControl
         public DbSet<CodeTable> CodeTables { get; set; } // tbCOM_CodeTable
         public DbSet<Department> Departments { get; set; } // tbLOG_Department
+        public DbSet<Domain> Domains { get; set; } // tbCOM_Domain
         public DbSet<ErrorInfo> ErrorInfoes { get; set; } // tbLOG_ErrorInfo
         public DbSet<Log> Logs { get; set; } // tbLOG_Log
         public DbSet<Menu> Menus { get; set; } // tbLOG_Menu
@@ -82,8 +84,10 @@ namespace Temp.Data.Entity
 
             modelBuilder.Configurations.Add(new AccountConfiguration());
             modelBuilder.Configurations.Add(new AccountOfRoleConfiguration());
+            modelBuilder.Configurations.Add(new AppVersionControlConfiguration());
             modelBuilder.Configurations.Add(new CodeTableConfiguration());
             modelBuilder.Configurations.Add(new DepartmentConfiguration());
+            modelBuilder.Configurations.Add(new DomainConfiguration());
             modelBuilder.Configurations.Add(new ErrorInfoConfiguration());
             modelBuilder.Configurations.Add(new LogConfiguration());
             modelBuilder.Configurations.Add(new MenuConfiguration());
@@ -100,8 +104,10 @@ namespace Temp.Data.Entity
         {
             modelBuilder.Configurations.Add(new AccountConfiguration(schema));
             modelBuilder.Configurations.Add(new AccountOfRoleConfiguration(schema));
+            modelBuilder.Configurations.Add(new AppVersionControlConfiguration(schema));
             modelBuilder.Configurations.Add(new CodeTableConfiguration(schema));
             modelBuilder.Configurations.Add(new DepartmentConfiguration(schema));
+            modelBuilder.Configurations.Add(new DomainConfiguration(schema));
             modelBuilder.Configurations.Add(new ErrorInfoConfiguration(schema));
             modelBuilder.Configurations.Add(new LogConfiguration(schema));
             modelBuilder.Configurations.Add(new MenuConfiguration(schema));

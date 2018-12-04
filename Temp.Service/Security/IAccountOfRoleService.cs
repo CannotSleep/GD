@@ -10,5 +10,6 @@ namespace Temp.Service.Security
 {
     public interface IAccountOfRoleService:IService<AccountOfRole>
     {
+        bool Assign(Guid accountId,string rolesId);
     }
 }

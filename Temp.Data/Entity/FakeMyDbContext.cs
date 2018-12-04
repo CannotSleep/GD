@@ -31,8 +31,10 @@ namespace Temp.Data.Entity
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccountOfRole> AccountOfRoles { get; set; }
+        public DbSet<AppVersionControl> AppVersionControls { get; set; }
         public DbSet<CodeTable> CodeTables { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Domain> Domains { get; set; }
         public DbSet<ErrorInfo> ErrorInfoes { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<Menu> Menus { get; set; }
@@ -46,8 +48,10 @@ namespace Temp.Data.Entity
         {
             Accounts = new FakeDbSet<Account>("ID");
             AccountOfRoles = new FakeDbSet<AccountOfRole>("ID");
+            AppVersionControls = new FakeDbSet<AppVersionControl>("ID");
             CodeTables = new FakeDbSet<CodeTable>("ID");
             Departments = new FakeDbSet<Department>("ID");
+            Domains = new FakeDbSet<Domain>("ID");
             ErrorInfoes = new FakeDbSet<ErrorInfo>("ID");
             Logs = new FakeDbSet<Log>("ID");
             Menus = new FakeDbSet<Menu>("ID");
