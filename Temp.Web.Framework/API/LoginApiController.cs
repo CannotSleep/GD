@@ -13,7 +13,9 @@ using Temp.Core.Dependency;
 using Temp.Core.Security;
 using Temp.Data.Entity;
 using Temp.Service.Security;
+using Temp.Web.Framework.Core;
 using Temp.Web.Framework.Models;
+using Tmp.Service;
 
 namespace Temp.Web.Framework.API
 {
@@ -29,7 +31,7 @@ namespace Temp.Web.Framework.API
             HttpContext context = HttpContext.Current;
             Message message = new Message();
             Account account = new Account();
-            account = HttpRequestHelper.ConvertJsonTomodel<Account>(context);
+            account = HttpRequestHelper.ConvertJsonToModel<Account>(context);
 
             if (string.IsNullOrWhiteSpace(account.AccountID)) {
                 message.message = "用户名不能为空";

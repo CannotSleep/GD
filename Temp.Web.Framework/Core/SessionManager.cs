@@ -7,6 +7,7 @@ using System.Web;
 using Temp.Core.Caching;
 using Temp.Core.Dependency;
 using Temp.Data.Entity;
+using Temp.Service.Dto;
 
 namespace Temp.Web.Framework.Core
 {
@@ -139,7 +140,7 @@ namespace Temp.Web.Framework.Core
         /// </summary>
         /// <param name="model"></param>
         /// <remarks></remarks>
-        public static void AddRolesInfo(AccountOfRoles model)
+        public static void AddRolesInfo(List<AccountOfRole> model)
         {
             if (model == null)
             {
@@ -168,14 +169,53 @@ namespace Temp.Web.Framework.Core
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static AccountOfRoles GetRolesInfo()
+        public static List<AccountOfRole> GetRolesInfo()
         {
             HttpContext context = HttpContext.Current;
             if ((context != null) & (context.Session != null))
             {
-                return (AccountOfRoles)context.Session[RolesInfo];
+                return (List<AccountOfRole>)context.Session[RolesInfo];
             }
             return null;
+        }
+
+
+        /// <summary>
+        /// 添加Domain
+        /// </summary>
+        /// <param name="domain"></param>
+        public static void AddDomain(int domain) {
+            HttpContext context = HttpContext.Current;
+            if ((context != null)&(context.Session!=null)) {
+                context.Session["Domain"] = domain;
+            }
+        }
+
+        /// <summary>
+        /// 删除Domain
+        /// </summary>
+        /// <remarks></remarks>
+        public static void RemoveDomain()
+        {
+            HttpContext context = HttpContext.Current;
+            if ((context != null) & (context.Session != null))
+            {
+                context.Session.Remove("Domain");
+            }
+        }
+        /// <summary>
+        /// 得到Domain
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks></remarks>
+        public static short GetDomain()
+        {
+            HttpContext context = HttpContext.Current;
+            if ((context != null) & (context.Session != null))
+            {
+                return Convert.ToInt16(context.Session["Doamin"]);
+            }
+            return 0;
         }
 
 
@@ -184,7 +224,7 @@ namespace Temp.Web.Framework.Core
         /// </summary>
         /// <param name="model"></param>
         /// <remarks></remarks>
-        public static void AddAccountInfo(Account model)
+        public static void AddAccountInfo(AccountDto model)
         {
             if (model == null)
             {
@@ -213,12 +253,12 @@ namespace Temp.Web.Framework.Core
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static Account GetAccountInfo()
+        public static AccountDto GetAccountInfo()
         {
             HttpContext context = HttpContext.Current;
             if ((context != null) & (context.Session != null))
             {
-                return (Account)context.Session[AccountInfo];
+                return (AccountDto)context.Session[AccountInfo];
             }
             return null;
         }
