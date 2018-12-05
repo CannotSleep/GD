@@ -9,5 +9,6 @@ namespace Temp.Service.Security
 {
     public interface IViewAccountService : IService<ViewAccount>
     {
+
     }
 }
